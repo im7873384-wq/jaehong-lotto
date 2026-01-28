@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>?ъ＜ - ?ы솉遊?/title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+    :root{
+      --bg1:#f0f4ff;
+      --bg2:#fff8f0;
+      --card:#ffffffcc;
+      --border:#d4c4ff;
+      --text:#2a2a2a;
+      --muted:#6b6b6b;
+      --purple:#9b7bff;
+      --purple2:#b99bff;
+      --gold:#ffc857;
+      --shadow: 0 18px 45px rgba(155, 123, 255, 0.15);
+    }
+
+    *{ box-sizing:border-box; }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      display: flex;
+      gap: 8px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--border);
+    }
+    .top-nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: background 0.15s;
+    }
+    .top-nav a:hover { background: rgba(155,123,255,0.15); }
+    .top-nav a.active { background: linear-gradient(135deg, var(--purple), var(--purple2)); color: #fff; }
+
+    body{
+      margin:0;
+      padding-top: 56px;
+      font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 0%, #efe8ff 0%, rgba(239,232,255,0) 60%),
+        radial-gradient(800px 500px at 100% 20%, #fff8e6 0%, rgba(255,248,230,0) 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wrap{ position: relative; z-index: 2; width:100%; max-width: 900px; padding: 0 16px; }
+
+    .card{
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--border);
+      border-radius: 26px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      animation: popIn 420ms cubic-bezier(.2,.9,.2,1) both;
+    }
+
+    @keyframes popIn {
+      from { transform: translateY(10px) scale(0.98); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-60px -40px auto auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, rgba(155,123,255,0.28), rgba(155,123,255,0) 70%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:auto auto -70px -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 35% 35%, rgba(255,200,87,0.26), rgba(255,200,87,0) 70%);
+      transform: rotate(-8deg);
+      pointer-events:none;
+    }
+
+    .icon{
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    h1{ 
+      margin:0; 
+      font-size: 36px; 
+      letter-spacing:-0.6px;
+      font-family: 'Jua', ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    .sub{ 
+      margin:12px 0 0; 
+      color:var(--muted); 
+      font-size: 18px; 
+      font-weight: 800;
+      letter-spacing:-0.3px;
+      font-family: 'Jua', ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    .coming{
+      margin-top: 24px;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--purple), var(--purple2));
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+
+    .tips{
+      margin-top: 24px;
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      color: #5a3d99;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+    }
+
+    .tipBall{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      border: 2px solid rgba(155,123,255,0.22);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
+      font-size: 13.5px;
+    }
+
+    .tipBall:before{
+      content:"";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,200,87,0.70);
+      margin-right: 8px;
+    }
+
+    .tipBall.dev{
+      color: var(--text);
+      font-weight: 900;
+    }
+  </style>
+  <style>
+    .nav{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);z-index:50;}
+    .nav a{text-decoration:none;color:inherit;padding:6px 10px;border-radius:8px;font-weight:600;}
+    .nav a:hover{background:rgba(0,0,0,.06);}
+  </style></head>
+<body>
+  <nav class="nav">
+    <a href="/">Home</a>
+    <a href="/lotto">Lotto</a>
+    <a href="/saju">Saju</a>
+  </nav>
+  <nav class="top-nav">
+    <a href="/">Home</a>
+    <a href="/lotto">Lotto</a>
+    <a href="/saju" class="active">Saju</a>
+  </nav>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="icon">&#128302;</div>
+      <h1>??二?/h1>
+      <div class="sub">?ъ＜/?댁꽭 ?쒕퉬??/div>
+
+      <div class="coming">Coming Soon</div>
+
+      <div class="tips">
+        <span class="tipBall">?ъ＜???以鍮꾩쨷</span>
+        <span class="tipBall">?ㅻ뒛???댁꽭</span>
+        <span class="tipBall dev">媛쒕컻?? ?꾩옱??/span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

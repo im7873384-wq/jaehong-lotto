@@ -1,0 +1,9 @@
+Refactor this repo for Netlify static routing.
+
+Requirements:
+- Root path should be a landing page (index.html) with links to /lotto and /saju.
+- Move the lotto app into folder lotto with lotto/index.html.
+- Move the saju app into folder saju with saju/index.html.
+- Fix any relative asset paths.
+- Add a top navigation on each page: Home, Lotto, Saju.
+- Make a single git commit with message: Route split: /lotto and /saju.
