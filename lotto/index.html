@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -311,33 +311,61 @@
       opacity: 0.95;
     }
   </style>
-</head>
+  <style>
+    .top-nav{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      display: flex;
+      gap: 8px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+    }
+    .top-nav a{
+      color: inherit;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .top-nav a:hover{ background: rgba(0,0,0,0.06); }
+    body{ padding-top: 64px; }
+  </style></head>
 <body>
+  <nav class="top-nav">
+    <a href="/">Home</a>
+    <a href="/lotto">Lotto</a>
+    <a href="/saju">Saju</a>
+  </nav>
   <div class="bg-deco" aria-hidden="true">
-    <img class="sticker s1" data-sticker src="assets/32411274/936aa21d/806221104@2x.png" alt="" />
-    <img class="sticker s2" data-sticker src="assets/32411274/936aa21d/806221110@2x.png" alt="" />
-    <img class="sticker s3" data-sticker src="assets/32411274/936aa21d/806221118@2x.png" alt="" />
-    <img class="sticker s4" data-sticker src="assets/32411274/936aa21d/806221123@2x.png" alt="" />
+    <img class="sticker s1" data-sticker src="../assets/32411274/936aa21d/806221104@2x.png" alt="" />
+    <img class="sticker s2" data-sticker src="../assets/32411274/936aa21d/806221110@2x.png" alt="" />
+    <img class="sticker s3" data-sticker src="../assets/32411274/936aa21d/806221118@2x.png" alt="" />
+    <img class="sticker s4" data-sticker src="../assets/32411274/936aa21d/806221123@2x.png" alt="" />
 
-    <img class="sticker s5" data-sticker src="assets/32411274/936aa21d/806221099@2x.png" alt="" />
-    <img class="sticker s6" data-sticker src="assets/32411274/936aa21d/806221106@2x.png" alt="" />
-    <img class="sticker s7" data-sticker src="assets/32411274/936aa21d/806221114@2x.png" alt="" />
-    <img class="sticker s8" data-sticker src="assets/32411274/936aa21d/806221120@2x.png" alt="" />
+    <img class="sticker s5" data-sticker src="../assets/32411274/936aa21d/806221099@2x.png" alt="" />
+    <img class="sticker s6" data-sticker src="../assets/32411274/936aa21d/806221106@2x.png" alt="" />
+    <img class="sticker s7" data-sticker src="../assets/32411274/936aa21d/806221114@2x.png" alt="" />
+    <img class="sticker s8" data-sticker src="../assets/32411274/936aa21d/806221120@2x.png" alt="" />
 
-    <img class="sticker s9" data-sticker src="assets/32411274/936aa21d/806221091@2x.png" alt="" />
-    <img class="sticker s10" data-sticker src="assets/32411274/936aa21d/806221126@2x.png" alt="" />
+    <img class="sticker s9" data-sticker src="../assets/32411274/936aa21d/806221091@2x.png" alt="" />
+    <img class="sticker s10" data-sticker src="../assets/32411274/936aa21d/806221126@2x.png" alt="" />
 
-    <img class="sticker s11" data-sticker src="assets/32411274/936aa21d/806221092@2x.png" alt="" />
-    <img class="sticker s12" data-sticker src="assets/32411274/936aa21d/806221093@2x.png" alt="" />
-    <img class="sticker s13" data-sticker src="assets/32411274/936aa21d/806221094@2x.png" alt="" />
-    <img class="sticker s14" data-sticker src="assets/32411274/936aa21d/806221095@2x.png" alt="" />
-    <img class="sticker s15" data-sticker src="assets/32411274/936aa21d/806221096@2x.png" alt="" />
+    <img class="sticker s11" data-sticker src="../assets/32411274/936aa21d/806221092@2x.png" alt="" />
+    <img class="sticker s12" data-sticker src="../assets/32411274/936aa21d/806221093@2x.png" alt="" />
+    <img class="sticker s13" data-sticker src="../assets/32411274/936aa21d/806221094@2x.png" alt="" />
+    <img class="sticker s14" data-sticker src="../assets/32411274/936aa21d/806221095@2x.png" alt="" />
+    <img class="sticker s15" data-sticker src="../assets/32411274/936aa21d/806221096@2x.png" alt="" />
 
-    <img class="sticker s16" data-sticker src="assets/32411274/936aa21d/806221097@2x.png" alt="" />
-    <img class="sticker s17" data-sticker src="assets/32411274/936aa21d/806221098@2x.png" alt="" />
-    <img class="sticker s18" data-sticker src="assets/32411274/936aa21d/806221100@2x.png" alt="" />
-    <img class="sticker s19" data-sticker src="assets/32411274/936aa21d/806221101@2x.png" alt="" />
-    <img class="sticker s20" data-sticker src="assets/32411274/936aa21d/806221102@2x.png" alt="" />
+    <img class="sticker s16" data-sticker src="../assets/32411274/936aa21d/806221097@2x.png" alt="" />
+    <img class="sticker s17" data-sticker src="../assets/32411274/936aa21d/806221098@2x.png" alt="" />
+    <img class="sticker s18" data-sticker src="../assets/32411274/936aa21d/806221100@2x.png" alt="" />
+    <img class="sticker s19" data-sticker src="../assets/32411274/936aa21d/806221101@2x.png" alt="" />
+    <img class="sticker s20" data-sticker src="../assets/32411274/936aa21d/806221102@2x.png" alt="" />
 
     <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
   </div>
@@ -345,7 +373,7 @@
   <div class="wrap">
     <div class="card">
       <div class="header">
-        <div class="badge" aria-hidden="true"><img src="assets/badge.png" alt="" /></div>
+        <div class="badge" aria-hidden="true"><img src="../assets/badge.png" alt="" /></div>
         <div>
           <h1>로또추천</h1>
           <div class="sub">로또번호 추천기!</div>
@@ -360,9 +388,9 @@
       </div>
 
       <div class="row">
-        <button class="primary" id="pickBtn">뽑아줘!</button>
-        <button class="ghost" id="pick5Btn">5세트 뽑기</button>
-        <button class="ghost" id="copyBtn" disabled>복사하기</button>
+        <button class="primary" id="pickBtn">뽑아줘!<</button>
+        <button class="ghost" id="pick5Btn">5세트 뽑기<</button>
+        <button class="ghost" id="copyBtn" disabled>복사하기<</button>
         <span class="status" id="status"></span>
       </div>
 
@@ -373,8 +401,8 @@
 
       <div class="tips">
         <span class="tipBall">당첨 보장은 아니고 랜덤 추천이야</span>
-        <span class="tipBall">운빨은… 화이팅</span>
-        <span class="tipBall dev">개발자: 임재홍</span>
+        <span class="tipBall">운빨은… 화이팅/span>
+        <span class="tipBall dev">개발자: 임재홍/span>
       </div>
     </div>
   </div>
@@ -401,7 +429,7 @@
 
     // keep the line text cute but minimal
     const line = list.join(', ');
-    document.getElementById('textLine').innerHTML = `오늘의 행운 번호 <span class="bubble">짠!</span>`;
+    document.getElementById('textLine').innerHTML = `?ㅻ뒛??행운 踰덊샇 <span class="bubble">吏?</span>`;
 
     const copyBtn = document.getElementById('copyBtn');
     copyBtn.disabled = false;
@@ -423,7 +451,7 @@
 
       const label = document.createElement('div');
       label.className = 'setLabel';
-      label.textContent = (i+1) + '세트';
+      label.textContent = (i+1) + '?명듃';
       row.appendChild(label);
 
       const nums = sets[i];
@@ -507,7 +535,7 @@
     const sets = Array.from({length:5}, () => pick6());
     const flatCopy = sets.map(s=>s.join(', ')).join('\n');
 
-    document.getElementById('textLine').innerHTML = `행운 5세트 <span class="bubble">두근</span>`;
+    document.getElementById('textLine').innerHTML = `행운 5?명듃 <span class="bubble">?먭렐</span>`;
     render(sets[0]);
     render5Sets(sets);
 
@@ -521,7 +549,7 @@
     copyBtn.disabled = false;
     copyBtn.onclick = async () => {
       await navigator.clipboard.writeText(flatCopy);
-      document.getElementById('status').textContent = '5세트 복사됨!';
+      document.getElementById('status').textContent = '5?명듃 蹂듭궗??';
       setTimeout(()=>document.getElementById('status').textContent='', 1200);
     };
 

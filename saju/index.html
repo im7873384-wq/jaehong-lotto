@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>사주풀이</title>
+  <title>?ъ＜???/title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;800;900&display=swap');
 
@@ -224,140 +224,168 @@
     .boxTitle{ font-weight: 1000; color:#7a2450; margin-bottom: 6px; }
     .box p{ margin:0; color:#2a2a2a; line-height:1.6; }
   </style>
-</head>
+  <style>
+    .top-nav{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      display: flex;
+      gap: 8px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+    }
+    .top-nav a{
+      color: inherit;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .top-nav a:hover{ background: rgba(0,0,0,0.06); }
+    body{ padding-top: 64px; }
+  </style></head>
 <body>
+  <nav class="top-nav">
+    <a href="/">Home</a>
+    <a href="/lotto">Lotto</a>
+    <a href="/saju">Saju</a>
+  </nav>
   <div class="wrap">
     <div class="card">
       <div class="header">
-        <div class="badge" aria-hidden="true">⛩</div>
+        <div class="badge" aria-hidden="true">??/div>
         <div>
-          <h1>사주풀이</h1>
-          <div class="sub">생년월일/시간으로 사주(오행 중심) 느낌의 해석을 만들어줘</div>
+          <h1>?ъ＜???/h1>
+          <div class="sub">?앸뀈?붿씪/?쒓컙?쇰줈 ?ъ＜(?ㅽ뻾 以묒떖) ?먮굦???댁꽍??留뚮뱾?댁쨾</div>
         </div>
       </div>
 
       <div class="pillRow" style="margin-top:10px;">
-        <span class="pill">오행</span>
-        <span class="pill">일간</span>
-        <span class="pill">기운 밸런스</span>
-        <span class="pill">한줄 조언</span>
+        <span class="pill">?ㅽ뻾</span>
+        <span class="pill">?쇨컙</span>
+        <span class="pill">湲곗슫 諛몃윴??/span>
+        <span class="pill">?쒖쨪 議곗뼵</span>
       </div>
 
       <div class="grid">
         <div>
-          <label>생년월일</label>
+          <label>?앸뀈?붿씪</label>
           <div class="field">
             <input id="date" type="date" />
           </div>
         </div>
 
         <div>
-          <label>달력 기준</label>
+          <label>?щ젰 湲곗?</label>
           <div class="field">
             <select id="calendar">
-              <option value="solar" selected>양력</option>
-              <option value="lunar">음력</option>
+              <option value="solar" selected>?묐젰</option>
+              <option value="lunar">?뚮젰</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label>출생 시간</label>
+          <label>異쒖깮 ?쒓컙</label>
           <div class="field">
             <select id="hour">
-              <option value="unknown" selected>모름</option>
-              <option value="0">00시(자)</option>
-              <option value="1">01시</option>
-              <option value="2">02시(축)</option>
-              <option value="3">03시</option>
-              <option value="4">04시(인)</option>
-              <option value="5">05시</option>
-              <option value="6">06시(묘)</option>
-              <option value="7">07시</option>
-              <option value="8">08시(진)</option>
-              <option value="9">09시</option>
-              <option value="10">10시(사)</option>
-              <option value="11">11시</option>
-              <option value="12">12시(오)</option>
-              <option value="13">13시</option>
-              <option value="14">14시(미)</option>
-              <option value="15">15시</option>
-              <option value="16">16시(신)</option>
-              <option value="17">17시</option>
-              <option value="18">18시(유)</option>
-              <option value="19">19시</option>
-              <option value="20">20시(술)</option>
-              <option value="21">21시</option>
-              <option value="22">22시(해)</option>
-              <option value="23">23시</option>
+              <option value="unknown" selected>紐⑤쫫</option>
+              <option value="0">00????</option>
+              <option value="1">01??/option>
+              <option value="2">02??異?</option>
+              <option value="3">03??/option>
+              <option value="4">04????</option>
+              <option value="5">05??/option>
+              <option value="6">06??臾?</option>
+              <option value="7">07??/option>
+              <option value="8">08??吏?</option>
+              <option value="9">09??/option>
+              <option value="10">10????</option>
+              <option value="11">11??/option>
+              <option value="12">12????</option>
+              <option value="13">13??/option>
+              <option value="14">14??誘?</option>
+              <option value="15">15??/option>
+              <option value="16">16????</option>
+              <option value="17">17??/option>
+              <option value="18">18????</option>
+              <option value="19">19??/option>
+              <option value="20">20????</option>
+              <option value="21">21??/option>
+              <option value="22">22????</option>
+              <option value="23">23??/option>
             </select>
           </div>
           <div class="small" style="margin-top:8px;">
-            ※ "모름" 선택 시 시간 요소는 흐릿하게 처리해서 결과를 보여줘.
+            ??"紐⑤쫫" ?좏깮 ???쒓컙 ?붿냼???먮┸?섍쾶 泥섎━?댁꽌 寃곌낵瑜?蹂댁뿬以?
           </div>
         </div>
 
         <div>
-          <label>성별(선택)</label>
+          <label>?깅퀎(?좏깮)</label>
           <div class="field">
             <select id="gender">
-              <option value="unknown" selected>선택 안함</option>
-              <option value="male">남</option>
-              <option value="female">여</option>
+              <option value="unknown" selected>?좏깮 ?덊븿</option>
+              <option value="male">??/option>
+              <option value="female">??/option>
             </select>
           </div>
           <div class="small" style="margin-top:8px;">
-            ※ 성별은 표현 톤/상담 스타일에만 참고.
+            ???깅퀎? ?쒗쁽 ???곷떞 ?ㅽ??쇱뿉留?李멸퀬.
           </div>
         </div>
       </div>
 
       <div class="row">
-        <button class="primary" id="go">풀이해줘!</button>
-        <button class="ghost" id="copy" disabled>복사하기</button>
+        <button class="primary" id="go">??댄빐以?</button>
+        <button class="ghost" id="copy" disabled>蹂듭궗?섍린</button>
         <span class="status" id="status"></span>
       </div>
 
       <div class="result" id="result" style="display:none;">
-        <h2>결과</h2>
+        <h2>寃곌낵</h2>
         <div class="pillRow" id="pills"></div>
 
         <div class="table" style="margin-top:12px;">
           <div class="box">
-            <div class="boxTitle">핵심 요약</div>
+            <div class="boxTitle">?듭떖 ?붿빟</div>
             <p id="summary"></p>
           </div>
           <div class="box">
-            <div class="boxTitle">오행 밸런스</div>
+            <div class="boxTitle">?ㅽ뻾 諛몃윴??/div>
             <p id="five"></p>
           </div>
           <div class="box">
-            <div class="boxTitle">조언</div>
+            <div class="boxTitle">議곗뼵</div>
             <p id="advice"></p>
           </div>
           <div class="box">
-            <div class="boxTitle">주의문구</div>
-            <p class="small">본 결과는 전통 사주 명리학을 흉내 낸 <b>참고용/오락용</b> 텍스트입니다. 중요한 결정은 전문가 상담/본인의 판단을 우선하세요.</p>
+            <div class="boxTitle">二쇱쓽臾멸뎄</div>
+            <p class="small">蹂?寃곌낵???꾪넻 ?ъ＜ 紐낅━?숈쓣 ?됰궡 ??<b>李멸퀬???ㅻ씫??/b> ?띿뒪?몄엯?덈떎. 以묒슂??寃곗젙? ?꾨Ц媛 ?곷떞/蹂몄씤???먮떒???곗꽑?섏꽭??</p>
           </div>
         </div>
       </div>
 
       <div class="small" style="margin-top:14px;">
-        입력값은 브라우저 안에서만 처리되고 서버로 전송하지 않음(정적 페이지).
+        ?낅젰媛믪? 釉뚮씪?곗? ?덉뿉?쒕쭔 泥섎━?섍퀬 ?쒕쾭濡??꾩넚?섏? ?딆쓬(?뺤쟻 ?섏씠吏).
       </div>
     </div>
   </div>
 
 <script>
-  // NOTE: This is a "real saju vibe" UI, but the actual 사주 계산(천간/지지/절기/음력 변환/대운)은 매우 복잡.
-  // 여기서는 사용자가 원한 느낌(오행/밸런스/조언)을 안전하게 "참고용"으로 생성.
+  // NOTE: This is a "real saju vibe" UI, but the actual ?ъ＜ 怨꾩궛(泥쒓컙/吏吏/?덇린/?뚮젰 蹂?????? 留ㅼ슦 蹂듭옟.
+  // ?ш린?쒕뒗 ?ъ슜?먭? ?먰븳 ?먮굦(?ㅽ뻾/諛몃윴??議곗뼵)???덉쟾?섍쾶 "李멸퀬???쇰줈 ?앹꽦.
 
   const FIVE = [
-    { k:'목', c:'#7de3d0', tips:['성장','확장','시작','유연함'] },
-    { k:'화', c:'#ff7fb2', tips:['열정','표현','속도','의욕'] },
-    { k:'토', c:'#ffd86b', tips:['중심','조율','책임','안정'] },
-    { k:'금', c:'#6aa8ff', tips:['정리','결단','규칙','선 긋기'] },
-    { k:'수', c:'#8b6cff', tips:['지혜','관찰','휴식','깊이'] },
+    { k:'紐?, c:'#7de3d0', tips:['?깆옣','?뺤옣','?쒖옉','?좎뿰??] },
+    { k:'??, c:'#ff7fb2', tips:['?댁젙','?쒗쁽','?띾룄','?섏슃'] },
+    { k:'??, c:'#ffd86b', tips:['以묒떖','議곗쑉','梨낆엫','?덉젙'] },
+    { k:'湲?, c:'#6aa8ff', tips:['?뺣━','寃곕떒','洹쒖튃','??湲뗪린'] },
+    { k:'??, c:'#8b6cff', tips:['吏??,'愿李?,'?댁떇','源딆씠'] },
   ];
 
   function seededRand(seed){
@@ -406,8 +434,8 @@
   }
 
   function dayStemLike(seed){
-    // 천간 느낌만 (정확 계산 아님)
-    const stems = ['갑','을','병','정','무','기','경','신','임','계'];
+    // 泥쒓컙 ?먮굦留?(?뺥솗 怨꾩궛 ?꾨떂)
+    const stems = ['媛?,'??,'蹂?,'??,'臾?,'湲?,'寃?,'??,'??,'怨?];
     return stems[seed % stems.length];
   }
 
@@ -421,23 +449,23 @@
 
     const hourKnown = hour !== 'unknown';
 
-    const tone = (gender === 'male') ? '형' : (gender === 'female') ? '누나/언니' : '너';
+    const tone = (gender === 'male') ? '?? : (gender === 'female') ? '?꾨굹/?몃땲' : '??;
 
-    const summary = `일간(느낌)은 ${dayStem}로 잡히고, 전체 기운은 ${dom.strong} 쪽이 더 강하게 흐르는 편이야. `
-      + (hourKnown ? `출생시간 정보가 있어서 디테일을 조금 더 세밀하게 잡았어.` : `출생시간이 없어서 큰 흐름 위주로만 봤어.`);
+    const summary = `?쇨컙(?먮굦)? ${dayStem}濡??≫엳怨? ?꾩껜 湲곗슫? ${dom.strong} 履쎌씠 ??媛뺥븯寃??먮Ⅴ???몄씠?? `
+      + (hourKnown ? `異쒖깮?쒓컙 ?뺣낫媛 ?덉뼱???뷀뀒?쇱쓣 議곌툑 ???몃??섍쾶 ?≪븯??` : `異쒖깮?쒓컙???놁뼱?????먮쫫 ?꾩＜濡쒕쭔 遊ㅼ뼱.`);
 
-    const five = `목 ${vals[0]} · 화 ${vals[1]} · 토 ${vals[2]} · 금 ${vals[3]} · 수 ${vals[4]} (합 100)
-강한 기운: ${dom.strong} / 약한 기운: ${dom.weak}`;
+    const five = `紐?${vals[0]} 쨌 ??${vals[1]} 쨌 ??${vals[2]} 쨌 湲?${vals[3]} 쨌 ??${vals[4]} (??100)
+媛뺥븳 湲곗슫: ${dom.strong} / ?쏀븳 湲곗슫: ${dom.weak}`;
 
-    const adviceA = `${dom.strong} 기운이 강할 때는 추진이 빨라지기 쉬워. 그래서 "끝맺음"을 의식적으로 챙기는 게 운을 안정시켜.`;
-    const adviceB = `${dom.weak} 기운이 약하면 그쪽 요소를 보완하는 루틴이 좋아. 예를 들면 ${FIVE[dom.weakIdx].tips.slice(0,2).join('·')} 쪽 습관을 일상에 붙여봐.`;
-    const adviceC = `한줄 조언: 오늘은 ${tone}의 페이스를 지키는 게 제일 큰 개운 포인트.`;
+    const adviceA = `${dom.strong} 湲곗슫??媛뺥븷 ?뚮뒗 異붿쭊??鍮⑤씪吏湲??ъ썙. 洹몃옒??"?앸㎈?????섏떇?곸쑝濡?梨숆린??寃??댁쓣 ?덉젙?쒖폒.`;
+    const adviceB = `${dom.weak} 湲곗슫???쏀븯硫?洹몄そ ?붿냼瑜?蹂댁셿?섎뒗 猷⑦떞??醫뗭븘. ?덈? ?ㅻ㈃ ${FIVE[dom.weakIdx].tips.slice(0,2).join('쨌')} 履??듦????쇱긽??遺숈뿬遊?`;
+    const adviceC = `?쒖쨪 議곗뼵: ?ㅻ뒛? ${tone}???섏씠?ㅻ? 吏?ㅻ뒗 寃??쒖씪 ??媛쒖슫 ?ъ씤??`;
 
     const pills = [
-      `일간(느낌): ${dayStem}`,
-      `강: ${dom.strong}`,
-      `약: ${dom.weak}`,
-      hourKnown ? '시간: 반영' : '시간: 미반영'
+      `?쇨컙(?먮굦): ${dayStem}`,
+      `媛? ${dom.strong}`,
+      `?? ${dom.weak}`,
+      hourKnown ? '?쒓컙: 諛섏쁺' : '?쒓컙: 誘몃컲??
     ];
 
     return { summary, five, advice: `${adviceA}\n${adviceB}\n${adviceC}`, pills };
@@ -448,7 +476,7 @@
   $('go').onclick = () => {
     const dateStr = $('date').value;
     if(!dateStr){
-      $('status').textContent = '생년월일을 선택해줘!';
+      $('status').textContent = '?앸뀈?붿씪???좏깮?댁쨾!';
       return;
     }
 
@@ -472,12 +500,12 @@
       pillsEl.appendChild(s);
     });
 
-    const copyText = `사주풀이(참고용)\n- 생년월일: ${dateStr} (${cal==='solar'?'양력':'음력'})\n- 출생시간: ${hour==='unknown'?'모름':hour+'시'}\n\n[요약]\n${out.summary}\n\n[오행]\n${out.five}\n\n[조언]\n${out.advice}\n\n[주의]\n본 결과는 참고용/오락용이며 중요한 결정은 전문가 상담/본인 판단을 우선하세요.`;
+    const copyText = `?ъ＜???李멸퀬??\n- ?앸뀈?붿씪: ${dateStr} (${cal==='solar'?'?묐젰':'?뚮젰'})\n- 異쒖깮?쒓컙: ${hour==='unknown'?'紐⑤쫫':hour+'??}\n\n[?붿빟]\n${out.summary}\n\n[?ㅽ뻾]\n${out.five}\n\n[議곗뼵]\n${out.advice}\n\n[二쇱쓽]\n蹂?寃곌낵??李멸퀬???ㅻ씫?⑹씠硫?以묒슂??寃곗젙? ?꾨Ц媛 ?곷떞/蹂몄씤 ?먮떒???곗꽑?섏꽭??`;
 
     $('copy').disabled = false;
     $('copy').onclick = async () => {
       await navigator.clipboard.writeText(copyText);
-      $('status').textContent = '복사됨!';
+      $('status').textContent = '蹂듭궗??';
       setTimeout(()=> $('status').textContent='', 1200);
     };
 
