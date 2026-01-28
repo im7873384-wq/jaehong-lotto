@@ -3,50 +3,44 @@
 <head>
   <meta charset=utf-8 />
   <meta name=viewport content=width=device-width initial-scale=1 />
-  <title>?ы솉遊?- ??/title>
+  <title>재홍봇 - 홈</title>
   <style>
     :root { color-scheme: dark; }
-    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; background:#0b0f19; color:#e6e8ef; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:#0b0f19; color:#e6e8ef; }
     .nav { display:flex; gap:12px; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); position:sticky; top:0; }
     .nav a { color:#e6e8ef; text-decoration:none; padding:6px 10px; border-radius:8px; }
     .nav a:hover { background:rgba(255,255,255,.08); }
-    .nav a.active { background:#7dd3fc; color:#0b0f19; border-radius:8px; }
     .wrap { max-width: 860px; margin: 0 auto; padding: 28px 18px; }
     .cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:18px; }
     .card { border:1px solid rgba(255,255,255,.10); border-radius:14px; padding:16px; background:rgba(255,255,255,.03); }
     .card h2 { margin: 0 0 8px; font-size:18px; }
     .card p { margin:0 0 12px; opacity:.9; line-height:1.4; }
     .card a { display:inline-block; color:#0b0f19; background:#7dd3fc; padding:8px 12px; border-radius:10px; text-decoration:none; font-weight:700; }
-    .card a:hover { filter:brightness(1.05); }
-    .muted { opacity:.7; font-size: 13px; margin-top: 16px; }
   </style>
-  <style>`n    .nav{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);z-index:50;}`n    .nav a{text-decoration:none;color:inherit;padding:6px 10px;border-radius:8px;font-weight:600;}`n    .nav a:hover{background:rgba(0,0,0,.06);}`n  </style>`n</head>
+</head>
 <body>
-
   <nav class=nav>
-    <a href=/ class=active>Home</a>
+    <a href=/>Home</a>
     <a href=/lotto>Lotto</a>
     <a href=/saju>Saju</a>
   </nav>
 
   <main class=wrap>
-    <h1>?ы솉遊?/h1>
-    <p>?먰븯??湲곕뒫???좏깮?섏꽭??</p>
+    <h1>재홍봇</h1>
+    <p>원하는 기능을 선택하세요.</p>
 
     <section class=cards>
       <div class=card>
         <h2>Lotto</h2>
-        <p>濡쒕삉 異붿쿇/議고쉶 ?섏씠吏</p>
-        <a href=/lotto>/lotto 濡??대룞</a>
+        <p>로또 페이지</p>
+        <a href=/lotto>/lotto로 이동</a>
       </div>
       <div class=card>
         <h2>Saju</h2>
-        <p>?ъ＜ ?섏씠吏</p>
-        <a href=/saju>/saju 濡??대룞</a>
+        <p>사주 페이지</p>
+        <a href=/saju>/saju로 이동</a>
       </div>
     </section>
-
-    <div class=muted>Netlify static routing: / ??Home, /lotto ??Lotto app, /saju ??Saju app</div>
   </main>
 </body>
 </html>
