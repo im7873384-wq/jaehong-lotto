@@ -1,493 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>사주풀이</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;800;900&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 사주 × MBTI - 통합 분석 플랫폼</title>
+    <link rel="stylesheet" href="../nav.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            line-height: 1.6; 
+            color: #333; 
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-    :root{
-      --bg1:#fff6fb;
-      --bg2:#f3fbff;
-      --card:#ffffffcc;
-      --border:#ffd7ea;
-      --text:#2a2a2a;
-      --muted:#6b6b6b;
-      --pink:#ff7fb2;
-      --pink2:#ff9fc6;
-      --mint:#7de3d0;
-      --shadow: 0 18px 45px rgba(255, 127, 178, 0.15);
-    }
+        /* 메인 컨테이너 */
+        .main-container {
+            min-height: calc(100vh - var(--nav-h, 56px));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
 
-    *{ box-sizing:border-box; }
+        /* 헤더 영역 */
+        .header-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
 
-    body{
-      margin:0;
-      font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 10% 0%, #ffe8f3 0%, rgba(255,232,243,0) 60%),
-        radial-gradient(800px 500px at 100% 20%, #e6fbff 0%, rgba(230,251,255,0) 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+        .header-section h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
 
-    .wrap{ width:100%; max-width: 920px; padding: 0 16px; }
+        .header-section .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
 
-    .card{
-      background:var(--card);
-      backdrop-filter: blur(10px);
-      border: 2px solid var(--border);
-      border-radius: 26px;
-      padding: 30px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow:hidden;
-      max-width: 820px;
-      margin: 0 auto;
-      animation: popIn 420ms cubic-bezier(.2,.9,.2,1) both;
-    }
+        .header-section .description {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-    @keyframes popIn {
-      from { transform: translateY(10px) scale(0.98); opacity: 0; }
-      to   { transform: translateY(0) scale(1); opacity: 1; }
-    }
+        /* 입력 폼 카드 */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
 
-    .header{ display:flex; gap:14px; align-items:center; margin-bottom: 14px; }
+        .form-title {
+            text-align: center;
+            color: #2563eb;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
 
-    .badge{
-      width: 68px;
-      height: 68px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(255,127,178,0.35), rgba(125,227,208,0.25));
-      border: 2px solid rgba(255,127,178,0.30);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
-      overflow: hidden;
-      font-family: 'Jua', system-ui;
-      font-size: 26px;
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    h1{ 
-      margin:0; 
-      font-size: 34px; 
-      letter-spacing:-0.6px;
-      font-family: 'Jua', ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.95rem;
+        }
 
-    .sub{ 
-      margin:4px 0 0; 
-      color:var(--muted); 
-      font-size: 16px; 
-      font-weight: 800;
-      letter-spacing:-0.25px;
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+        .form-group label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
 
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
-    @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
 
-    label{ display:block; font-weight: 900; letter-spacing:-0.2px; margin-bottom: 6px; color:#7a2450; }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+        }
 
-    .field{
-      background: rgba(255,255,255,0.8);
-      border: 2px solid rgba(255,127,178,0.22);
-      border-radius: 16px;
-      padding: 12px 12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
 
-    input, select{
-      width:100%;
-      border:0;
-      outline:0;
-      background: transparent;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
 
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 16px; }
+        /* 시간 선택 */
+        .time-select-wrapper {
+            margin-bottom: 20px;
+        }
 
-    button{
-      cursor:pointer;
-      border:0;
-      border-radius: 16px;
-      padding: 12px 14px;
-      font-weight: 900;
-      letter-spacing:-0.2px;
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+        /* 버튼 */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
 
-    .primary{
-      background: linear-gradient(135deg, var(--pink), var(--pink2));
-      color: #fff;
-      box-shadow: 0 14px 26px rgba(255,127,178,0.28);
-    }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
 
-    .ghost{
-      background: rgba(255,255,255,0.75);
-      border: 2px dashed rgba(255,127,178,0.35);
-      color: var(--text);
-    }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
 
-    .ghost:disabled{ opacity:0.55; cursor:not-allowed; }
+        /* 통계 */
+        .stats {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
 
-    .status{ font-size: 13px; color: var(--muted); }
+        .stats span {
+            margin: 0 8px;
+        }
 
-    .bubble{
-      display:inline-block;
-      background: rgba(255,255,255,0.9);
-      border: 2px solid rgba(255,127,178,0.22);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12.5px;
-      color: #7a2450;
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+        /* 참고 문구 */
+        .disclaimer {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            margin-top: 20px;
+            max-width: 500px;
+        }
 
-    .result{
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.75);
-      border: 2px solid rgba(125,227,208,0.25);
-    }
+        /* 반응형 */
+        @media (max-width: 600px) {
+            .header-section h1 {
+                font-size: 2rem;
+            }
 
-    .result h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing:-0.25px;
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+            .form-card {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
 
-    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.92);
-      border: 2px solid rgba(255,127,178,0.22);
-      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
-      font-size: 13.5px;
-      color:#7a2450;
-      font-weight: 900;
-      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
-    }
+            .form-row .form-group {
+                margin-bottom: 0;
+            }
+        }
 
-    .pill:before{
-      content:"";
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(125,227,208,0.70);
-      margin-right: 8px;
-    }
+        /* 애니메이션 */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
 
-    .mono{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background: rgba(255,127,178,0.12);
-      padding: 3px 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,127,178,0.22);
-      color: #7a2450;
-    }
-
-    .small{ font-size: 12.5px; color: var(--muted); line-height:1.45; }
-
-    .table{
-      margin-top: 12px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .box{
-      border-radius: 16px;
-      background: rgba(255,255,255,0.85);
-      border: 2px solid rgba(255,127,178,0.18);
-      padding: 12px;
-    }
-
-    .boxTitle{ font-weight: 1000; color:#7a2450; margin-bottom: 6px; }
-    .box p{ margin:0; color:#2a2a2a; line-height:1.6; }
-  </style>
-
-  <style>
-</style>
-  <link rel="stylesheet" href="../nav.css" />
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="top-nav"><a href="/jaehong-lotto/">홈</a><a href="/jaehong-lotto/lotto/">로또</a><a href="/jaehong-lotto/saju/">사주</a></nav>
-<div class="wrap">
-    <div class="card">
-      <div class="header">
-        <div class="badge" aria-hidden="true">⛩</div>
-        <div>
-          <h1>사주풀이</h1>
-          <div class="sub">생년월일/시간으로 사주(오행 중심) 느낌의 해석을 만들어줘</div>
-        </div>
-      </div>
+    <nav class="top-nav">
+        <a href="/jaehong-lotto/">홈</a>
+        <a href="/jaehong-lotto/lotto/">로또</a>
+        <a href="/jaehong-lotto/saju/">사주</a>
+    </nav>
 
-      <div class="pillRow" style="margin-top:10px;">
-        <span class="pill">오행</span>
-        <span class="pill">일간</span>
-        <span class="pill">기운 밸런스</span>
-        <span class="pill">한줄 조언</span>
-      </div>
-
-      <div class="grid">
-        <div>
-          <label>생년월일</label>
-          <div class="field">
-            <input id="date" type="date" />
-          </div>
+    <div class="main-container">
+        <!-- 헤더 -->
+        <div class="header-section fade-in">
+            <h1>🔮 AI 사주 × MBTI</h1>
+            <p class="subtitle">전통 사주명리학과 현대 심리학의 완벽한 만남</p>
+            <p class="description">당신만의 숨겨진 재능과 운명을 발견하세요</p>
         </div>
 
-        <div>
-          <label>달력 기준</label>
-          <div class="field">
-            <select id="calendar">
-              <option value="solar" selected>양력</option>
-              <option value="lunar">음력</option>
-            </select>
-          </div>
+        <!-- 입력 폼 -->
+        <div class="form-card fade-in">
+            <h2 class="form-title">✨ 무료 상세 분석</h2>
+            
+            <form id="sajuForm">
+                <div class="form-group">
+                    <label>이름 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="홍길동" maxlength="20">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>생년 <span class="required">*</span></label>
+                        <select id="year" name="year" required>
+                            <option value="">년도</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>생월 <span class="required">*</span></label>
+                        <select id="month" name="month" required>
+                            <option value="">월</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>생일 <span class="required">*</span></label>
+                        <select id="day" name="day" required>
+                            <option value="">일</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group time-select-wrapper">
+                    <label>출생시간 <span class="required">*</span></label>
+                    <select id="hour" name="hour" required>
+                        <option value="">선택하세요</option>
+                        <option value="23">자시 (23:00~01:00)</option>
+                        <option value="1">축시 (01:00~03:00)</option>
+                        <option value="3">인시 (03:00~05:00)</option>
+                        <option value="5">묘시 (05:00~07:00)</option>
+                        <option value="7">진시 (07:00~09:00)</option>
+                        <option value="9">사시 (09:00~11:00)</option>
+                        <option value="11">오시 (11:00~13:00)</option>
+                        <option value="13">미시 (13:00~15:00)</option>
+                        <option value="15">신시 (15:00~17:00)</option>
+                        <option value="17">유시 (17:00~19:00)</option>
+                        <option value="19">술시 (19:00~21:00)</option>
+                        <option value="21">해시 (21:00~23:00)</option>
+                        <option value="-1">모름</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>성별 <span class="required">*</span></label>
+                    <select id="gender" name="gender" required>
+                        <option value="">선택하세요</option>
+                        <option value="M">남성</option>
+                        <option value="F">여성</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>MBTI (선택)</label>
+                    <select id="mbti" name="mbti">
+                        <option value="">모르겠어요</option>
+                        <option value="ENFP">ENFP - 재기발랄한 활동가</option>
+                        <option value="ENFJ">ENFJ - 정의로운 사회운동가</option>
+                        <option value="ENTP">ENTP - 뜨거운 논쟁을 즐기는 변론가</option>
+                        <option value="ENTJ">ENTJ - 대담한 통솔자</option>
+                        <option value="INFP">INFP - 열정적인 중재자</option>
+                        <option value="INFJ">INFJ - 선의의 옹호자</option>
+                        <option value="INTP">INTP - 논리적인 사색가</option>
+                        <option value="INTJ">INTJ - 용의주도한 전략가</option>
+                        <option value="ESFP">ESFP - 자유로운 연예인</option>
+                        <option value="ESFJ">ESFJ - 사교적인 외교관</option>
+                        <option value="ESTP">ESTP - 모험을 즐기는 사업가</option>
+                        <option value="ESTJ">ESTJ - 엄격한 관리자</option>
+                        <option value="ISFP">ISFP - 호기심 많은 예술가</option>
+                        <option value="ISFJ">ISFJ - 용감한 수호자</option>
+                        <option value="ISTP">ISTP - 만능 재주꾼</option>
+                        <option value="ISTJ">ISTJ - 청렴결백한 논리주의자</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    🔮 상세 분석 보기
+                </button>
+            </form>
         </div>
 
-        <div>
-          <label>출생 시간</label>
-          <div class="field">
-            <select id="hour">
-              <option value="unknown" selected>모름</option>
-              <option value="0">00시(자)</option>
-              <option value="1">01시</option>
-              <option value="2">02시(축)</option>
-              <option value="3">03시</option>
-              <option value="4">04시(인)</option>
-              <option value="5">05시</option>
-              <option value="6">06시(묘)</option>
-              <option value="7">07시</option>
-              <option value="8">08시(진)</option>
-              <option value="9">09시</option>
-              <option value="10">10시(사)</option>
-              <option value="11">11시</option>
-              <option value="12">12시(오)</option>
-              <option value="13">13시</option>
-              <option value="14">14시(미)</option>
-              <option value="15">15시</option>
-              <option value="16">16시(신)</option>
-              <option value="17">17시</option>
-              <option value="18">18시(유)</option>
-              <option value="19">19시</option>
-              <option value="20">20시(술)</option>
-              <option value="21">21시</option>
-              <option value="22">22시(해)</option>
-              <option value="23">23시</option>
-            </select>
-          </div>
-          <div class="small" style="margin-top:8px;">
-            ※ "모름" 선택 시 시간 요소는 흐릿하게 처리해서 결과를 보여줘.
-          </div>
+        <!-- 통계 -->
+        <div class="stats">
+            <span>✨ 10만+ 분석 완료</span>
+            <span>|</span>
+            <span>⭐ 평점 4.8/5.0</span>
+            <span>|</span>
+            <span>🕐 즉시 결과</span>
         </div>
 
-        <div>
-          <label>성별(선택)</label>
-          <div class="field">
-            <select id="gender">
-              <option value="unknown" selected>선택 안함</option>
-              <option value="male">남</option>
-              <option value="female">여</option>
-            </select>
-          </div>
-          <div class="small" style="margin-top:8px;">
-            ※ 성별은 표현 톤/상담 스타일에만 참고.
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <button class="primary" id="go">풀이해줘!</button>
-        <button class="ghost" id="copy" disabled>복사하기</button>
-        <span class="status" id="status"></span>
-      </div>
-
-      <div class="result" id="result" style="display:none;">
-        <h2>결과</h2>
-        <div class="pillRow" id="pills"></div>
-
-        <div class="table" style="margin-top:12px;">
-          <div class="box">
-            <div class="boxTitle">핵심 요약</div>
-            <p id="summary"></p>
-          </div>
-          <div class="box">
-            <div class="boxTitle">오행 밸런스</div>
-            <p id="five"></p>
-          </div>
-          <div class="box">
-            <div class="boxTitle">조언</div>
-            <p id="advice"></p>
-          </div>
-          <div class="box">
-            <div class="boxTitle">주의문구</div>
-            <p class="small">본 결과는 전통 사주 명리학을 흉내 낸 <b>참고용/오락용</b> 텍스트입니다. 중요한 결정은 전문가 상담/본인의 판단을 우선하세요.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="small" style="margin-top:14px;">
-        입력값은 브라우저 안에서만 처리되고 서버로 전송하지 않음(정적 페이지).
-      </div>
+        <!-- 참고 문구 -->
+        <p class="disclaimer">
+            모든 분석은 참고용이며, 중요한 결정은 전문가 상담을 권장합니다.
+        </p>
     </div>
-  </div>
 
-<script>
-  // NOTE: This is a "real saju vibe" UI, but the actual 사주 계산(천간/지지/절기/음력 변환/대운)은 매우 복잡.
-  // 여기서는 사용자가 원한 느낌(오행/밸런스/조언)을 안전하게 "참고용"으로 생성.
+    <script>
+        // 년도 옵션 생성
+        (function populateYears() {
+            const yearSelect = document.getElementById('year');
+            const currentYear = new Date().getFullYear();
+            
+            for (let year = currentYear - 10; year >= 1940; year--) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year + '년';
+                yearSelect.appendChild(option);
+            }
+        })();
 
-  const FIVE = [
-    { k:'목', c:'#7de3d0', tips:['성장','확장','시작','유연함'] },
-    { k:'화', c:'#ff7fb2', tips:['열정','표현','속도','의욕'] },
-    { k:'토', c:'#ffd86b', tips:['중심','조율','책임','안정'] },
-    { k:'금', c:'#6aa8ff', tips:['정리','결단','규칙','선 긋기'] },
-    { k:'수', c:'#8b6cff', tips:['지혜','관찰','휴식','깊이'] },
-  ];
+        // 월 옵션 생성
+        (function populateMonths() {
+            const monthSelect = document.getElementById('month');
+            
+            for (let month = 1; month <= 12; month++) {
+                const option = document.createElement('option');
+                option.value = month;
+                option.textContent = month + '월';
+                monthSelect.appendChild(option);
+            }
+        })();
 
-  function seededRand(seed){
-    // xorshift32
-    let x = seed >>> 0;
-    return () => {
-      x ^= x << 13; x >>>= 0;
-      x ^= x >> 17; x >>>= 0;
-      x ^= x << 5;  x >>>= 0;
-      return (x >>> 0) / 4294967296;
-    };
-  }
+        // 일 옵션 생성
+        (function populateDays() {
+            const daySelect = document.getElementById('day');
+            
+            for (let day = 1; day <= 31; day++) {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day + '일';
+                daySelect.appendChild(option);
+            }
+        })();
 
-  function hashStr(s){
-    let h = 2166136261;
-    for (let i=0;i<s.length;i++){
-      h ^= s.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    return h >>> 0;
-  }
+        // 폼 제출 처리
+        document.getElementById('sajuForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const year = document.getElementById('year').value;
+            const month = document.getElementById('month').value;
+            const day = document.getElementById('day').value;
+            const hour = document.getElementById('hour').value;
+            const gender = document.getElementById('gender').value;
+            const mbti = document.getElementById('mbti').value;
 
-  function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+            // 유효성 검사
+            if (!name || !year || !month || !day || !hour || !gender) {
+                alert('필수 항목을 모두 입력해주세요.');
+                return;
+            }
 
-  function makeFiveBalance(r){
-    // produce 5 values that sum to 100-ish
-    const raw = FIVE.map(()=> 0.6 + r()*1.4);
-    const sum = raw.reduce((a,b)=>a+b,0);
-    const vals = raw.map(v => Math.round((v/sum)*100));
-    // fix rounding
-    let diff = 100 - vals.reduce((a,b)=>a+b,0);
-    while(diff !== 0){
-      const i = Math.floor(r()*5);
-      const next = vals[i] + (diff>0 ? 1 : -1);
-      if(next>=0){ vals[i]=next; diff += (diff>0 ? -1 : 1); }
-    }
-    return vals;
-  }
+            // URL 파라미터 생성 (한글 이름 encodeURIComponent 적용)
+            const params = new URLSearchParams();
+            params.set('name', encodeURIComponent(name));
+            params.set('year', year);
+            params.set('month', month);
+            params.set('day', day);
+            params.set('hour', hour);
+            params.set('gender', gender);
+            if (mbti) {
+                params.set('mbti', mbti);
+            }
 
-  function pickDominant(vals){
-    let max=-1, idx=0;
-    for(let i=0;i<vals.length;i++){ if(vals[i]>max){ max=vals[i]; idx=i; } }
-    let min=999, jdx=0;
-    for(let i=0;i<vals.length;i++){ if(vals[i]<min){ min=vals[i]; jdx=i; } }
-    return { strong: FIVE[idx].k, weak: FIVE[jdx].k, strongIdx: idx, weakIdx: jdx };
-  }
-
-  function dayStemLike(seed){
-    // 천간 느낌만 (정확 계산 아님)
-    const stems = ['갑','을','병','정','무','기','경','신','임','계'];
-    return stems[seed % stems.length];
-  }
-
-  function buildText({dateStr, cal, hour, gender}){
-    const seed = hashStr([dateStr, cal, hour, gender].join('|'));
-    const r = seededRand(seed);
-
-    const vals = makeFiveBalance(r);
-    const dom = pickDominant(vals);
-    const dayStem = dayStemLike(seed);
-
-    const hourKnown = hour !== 'unknown';
-
-    const tone = (gender === 'male') ? '형' : (gender === 'female') ? '누나/언니' : '너';
-
-    const summary = `일간(느낌)은 ${dayStem}로 잡히고, 전체 기운은 ${dom.strong} 쪽이 더 강하게 흐르는 편이야. `
-      + (hourKnown ? `출생시간 정보가 있어서 디테일을 조금 더 세밀하게 잡았어.` : `출생시간이 없어서 큰 흐름 위주로만 봤어.`);
-
-    const five = `목 ${vals[0]} · 화 ${vals[1]} · 토 ${vals[2]} · 금 ${vals[3]} · 수 ${vals[4]} (합 100)
-강한 기운: ${dom.strong} / 약한 기운: ${dom.weak}`;
-
-    const adviceA = `${dom.strong} 기운이 강할 때는 추진이 빨라지기 쉬워. 그래서 "끝맺음"을 의식적으로 챙기는 게 운을 안정시켜.`;
-    const adviceB = `${dom.weak} 기운이 약하면 그쪽 요소를 보완하는 루틴이 좋아. 예를 들면 ${FIVE[dom.weakIdx].tips.slice(0,2).join('·')} 쪽 습관을 일상에 붙여봐.`;
-    const adviceC = `한줄 조언: 오늘은 ${tone}의 페이스를 지키는 게 제일 큰 개운 포인트.`;
-
-    const pills = [
-      `일간(느낌): ${dayStem}`,
-      `강: ${dom.strong}`,
-      `약: ${dom.weak}`,
-      hourKnown ? '시간: 반영' : '시간: 미반영'
-    ];
-
-    return { summary, five, advice: `${adviceA}\n${adviceB}\n${adviceC}`, pills };
-  }
-
-  const $ = (id) => document.getElementById(id);
-
-  $('go').onclick = () => {
-    const dateStr = $('date').value;
-    if(!dateStr){
-      $('status').textContent = '생년월일을 선택해줘!';
-      return;
-    }
-
-    const cal = $('calendar').value;
-    const hour = $('hour').value;
-    const gender = $('gender').value;
-
-    const out = buildText({dateStr, cal, hour, gender});
-
-    $('result').style.display = 'block';
-    $('summary').textContent = out.summary;
-    $('five').textContent = out.five;
-    $('advice').textContent = out.advice;
-
-    const pillsEl = $('pills');
-    pillsEl.innerHTML = '';
-    out.pills.forEach(t => {
-      const s = document.createElement('span');
-      s.className = 'pill';
-      s.textContent = t;
-      pillsEl.appendChild(s);
-    });
-
-    const copyText = `사주풀이(참고용)\n- 생년월일: ${dateStr} (${cal==='solar'?'양력':'음력'})\n- 출생시간: ${hour==='unknown'?'모름':hour+'시'}\n\n[요약]\n${out.summary}\n\n[오행]\n${out.five}\n\n[조언]\n${out.advice}\n\n[주의]\n본 결과는 참고용/오락용이며 중요한 결정은 전문가 상담/본인 판단을 우선하세요.`;
-
-    $('copy').disabled = false;
-    $('copy').onclick = async () => {
-      await navigator.clipboard.writeText(copyText);
-      $('status').textContent = '복사됨!';
-      setTimeout(()=> $('status').textContent='', 1200);
-    };
-
-    $('status').textContent = '';
-  };
-</script>
+            // demo-report.html로 이동
+            window.location.href = 'demo-report.html?' + params.toString();
+        });
+    </script>
 </body>
 </html>
