@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>로또추천</title>
+  <style>
+    :root{
+      --bg1:#fff6fb;
+      --bg2:#f3fbff;
+      --card:#ffffffcc;
+      --border:#ffd7ea;
+      --text:#2a2a2a;
+      --muted:#6b6b6b;
+      --pink:#ff7fb2;
+      --pink2:#ff9fc6;
+      --mint:#7de3d0;
+      --shadow: 0 18px 45px rgba(255, 127, 178, 0.15);
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 0%, #ffe8f3 0%, rgba(255,232,243,0) 60%),
+        radial-gradient(800px 500px at 100% 20%, #e6fbff 0%, rgba(230,251,255,0) 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .wrap{ position: relative; z-index: 2; width:100%; max-width: 900px; padding: 0 16px; }
+
+    .card{
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      border: 2px solid var(--border);
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+      max-width: 700px; /* ~25% bigger */
+      margin: 0 auto;
+      animation: popIn 420ms cubic-bezier(.2,.9,.2,1) both;
+    }
+
+    @keyframes popIn {
+      from { transform: translateY(10px) scale(0.98); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-60px -40px auto auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,127,178,0.28), rgba(255,127,178,0) 70%);
+      transform: rotate(12deg);
+      pointer-events:none;
+      animation: floaty 5.5s ease-in-out infinite;
+    }
+
+    .card:after{
+      content:"";
+      position:absolute;
+      inset:auto auto -70px -60px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 35% 35%, rgba(125,227,208,0.26), rgba(125,227,208,0) 70%);
+      transform: rotate(-8deg);
+      pointer-events:none;
+      animation: floaty 6.5s ease-in-out infinite reverse;
+    }
+
+    @keyframes floaty {
+      0%,100% { transform: translateY(0) rotate(12deg); }
+      50%     { transform: translateY(10px) rotate(12deg); }
+    }
+
+    .header{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-bottom: 8px;
+    }
+
+    .badge{
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,127,178,0.35), rgba(125,227,208,0.25));
+      border: 2px solid rgba(255,127,178,0.30);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .badge img{ width:100%; height:100%; object-fit: contain; }
+
+    h1{ margin:0; font-size: 28px; letter-spacing:-0.4px; }
+    .sub{ margin:2px 0 0; color:var(--muted); font-size: 15.5px; }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 14px; }
+
+    button{
+      cursor:pointer;
+      border:0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 900;
+      letter-spacing:-0.2px;
+    }
+
+    .primary{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color: #fff;
+      box-shadow: 0 14px 26px rgba(255,127,178,0.28);
+    }
+    .primary:hover{ filter: brightness(1.02); transform: translateY(-1px); }
+    .primary:active{ transform: translateY(1px) scale(0.99); }
+
+    .ghost{
+      background: rgba(255,255,255,0.75);
+      border: 2px dashed rgba(255,127,178,0.35);
+      color: var(--text);
+    }
+
+    .ghost:disabled{ opacity:0.55; cursor:not-allowed; }
+
+    .status{ font-size: 13px; color: var(--muted); }
+
+    .nums{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px; }
+
+    .sets{ margin-top: 12px; display:grid; gap: 10px; }
+    .setRow{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .setLabel{ width: 54px; min-width:54px; text-align:center; font-weight: 900; color:#7a2450; }
+    .miniBall{
+      width:46px; height:46px; border-radius: 999px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 1000; font-size: 16px;
+      background:#fff;
+      border:2px solid rgba(255,127,178,0.22);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.06);
+      position:relative;
+      animation: bounceIn 420ms cubic-bezier(.2,.9,.2,1) both;
+    }
+    .miniBall:after{
+      content:"";
+      position:absolute;
+      inset: 6px 8px auto auto;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(125,227,208,0.65);
+    }
+
+    .ball{
+      width:66px;
+      height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 999px;
+      font-size: 22px;
+      font-weight: 1000;
+      background: #fff;
+      border: 2px solid rgba(255,127,178,0.28);
+      box-shadow: 0 12px 22px rgba(0,0,0,0.07);
+      position:relative;
+      transform: translateY(0) scale(1);
+      animation: bounceIn 420ms cubic-bezier(.2,.9,.2,1) both;
+    }
+
+    @keyframes bounceIn {
+      0%   { transform: translateY(10px) scale(0.9); opacity:0; }
+      60%  { transform: translateY(-3px) scale(1.05); opacity:1; }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .ball:after{
+      content:"";
+      position:absolute;
+      inset: 6px 8px auto auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(125,227,208,0.7);
+      filter: blur(0.1px);
+    }
+
+    .line{ margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+    code{ background: rgba(255,127,178,0.12); padding: 3px 8px; border-radius: 10px; border: 1px solid rgba(255,127,178,0.22); color: #7a2450; }
+
+    .tips{
+      margin-top: 16px;
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items:center;
+      color: #7a2450;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+    }
+
+    .tipBall{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.92);
+      border: 2px solid rgba(255,127,178,0.22);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.05);
+      font-size: 13.5px;
+    }
+
+    .tipBall:before{
+      content:"";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(125,227,208,0.70);
+      margin-right: 8px;
+    }
+
+    .bubble{
+      display:inline-block;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid rgba(255,127,178,0.22);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      color: #7a2450;
+    }
+
+    .bg-deco{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .wrap{ position: relative; z-index: 2; width:100%; max-width: 900px; padding: 0 16px; }
+
+    .sticker{
+      position: absolute;
+      width: 220px;
+      height: auto;
+      opacity: 0.92;
+      filter: drop-shadow(0 14px 20px rgba(0,0,0,0.10));
+      /* reduce continuous animation cost */
+      animation: none;
+      transition: opacity 200ms ease;
+      will-change: opacity;
+    }
+
+    /* fixed sticker layout */
+    .sticker.s1{ left: 2.5vw; top: 8vh; --r:-6deg; transform: rotate(-6deg); }
+    .sticker.s2{ right: 3vw; top: 9vh; --r:7deg; transform: rotate(7deg); animation-duration: 6.6s; }
+    .sticker.s3{ left: 5vw; bottom: 7vh; --r:5deg; transform: rotate(5deg); animation-duration: 7.0s; }
+    .sticker.s4{ right: 5vw; bottom: 6vh; --r:-4deg; transform: rotate(-4deg); animation-duration: 6.2s; }
+
+    .sticker.s5{ left: 14vw; top: 22vh; --r:10deg; transform: rotate(10deg); width: 180px; opacity:0.85; animation-duration: 7.4s; }
+    .sticker.s6{ right: 14vw; top: 24vh; --r:-9deg; transform: rotate(-9deg); width: 180px; opacity:0.85; animation-duration: 7.1s; }
+    .sticker.s7{ left: 12vw; bottom: 22vh; --r:-2deg; transform: rotate(-2deg); width: 180px; opacity:0.85; animation-duration: 7.8s; }
+    .sticker.s8{ right: 12vw; bottom: 21vh; --r:3deg; transform: rotate(3deg); width: 180px; opacity:0.85; animation-duration: 7.6s; }
+
+    .sticker.s9{ left: 32vw; top: 4vh; --r:-12deg; transform: rotate(-12deg); width: 140px; opacity:0.8; animation-duration: 8.2s; }
+    .sticker.s10{ right: 32vw; bottom: 3vh; --r:12deg; transform: rotate(12deg); width: 140px; opacity:0.8; animation-duration: 8.0s; }
+
+    /* more fillers (smaller, to avoid overlap) */
+    .sticker.s11{ left: 8vw; top: 2vh; --r:8deg; transform: rotate(8deg); width: 120px; opacity:0.72; animation-duration: 8.6s; }
+    .sticker.s12{ right: 8vw; top: 2vh; --r:-8deg; transform: rotate(-8deg); width: 120px; opacity:0.72; animation-duration: 8.4s; }
+    .sticker.s13{ left: 2vw; top: 38vh; --r:14deg; transform: rotate(14deg); width: 120px; opacity:0.72; animation-duration: 9.0s; }
+    .sticker.s14{ right: 2vw; top: 40vh; --r:-14deg; transform: rotate(-14deg); width: 120px; opacity:0.72; animation-duration: 8.9s; }
+    .sticker.s15{ left: 24vw; top: 52vh; --r:-6deg; transform: rotate(-6deg); width: 110px; opacity:0.68; animation-duration: 9.2s; }
+
+    .sticker.s16{ right: 24vw; top: 50vh; --r:6deg; transform: rotate(6deg); width: 110px; opacity:0.68; animation-duration: 9.1s; }
+    .sticker.s17{ left: 24vw; bottom: 36vh; --r:10deg; transform: rotate(10deg); width: 110px; opacity:0.68; animation-duration: 9.3s; }
+    .sticker.s18{ right: 24vw; bottom: 36vh; --r:-10deg; transform: rotate(-10deg); width: 110px; opacity:0.68; animation-duration: 9.4s; }
+    .sticker.s19{ left: 46vw; bottom: 14vh; --r:-5deg; transform: rotate(-5deg); width: 120px; opacity:0.70; animation-duration: 8.7s; }
+    .sticker.s20{ right: 46vw; top: 66vh; --r:5deg; transform: rotate(5deg); width: 120px; opacity:0.70; animation-duration: 8.8s; }
+
+    @keyframes stickerFloat{
+      0%,100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+      50%     { transform: translateY(12px) rotate(var(--r, 0deg)); }
+    }
+
+    .confetti{
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events:none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-deco" aria-hidden="true">
+    <img class="sticker s1" data-sticker src="assets/32411274/936aa21d/806221104@2x.png" alt="" />
+    <img class="sticker s2" data-sticker src="assets/32411274/936aa21d/806221110@2x.png" alt="" />
+    <img class="sticker s3" data-sticker src="assets/32411274/936aa21d/806221118@2x.png" alt="" />
+    <img class="sticker s4" data-sticker src="assets/32411274/936aa21d/806221123@2x.png" alt="" />
+
+    <img class="sticker s5" data-sticker src="assets/32411274/936aa21d/806221099@2x.png" alt="" />
+    <img class="sticker s6" data-sticker src="assets/32411274/936aa21d/806221106@2x.png" alt="" />
+    <img class="sticker s7" data-sticker src="assets/32411274/936aa21d/806221114@2x.png" alt="" />
+    <img class="sticker s8" data-sticker src="assets/32411274/936aa21d/806221120@2x.png" alt="" />
+
+    <img class="sticker s9" data-sticker src="assets/32411274/936aa21d/806221091@2x.png" alt="" />
+    <img class="sticker s10" data-sticker src="assets/32411274/936aa21d/806221126@2x.png" alt="" />
+
+    <img class="sticker s11" data-sticker src="assets/32411274/936aa21d/806221092@2x.png" alt="" />
+    <img class="sticker s12" data-sticker src="assets/32411274/936aa21d/806221093@2x.png" alt="" />
+    <img class="sticker s13" data-sticker src="assets/32411274/936aa21d/806221094@2x.png" alt="" />
+    <img class="sticker s14" data-sticker src="assets/32411274/936aa21d/806221095@2x.png" alt="" />
+    <img class="sticker s15" data-sticker src="assets/32411274/936aa21d/806221096@2x.png" alt="" />
+
+    <img class="sticker s16" data-sticker src="assets/32411274/936aa21d/806221097@2x.png" alt="" />
+    <img class="sticker s17" data-sticker src="assets/32411274/936aa21d/806221098@2x.png" alt="" />
+    <img class="sticker s18" data-sticker src="assets/32411274/936aa21d/806221100@2x.png" alt="" />
+    <img class="sticker s19" data-sticker src="assets/32411274/936aa21d/806221101@2x.png" alt="" />
+    <img class="sticker s20" data-sticker src="assets/32411274/936aa21d/806221102@2x.png" alt="" />
+
+    <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <div class="badge" aria-hidden="true"><img src="assets/badge.png" alt="" /></div>
+        <div>
+          <h1>로또추천</h1>
+          <div class="sub"><span class="bubble">1~45</span> 에서 <b>중복 없이 6개</b> 뽑기</div>
+        </div>
+      </div>
+
+      <div class="sub" style="margin-top:10px;">
+        <span class="bubble">오늘도</span>
+        <span class="bubble">행운</span>
+        <span class="bubble">뽑자!</span>
+        <span class="bubble">⋆｡°✩</span>
+      </div>
+
+      <div class="row">
+        <button class="primary" id="pickBtn">뽑아줘!</button>
+        <button class="ghost" id="pick5Btn">5세트 뽑기</button>
+        <button class="ghost" id="copyBtn" disabled>복사하기</button>
+        <span class="status" id="status"></span>
+      </div>
+
+      <div class="nums" id="nums"></div>
+      <div class="line" id="textLine"></div>
+      <div class="sets" id="sets" style="display:none;"></div>
+      <div class="line" id="list5" style="display:none;"></div>
+
+      <div class="tips">
+        <span class="tipBall">당첨 보장은 아니고 랜덤 추천이야</span>
+        <span class="tipBall">운빨은… 화이팅</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function pick6() {
+    const nums = new Set();
+    while (nums.size < 6) nums.add(Math.floor(Math.random() * 45) + 1);
+    return Array.from(nums).sort((a,b)=>a-b);
+  }
+
+  function render(list) {
+    const numsEl = document.getElementById('nums');
+    numsEl.innerHTML = '';
+
+    for (let i=0; i<list.length; i++) {
+      const n = list[i];
+      const d = document.createElement('div');
+      d.className = 'ball';
+      d.style.animationDelay = (i * 45) + 'ms';
+      d.textContent = n;
+      numsEl.appendChild(d);
+    }
+
+    // keep the line text cute but minimal
+    const line = list.join(', ');
+    document.getElementById('textLine').innerHTML = `오늘의 행운 번호 <span class="bubble">짠!</span>`;
+
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.disabled = false;
+    copyBtn.onclick = async () => {
+      await navigator.clipboard.writeText(line);
+      document.getElementById('status').textContent = '복사됨!';
+      setTimeout(()=>document.getElementById('status').textContent='', 1200);
+    };
+  }
+
+  function render5Sets(sets){
+    const setsEl = document.getElementById('sets');
+    setsEl.innerHTML = '';
+    setsEl.style.display = 'grid';
+
+    for (let i=0; i<sets.length; i++) {
+      const row = document.createElement('div');
+      row.className = 'setRow';
+
+      const label = document.createElement('div');
+      label.className = 'setLabel';
+      label.textContent = (i+1) + '세트';
+      row.appendChild(label);
+
+      const nums = sets[i];
+      for (let j=0; j<nums.length; j++) {
+        const n = nums[j];
+        const b = document.createElement('div');
+        b.className = 'miniBall';
+        b.style.animationDelay = ((i*6 + j) * 25) + 'ms';
+        b.textContent = n;
+        row.appendChild(b);
+      }
+
+      setsEl.appendChild(row);
+    }
+  }
+
+  // confetti (tiny, no deps)
+  function popConfetti(){
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    // cap DPR for performance
+    const dpr = Math.min(1.5, window.devicePixelRatio || 1);
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    const colors = ['#ff7fb2','#ff9fc6','#7de3d0','#6aa8ff','#ffd86b'];
+    const parts = Array.from({length: 80}, () => ({
+      x: window.innerWidth/2 + (Math.random()*120-60),
+      y: window.innerHeight/2 + (Math.random()*60-30),
+      vx: (Math.random()*7-3.5),
+      vy: (Math.random()*-9-4),
+      g: 0.32 + Math.random()*0.10,
+      s: 4 + Math.random()*4,
+      r: Math.random()*Math.PI,
+      vr: (Math.random()*0.18-0.09),
+      c: colors[Math.floor(Math.random()*colors.length)],
+      life: 0
+    }));
+
+    let raf;
+    function tick(){
+      raf = requestAnimationFrame(tick);
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      let alive = 0;
+      for(const p of parts){
+        p.life += 1;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += p.g;
+        p.r += p.vr;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.r);
+        ctx.fillStyle = p.c;
+        ctx.globalAlpha = Math.max(0, 1 - p.life/90);
+        ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*1.6);
+        ctx.restore();
+        if (p.life < 90 && p.y < window.innerHeight + 50) alive++;
+      }
+      if (!alive){
+        cancelAnimationFrame(raf);
+        ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      }
+    }
+    tick();
+  }
+
+  document.getElementById('pickBtn').onclick = () => {
+    document.getElementById('status').textContent = '';
+    document.getElementById('list5').style.display = 'none';
+    document.getElementById('sets').style.display = 'none';
+    render(pick6());
+    popConfetti();
+  };
+
+  document.getElementById('pick5Btn').onclick = () => {
+    document.getElementById('status').textContent = '';
+    const sets = Array.from({length:5}, () => pick6());
+    const flatCopy = sets.map(s=>s.join(', ')).join('\n');
+
+    document.getElementById('textLine').innerHTML = `행운 5세트 <span class="bubble">두근</span>`;
+    render(sets[0]);
+    render5Sets(sets);
+
+    // store for copy
+    const el = document.getElementById('list5');
+    el.style.display = 'none';
+    el.textContent = flatCopy;
+
+    popConfetti();
+  };
+
+  // sticker randomizer (local assets)
+  const STICKER_POOLS = [
+    { base: 'assets/32411274/936aa21d/', files: [
+      '806221089@2x.png','806221090@2x.png','806221091@2x.png','806221092@2x.png','806221093@2x.png',
+      '806221094@2x.png','806221095@2x.png','806221096@2x.png','806221097@2x.png','806221098@2x.png',
+      '806221099@2x.png','806221100@2x.png','806221101@2x.png','806221102@2x.png','806221103@2x.png',
+      '806221104@2x.png','806221105@2x.png','806221106@2x.png','806221107@2x.png','806221108@2x.png',
+      '806221109@2x.png','806221110@2x.png','806221111@2x.png','806221112@2x.png','806221113@2x.png',
+      '806221114@2x.png','806221115@2x.png','806221116@2x.png','806221117@2x.png','806221118@2x.png',
+      '806221119@2x.png','806221120@2x.png','806221121@2x.png','806221122@2x.png','806221123@2x.png',
+      '806221124@2x.png','806221125@2x.png','806221126@2x.png','806221127@2x.png','806221128@2x.png'
+    ]},
+    { base: 'assets/badgezip/29118925/211d23d7/', files: [
+      '737443185@2x.png','737443186@2x.png','737443187@2x.png','737443188@2x.png','737443189@2x.png',
+      '737443190@2x.png','737443191@2x.png','737443192@2x.png','737443193@2x.png','737443194@2x.png',
+      '737443195@2x.png','737443196@2x.png','737443197@2x.png','737443198@2x.png','737443199@2x.png',
+      '737443200@2x.png','737443201@2x.png','737443202@2x.png','737443203@2x.png','737443204@2x.png',
+      '737443205@2x.png','737443206@2x.png','737443207@2x.png','737443208@2x.png','737443209@2x.png',
+      '737443210@2x.png','737443211@2x.png','737443212@2x.png','737443213@2x.png','737443214@2x.png',
+      '737443215@2x.png','737443216@2x.png','737443217@2x.png','737443218@2x.png','737443219@2x.png',
+      '737443220@2x.png','737443221@2x.png','737443222@2x.png','737443223@2x.png','737443224@2x.png'
+    ]}
+  ];
+
+  const STICKERS = STICKER_POOLS.flatMap(p => p.files.map(f => ({ base: p.base, file: f })));
+
+  function shuffle(arr){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
+  }
+
+  function refreshStickers(){
+    const imgs = Array.from(document.querySelectorAll('[data-sticker]'));
+    const picks = shuffle(STICKERS).slice(0, imgs.length);
+
+    // just swap images (no movement). Use decode to reduce jank.
+    imgs.forEach((img, idx) => {
+      img.style.opacity = '0';
+      const p = picks[idx];
+      const nextSrc = p.base + p.file;
+      const preload = new Image();
+      preload.src = nextSrc;
+      (preload.decode ? preload.decode().catch(()=>{}) : Promise.resolve()).finally(() => {
+        setTimeout(() => {
+          img.src = nextSrc;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          img.style.opacity = '0.92';
+        }, 90);
+      });
+    });
+  }
+
+  // also randomize stickers on both buttons
+  const hookSticker = (id) => {
+    const btn = document.getElementById(id);
+    const old = btn.onclick;
+    btn.onclick = () => {
+      old();
+      refreshStickers();
+    };
+  };
+  hookSticker('pickBtn');
+  hookSticker('pick5Btn');
+
+  // copy button should copy either the 5-set list (if visible) or the single line.
+  const copyBtn = document.getElementById('copyBtn');
+  const oldCopy = copyBtn.onclick;
+  copyBtn.onclick = async () => {
+    const list5 = document.getElementById('list5');
+    if (list5 && list5.textContent && list5.textContent.includes(',')) {
+      await navigator.clipboard.writeText(list5.textContent.trim());
+      document.getElementById('status').textContent = '복사됨!';
+      setTimeout(()=>document.getElementById('status').textContent='', 1200);
+      return;
+    }
+    return oldCopy();
+  };
+
+  // initial
+  render(pick6());
+  refreshStickers();
+</script>
+</body>
+</html>
