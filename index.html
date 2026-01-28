@@ -516,6 +516,15 @@
     el.style.display = 'none';
     el.textContent = flatCopy;
 
+    // ensure copy button copies 5 sets when in 5-set mode
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn.disabled = false;
+    copyBtn.onclick = async () => {
+      await navigator.clipboard.writeText(flatCopy);
+      document.getElementById('status').textContent = '5세트 복사됨!';
+      setTimeout(()=>document.getElementById('status').textContent='', 1200);
+    };
+
     popConfetti();
   };
 
