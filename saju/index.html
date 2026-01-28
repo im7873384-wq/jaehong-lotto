@@ -1,60 +1,34 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>?ъ＜ - ?ы솉遊?/title>
+  <title>사주풀이</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;800;900&display=swap');
 
     :root{
-      --bg1:#f0f4ff;
-      --bg2:#fff8f0;
+      --bg1:#fff6fb;
+      --bg2:#f3fbff;
       --card:#ffffffcc;
-      --border:#d4c4ff;
+      --border:#ffd7ea;
       --text:#2a2a2a;
       --muted:#6b6b6b;
-      --purple:#9b7bff;
-      --purple2:#b99bff;
-      --gold:#ffc857;
-      --shadow: 0 18px 45px rgba(155, 123, 255, 0.15);
+      --pink:#ff7fb2;
+      --pink2:#ff9fc6;
+      --mint:#7de3d0;
+      --shadow: 0 18px 45px rgba(255, 127, 178, 0.15);
     }
 
     *{ box-sizing:border-box; }
 
-    .top-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10000;
-      display: flex;
-      gap: 8px;
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--border);
-    }
-    .top-nav a {
-      color: var(--text);
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: background 0.15s;
-    }
-    .top-nav a:hover { background: rgba(155,123,255,0.15); }
-    .top-nav a.active { background: linear-gradient(135deg, var(--purple), var(--purple2)); color: #fff; }
-
     body{
       margin:0;
-      padding-top: 56px;
       font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 10% 0%, #efe8ff 0%, rgba(239,232,255,0) 60%),
-        radial-gradient(800px 500px at 100% 20%, #fff8e6 0%, rgba(255,248,230,0) 60%),
+        radial-gradient(900px 500px at 10% 0%, #ffe8f3 0%, rgba(255,232,243,0) 60%),
+        radial-gradient(800px 500px at 100% 20%, #e6fbff 0%, rgba(230,251,255,0) 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
       display:flex;
@@ -62,20 +36,19 @@
       justify-content:center;
     }
 
-    .wrap{ position: relative; z-index: 2; width:100%; max-width: 900px; padding: 0 16px; }
+    .wrap{ width:100%; max-width: 920px; padding: 0 16px; }
 
     .card{
       background:var(--card);
       backdrop-filter: blur(10px);
       border: 2px solid var(--border);
       border-radius: 26px;
-      padding: 40px;
+      padding: 30px;
       box-shadow: var(--shadow);
       position: relative;
       overflow:hidden;
-      max-width: 600px;
+      max-width: 820px;
       margin: 0 auto;
-      text-align: center;
       animation: popIn 420ms cubic-bezier(.2,.9,.2,1) both;
     }
 
@@ -84,129 +57,432 @@
       to   { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:-60px -40px auto auto;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle at 30% 30%, rgba(155,123,255,0.28), rgba(155,123,255,0) 70%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
+    .header{ display:flex; gap:14px; align-items:center; margin-bottom: 14px; }
 
-    .card:after{
-      content:"";
-      position:absolute;
-      inset:auto auto -70px -60px;
-      width: 240px;
-      height: 240px;
-      background: radial-gradient(circle at 35% 35%, rgba(255,200,87,0.26), rgba(255,200,87,0) 70%);
-      transform: rotate(-8deg);
-      pointer-events:none;
-    }
-
-    .icon{
-      font-size: 64px;
-      margin-bottom: 16px;
+    .badge{
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,127,178,0.35), rgba(125,227,208,0.25));
+      border: 2px solid rgba(255,127,178,0.30);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+      overflow: hidden;
+      font-family: 'Jua', system-ui;
+      font-size: 26px;
     }
 
     h1{ 
       margin:0; 
-      font-size: 36px; 
+      font-size: 34px; 
       letter-spacing:-0.6px;
       font-family: 'Jua', ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     }
 
     .sub{ 
-      margin:12px 0 0; 
+      margin:4px 0 0; 
       color:var(--muted); 
-      font-size: 18px; 
+      font-size: 16px; 
       font-weight: 800;
-      letter-spacing:-0.3px;
-      font-family: 'Jua', ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      letter-spacing:-0.25px;
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
     }
 
-    .coming{
-      margin-top: 24px;
-      display: inline-block;
-      background: linear-gradient(135deg, var(--purple), var(--purple2));
-      color: #fff;
-      padding: 14px 28px;
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+    @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
+
+    label{ display:block; font-weight: 900; letter-spacing:-0.2px; margin-bottom: 6px; color:#7a2450; }
+
+    .field{
+      background: rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,127,178,0.22);
       border-radius: 16px;
-      font-weight: 900;
-      font-size: 16px;
-      letter-spacing: -0.2px;
-    }
-
-    .tips{
-      margin-top: 24px;
+      padding: 12px 12px;
       display:flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      color: #5a3d99;
-      font-weight: 900;
-      letter-spacing: -0.2px;
+      gap:10px;
+      align-items:center;
     }
 
-    .tipBall{
+    input, select{
+      width:100%;
+      border:0;
+      outline:0;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
+    }
+
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 16px; }
+
+    button{
+      cursor:pointer;
+      border:0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 900;
+      letter-spacing:-0.2px;
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
+    }
+
+    .primary{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color: #fff;
+      box-shadow: 0 14px 26px rgba(255,127,178,0.28);
+    }
+
+    .ghost{
+      background: rgba(255,255,255,0.75);
+      border: 2px dashed rgba(255,127,178,0.35);
+      color: var(--text);
+    }
+
+    .ghost:disabled{ opacity:0.55; cursor:not-allowed; }
+
+    .status{ font-size: 13px; color: var(--muted); }
+
+    .bubble{
+      display:inline-block;
+      background: rgba(255,255,255,0.9);
+      border: 2px solid rgba(255,127,178,0.22);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      color: #7a2450;
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
+    }
+
+    .result{
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.75);
+      border: 2px solid rgba(125,227,208,0.25);
+    }
+
+    .result h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing:-0.25px;
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
+    }
+
+    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; }
+
+    .pill{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       padding: 10px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.92);
-      border: 2px solid rgba(155,123,255,0.22);
+      border: 2px solid rgba(255,127,178,0.22);
       box-shadow: 0 10px 18px rgba(0,0,0,0.05);
       font-size: 13.5px;
+      color:#7a2450;
+      font-weight: 900;
+      font-family: "Noto Sans KR", ui-rounded, system-ui, sans-serif;
     }
 
-    .tipBall:before{
+    .pill:before{
       content:"";
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,200,87,0.70);
+      background: rgba(125,227,208,0.70);
       margin-right: 8px;
     }
 
-    .tipBall.dev{
-      color: var(--text);
-      font-weight: 900;
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: rgba(255,127,178,0.12);
+      padding: 3px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,127,178,0.22);
+      color: #7a2450;
     }
-  </style>
-  <style>
-    .nav{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(6px);z-index:50;}
-    .nav a{text-decoration:none;color:inherit;padding:6px 10px;border-radius:8px;font-weight:600;}
-    .nav a:hover{background:rgba(0,0,0,.06);}
-  </style></head>
-<body>
-  <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/lotto">Lotto</a>
-    <a href="/saju">Saju</a>
-  </nav>
-  <nav class="top-nav">
-    <a href="/">Home</a>
-    <a href="/lotto">Lotto</a>
-    <a href="/saju" class="active">Saju</a>
-  </nav>
 
+    .small{ font-size: 12.5px; color: var(--muted); line-height:1.45; }
+
+    .table{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .box{
+      border-radius: 16px;
+      background: rgba(255,255,255,0.85);
+      border: 2px solid rgba(255,127,178,0.18);
+      padding: 12px;
+    }
+
+    .boxTitle{ font-weight: 1000; color:#7a2450; margin-bottom: 6px; }
+    .box p{ margin:0; color:#2a2a2a; line-height:1.6; }
+  </style>
+</head>
+<body>
   <div class="wrap">
     <div class="card">
-      <div class="icon">&#128302;</div>
-      <h1>??二?/h1>
-      <div class="sub">?ъ＜/?댁꽭 ?쒕퉬??/div>
+      <div class="header">
+        <div class="badge" aria-hidden="true">⛩</div>
+        <div>
+          <h1>사주풀이</h1>
+          <div class="sub">생년월일/시간으로 사주(오행 중심) 느낌의 해석을 만들어줘</div>
+        </div>
+      </div>
 
-      <div class="coming">Coming Soon</div>
+      <div class="pillRow" style="margin-top:10px;">
+        <span class="pill">오행</span>
+        <span class="pill">일간</span>
+        <span class="pill">기운 밸런스</span>
+        <span class="pill">한줄 조언</span>
+      </div>
 
-      <div class="tips">
-        <span class="tipBall">?ъ＜???以鍮꾩쨷</span>
-        <span class="tipBall">?ㅻ뒛???댁꽭</span>
-        <span class="tipBall dev">媛쒕컻?? ?꾩옱??/span>
+      <div class="grid">
+        <div>
+          <label>생년월일</label>
+          <div class="field">
+            <input id="date" type="date" />
+          </div>
+        </div>
+
+        <div>
+          <label>달력 기준</label>
+          <div class="field">
+            <select id="calendar">
+              <option value="solar" selected>양력</option>
+              <option value="lunar">음력</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label>출생 시간</label>
+          <div class="field">
+            <select id="hour">
+              <option value="unknown" selected>모름</option>
+              <option value="0">00시(자)</option>
+              <option value="1">01시</option>
+              <option value="2">02시(축)</option>
+              <option value="3">03시</option>
+              <option value="4">04시(인)</option>
+              <option value="5">05시</option>
+              <option value="6">06시(묘)</option>
+              <option value="7">07시</option>
+              <option value="8">08시(진)</option>
+              <option value="9">09시</option>
+              <option value="10">10시(사)</option>
+              <option value="11">11시</option>
+              <option value="12">12시(오)</option>
+              <option value="13">13시</option>
+              <option value="14">14시(미)</option>
+              <option value="15">15시</option>
+              <option value="16">16시(신)</option>
+              <option value="17">17시</option>
+              <option value="18">18시(유)</option>
+              <option value="19">19시</option>
+              <option value="20">20시(술)</option>
+              <option value="21">21시</option>
+              <option value="22">22시(해)</option>
+              <option value="23">23시</option>
+            </select>
+          </div>
+          <div class="small" style="margin-top:8px;">
+            ※ "모름" 선택 시 시간 요소는 흐릿하게 처리해서 결과를 보여줘.
+          </div>
+        </div>
+
+        <div>
+          <label>성별(선택)</label>
+          <div class="field">
+            <select id="gender">
+              <option value="unknown" selected>선택 안함</option>
+              <option value="male">남</option>
+              <option value="female">여</option>
+            </select>
+          </div>
+          <div class="small" style="margin-top:8px;">
+            ※ 성별은 표현 톤/상담 스타일에만 참고.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="primary" id="go">풀이해줘!</button>
+        <button class="ghost" id="copy" disabled>복사하기</button>
+        <span class="status" id="status"></span>
+      </div>
+
+      <div class="result" id="result" style="display:none;">
+        <h2>결과</h2>
+        <div class="pillRow" id="pills"></div>
+
+        <div class="table" style="margin-top:12px;">
+          <div class="box">
+            <div class="boxTitle">핵심 요약</div>
+            <p id="summary"></p>
+          </div>
+          <div class="box">
+            <div class="boxTitle">오행 밸런스</div>
+            <p id="five"></p>
+          </div>
+          <div class="box">
+            <div class="boxTitle">조언</div>
+            <p id="advice"></p>
+          </div>
+          <div class="box">
+            <div class="boxTitle">주의문구</div>
+            <p class="small">본 결과는 전통 사주 명리학을 흉내 낸 <b>참고용/오락용</b> 텍스트입니다. 중요한 결정은 전문가 상담/본인의 판단을 우선하세요.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="small" style="margin-top:14px;">
+        입력값은 브라우저 안에서만 처리되고 서버로 전송하지 않음(정적 페이지).
       </div>
     </div>
   </div>
+
+<script>
+  // NOTE: This is a "real saju vibe" UI, but the actual 사주 계산(천간/지지/절기/음력 변환/대운)은 매우 복잡.
+  // 여기서는 사용자가 원한 느낌(오행/밸런스/조언)을 안전하게 "참고용"으로 생성.
+
+  const FIVE = [
+    { k:'목', c:'#7de3d0', tips:['성장','확장','시작','유연함'] },
+    { k:'화', c:'#ff7fb2', tips:['열정','표현','속도','의욕'] },
+    { k:'토', c:'#ffd86b', tips:['중심','조율','책임','안정'] },
+    { k:'금', c:'#6aa8ff', tips:['정리','결단','규칙','선 긋기'] },
+    { k:'수', c:'#8b6cff', tips:['지혜','관찰','휴식','깊이'] },
+  ];
+
+  function seededRand(seed){
+    // xorshift32
+    let x = seed >>> 0;
+    return () => {
+      x ^= x << 13; x >>>= 0;
+      x ^= x >> 17; x >>>= 0;
+      x ^= x << 5;  x >>>= 0;
+      return (x >>> 0) / 4294967296;
+    };
+  }
+
+  function hashStr(s){
+    let h = 2166136261;
+    for (let i=0;i<s.length;i++){
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+
+  function makeFiveBalance(r){
+    // produce 5 values that sum to 100-ish
+    const raw = FIVE.map(()=> 0.6 + r()*1.4);
+    const sum = raw.reduce((a,b)=>a+b,0);
+    const vals = raw.map(v => Math.round((v/sum)*100));
+    // fix rounding
+    let diff = 100 - vals.reduce((a,b)=>a+b,0);
+    while(diff !== 0){
+      const i = Math.floor(r()*5);
+      const next = vals[i] + (diff>0 ? 1 : -1);
+      if(next>=0){ vals[i]=next; diff += (diff>0 ? -1 : 1); }
+    }
+    return vals;
+  }
+
+  function pickDominant(vals){
+    let max=-1, idx=0;
+    for(let i=0;i<vals.length;i++){ if(vals[i]>max){ max=vals[i]; idx=i; } }
+    let min=999, jdx=0;
+    for(let i=0;i<vals.length;i++){ if(vals[i]<min){ min=vals[i]; jdx=i; } }
+    return { strong: FIVE[idx].k, weak: FIVE[jdx].k, strongIdx: idx, weakIdx: jdx };
+  }
+
+  function dayStemLike(seed){
+    // 천간 느낌만 (정확 계산 아님)
+    const stems = ['갑','을','병','정','무','기','경','신','임','계'];
+    return stems[seed % stems.length];
+  }
+
+  function buildText({dateStr, cal, hour, gender}){
+    const seed = hashStr([dateStr, cal, hour, gender].join('|'));
+    const r = seededRand(seed);
+
+    const vals = makeFiveBalance(r);
+    const dom = pickDominant(vals);
+    const dayStem = dayStemLike(seed);
+
+    const hourKnown = hour !== 'unknown';
+
+    const tone = (gender === 'male') ? '형' : (gender === 'female') ? '누나/언니' : '너';
+
+    const summary = `일간(느낌)은 ${dayStem}로 잡히고, 전체 기운은 ${dom.strong} 쪽이 더 강하게 흐르는 편이야. `
+      + (hourKnown ? `출생시간 정보가 있어서 디테일을 조금 더 세밀하게 잡았어.` : `출생시간이 없어서 큰 흐름 위주로만 봤어.`);
+
+    const five = `목 ${vals[0]} · 화 ${vals[1]} · 토 ${vals[2]} · 금 ${vals[3]} · 수 ${vals[4]} (합 100)
+강한 기운: ${dom.strong} / 약한 기운: ${dom.weak}`;
+
+    const adviceA = `${dom.strong} 기운이 강할 때는 추진이 빨라지기 쉬워. 그래서 "끝맺음"을 의식적으로 챙기는 게 운을 안정시켜.`;
+    const adviceB = `${dom.weak} 기운이 약하면 그쪽 요소를 보완하는 루틴이 좋아. 예를 들면 ${FIVE[dom.weakIdx].tips.slice(0,2).join('·')} 쪽 습관을 일상에 붙여봐.`;
+    const adviceC = `한줄 조언: 오늘은 ${tone}의 페이스를 지키는 게 제일 큰 개운 포인트.`;
+
+    const pills = [
+      `일간(느낌): ${dayStem}`,
+      `강: ${dom.strong}`,
+      `약: ${dom.weak}`,
+      hourKnown ? '시간: 반영' : '시간: 미반영'
+    ];
+
+    return { summary, five, advice: `${adviceA}\n${adviceB}\n${adviceC}`, pills };
+  }
+
+  const $ = (id) => document.getElementById(id);
+
+  $('go').onclick = () => {
+    const dateStr = $('date').value;
+    if(!dateStr){
+      $('status').textContent = '생년월일을 선택해줘!';
+      return;
+    }
+
+    const cal = $('calendar').value;
+    const hour = $('hour').value;
+    const gender = $('gender').value;
+
+    const out = buildText({dateStr, cal, hour, gender});
+
+    $('result').style.display = 'block';
+    $('summary').textContent = out.summary;
+    $('five').textContent = out.five;
+    $('advice').textContent = out.advice;
+
+    const pillsEl = $('pills');
+    pillsEl.innerHTML = '';
+    out.pills.forEach(t => {
+      const s = document.createElement('span');
+      s.className = 'pill';
+      s.textContent = t;
+      pillsEl.appendChild(s);
+    });
+
+    const copyText = `사주풀이(참고용)\n- 생년월일: ${dateStr} (${cal==='solar'?'양력':'음력'})\n- 출생시간: ${hour==='unknown'?'모름':hour+'시'}\n\n[요약]\n${out.summary}\n\n[오행]\n${out.five}\n\n[조언]\n${out.advice}\n\n[주의]\n본 결과는 참고용/오락용이며 중요한 결정은 전문가 상담/본인 판단을 우선하세요.`;
+
+    $('copy').disabled = false;
+    $('copy').onclick = async () => {
+      await navigator.clipboard.writeText(copyText);
+      $('status').textContent = '복사됨!';
+      setTimeout(()=> $('status').textContent='', 1200);
+    };
+
+    $('status').textContent = '';
+  };
+</script>
 </body>
 </html>
