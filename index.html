@@ -268,32 +268,32 @@
       will-change: opacity;
     }
 
-    /* fixed sticker layout */
-    .sticker.s1{ left: 2.5vw; top: 8vh; --r:-6deg; transform: rotate(-6deg); }
-    .sticker.s2{ right: 3vw; top: 9vh; --r:7deg; transform: rotate(7deg); animation-duration: 6.6s; }
-    .sticker.s3{ left: 5vw; bottom: 7vh; --r:5deg; transform: rotate(5deg); animation-duration: 7.0s; }
-    .sticker.s4{ right: 5vw; bottom: 6vh; --r:-4deg; transform: rotate(-4deg); animation-duration: 6.2s; }
+    /* fixed sticker layout (ONLY left/right sides; no top/bottom) */
+    .sticker.s1{ left: 2.5vw; top: 14vh; --r:-6deg; transform: rotate(-6deg); }
+    .sticker.s2{ right: 3vw; top: 16vh; --r:7deg; transform: rotate(7deg); }
+    .sticker.s3{ left: 4vw; top: 42vh; --r:5deg; transform: rotate(5deg); }
+    .sticker.s4{ right: 4vw; top: 44vh; --r:-4deg; transform: rotate(-4deg); }
 
-    .sticker.s5{ left: 14vw; top: 22vh; --r:10deg; transform: rotate(10deg); width: 180px; opacity:0.85; animation-duration: 7.4s; }
-    .sticker.s6{ right: 14vw; top: 24vh; --r:-9deg; transform: rotate(-9deg); width: 180px; opacity:0.85; animation-duration: 7.1s; }
-    .sticker.s7{ left: 12vw; bottom: 22vh; --r:-2deg; transform: rotate(-2deg); width: 180px; opacity:0.85; animation-duration: 7.8s; }
-    .sticker.s8{ right: 12vw; bottom: 21vh; --r:3deg; transform: rotate(3deg); width: 180px; opacity:0.85; animation-duration: 7.6s; }
+    .sticker.s5{ left: 10vw; top: 26vh; --r:10deg; transform: rotate(10deg); width: 180px; opacity:0.85; }
+    .sticker.s6{ right: 10vw; top: 28vh; --r:-9deg; transform: rotate(-9deg); width: 180px; opacity:0.85; }
+    .sticker.s7{ left: 10vw; top: 58vh; --r:-2deg; transform: rotate(-2deg); width: 180px; opacity:0.85; }
+    .sticker.s8{ right: 10vw; top: 60vh; --r:3deg; transform: rotate(3deg); width: 180px; opacity:0.85; }
 
-    .sticker.s9{ left: 32vw; top: 4vh; --r:-12deg; transform: rotate(-12deg); width: 140px; opacity:0.8; animation-duration: 8.2s; }
-    .sticker.s10{ right: 32vw; bottom: 3vh; --r:12deg; transform: rotate(12deg); width: 140px; opacity:0.8; animation-duration: 8.0s; }
+    .sticker.s9{ left: 20vw; top: 34vh; --r:-12deg; transform: rotate(-12deg); width: 140px; opacity:0.8; }
+    .sticker.s10{ right: 20vw; top: 36vh; --r:12deg; transform: rotate(12deg); width: 140px; opacity:0.8; }
 
-    /* more fillers (smaller, to avoid overlap) */
-    .sticker.s11{ left: 8vw; top: 2vh; --r:8deg; transform: rotate(8deg); width: 120px; opacity:0.72; animation-duration: 8.6s; }
-    .sticker.s12{ right: 8vw; top: 2vh; --r:-8deg; transform: rotate(-8deg); width: 120px; opacity:0.72; animation-duration: 8.4s; }
-    .sticker.s13{ left: 2vw; top: 38vh; --r:14deg; transform: rotate(14deg); width: 120px; opacity:0.72; animation-duration: 9.0s; }
-    .sticker.s14{ right: 2vw; top: 40vh; --r:-14deg; transform: rotate(-14deg); width: 120px; opacity:0.72; animation-duration: 8.9s; }
-    .sticker.s15{ left: 24vw; top: 52vh; --r:-6deg; transform: rotate(-6deg); width: 110px; opacity:0.68; animation-duration: 9.2s; }
+    /* more fillers (smaller, keep on sides) */
+    .sticker.s11{ left: 2vw; top: 28vh; --r:8deg; transform: rotate(8deg); width: 120px; opacity:0.72; }
+    .sticker.s12{ right: 2vw; top: 30vh; --r:-8deg; transform: rotate(-8deg); width: 120px; opacity:0.72; }
+    .sticker.s13{ left: 2vw; top: 56vh; --r:14deg; transform: rotate(14deg); width: 120px; opacity:0.72; }
+    .sticker.s14{ right: 2vw; top: 58vh; --r:-14deg; transform: rotate(-14deg); width: 120px; opacity:0.72; }
+    .sticker.s15{ left: 16vw; top: 46vh; --r:-6deg; transform: rotate(-6deg); width: 110px; opacity:0.68; }
 
-    .sticker.s16{ right: 24vw; top: 50vh; --r:6deg; transform: rotate(6deg); width: 110px; opacity:0.68; animation-duration: 9.1s; }
-    .sticker.s17{ left: 24vw; bottom: 36vh; --r:10deg; transform: rotate(10deg); width: 110px; opacity:0.68; animation-duration: 9.3s; }
-    .sticker.s18{ right: 24vw; bottom: 36vh; --r:-10deg; transform: rotate(-10deg); width: 110px; opacity:0.68; animation-duration: 9.4s; }
-    .sticker.s19{ left: 46vw; bottom: 14vh; --r:-5deg; transform: rotate(-5deg); width: 120px; opacity:0.70; animation-duration: 8.7s; }
-    .sticker.s20{ right: 46vw; top: 66vh; --r:5deg; transform: rotate(5deg); width: 120px; opacity:0.70; animation-duration: 8.8s; }
+    .sticker.s16{ right: 16vw; top: 48vh; --r:6deg; transform: rotate(6deg); width: 110px; opacity:0.68; }
+    .sticker.s17{ left: 6vw; top: 68vh; --r:10deg; transform: rotate(10deg); width: 110px; opacity:0.68; }
+    .sticker.s18{ right: 6vw; top: 70vh; --r:-10deg; transform: rotate(-10deg); width: 110px; opacity:0.68; }
+    .sticker.s19{ left: 22vw; top: 62vh; --r:-5deg; transform: rotate(-5deg); width: 120px; opacity:0.70; }
+    .sticker.s20{ right: 22vw; top: 64vh; --r:5deg; transform: rotate(5deg); width: 120px; opacity:0.70; }
 
     @keyframes stickerFloat{
       0%,100% { transform: translateY(0) rotate(var(--r, 0deg)); }
