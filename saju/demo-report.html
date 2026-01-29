@@ -935,18 +935,16 @@
                     var d = pillars.day || {};
                     var t = pillars.time || {};
 
-                    var yearExplain = `연주(年柱): ‘바깥 프레임’(초반 환경/가문/첫인상).\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')})\n- 포인트: 연주는 ‘외부가 나를 읽는 방식’이라, 같은 성향이어도 대외 이미지가 다르게 잡힐 수 있어.`;
-                    var monthExplain = `월주(月柱): ‘사회 축’(월령=계절 기운 / 커리어·루틴).\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')})\n- 포인트: 월령(계절 기운)이 강하게 작동해서, 일/사회에서 반복되는 패턴이 여기서 선명해져.`;
-                    var dayExplain = `일주(日柱): ‘나의 기본값’(일간=나 자신 / 관계의 결).\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')})\n- 포인트: 일간(천간)은 “내 엔진”이라 힘들 때도 결국 여기로 돌아와. 연애/관계 스타일도 이 영향이 큼.`;
-                    var timeExplain = `시주(時柱): ‘미래/결실’(잠재력·후반운 / 성과).\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')})\n- 포인트: 시주는 시간이 갈수록 체감이 커져서, 후반에 강점(재능/성과)이 더 뚜렷해지기도 해.`;
+                    var yearExplain = `연주(年柱): 남들이 처음 보는 ‘겉이미지/분위기’.\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')})\n- 쉽게 말해: “나는 원래 이런 사람처럼 보이는구나”를 알려줘.`;
+                    var monthExplain = `월주(月柱): 회사/학교에서 자주 쓰는 ‘일하는 방식·루틴’.\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')})\n- 쉽게 말해: “내가 사회에서 반복하는 패턴”이 여기서 나온다.`;
+                    var dayExplain = `일주(日柱): 진짜 내 성격의 ‘기본값’(일간=나).\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')})\n- 쉽게 말해: 스트레스 받아도 결국 돌아오는 ‘본체 모드’야.`;
+                    var timeExplain = `시주(時柱): 앞으로 커질 ‘재능/결과’(후반운).\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')})\n- 쉽게 말해: 시간이 갈수록 더 강해지는 능력/관심사.`;
 
                     var explainText = [yearExplain, monthExplain, dayExplain, timeExplain].join('\n\n');
                     safeSetText('pillarExplainText', explainText);
 
-                    // 오늘 포인트: 일주(일간) + 월주(커리어) 기준으로 한 줄 팁
-                    var dayStem = (d.stemName || '');
-                    var monthStem = (m.stemName || '');
-                    safeSetText('pillarExplainTip', `✅ 오늘 포인트: 일주(나)의 ${dayStem} 기운을 “핵심 1개”에 쓰고, 월주(일/사회)의 ${monthStem} 기운은 “정리/우선순위”에 써봐.`);
+                    // 오늘 포인트(초간단): “오늘 할 일 1개 + 정리 1개”
+                    safeSetText('pillarExplainTip', '✅ 오늘의 포인트: 오늘 제일 중요한 일 1개만 먼저 끝내고, 그 다음에 책상/파일/일정 중 하나를 10분만 정리해봐. (과부하 방지용 루틴)');
                 }
             }
 
