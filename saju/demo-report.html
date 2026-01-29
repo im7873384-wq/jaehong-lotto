@@ -619,6 +619,14 @@
             </div>
         </div>
 
+        <!-- 십신(3번) -->
+        <div class="analysis-section fade-in">
+            <h3>🧩 내 사주의 캐릭터(십신)</h3>
+            <div id="tenGodsAnalysis">
+                <p>분석중...</p>
+            </div>
+        </div>
+
         <!-- 용신/기신 -->
         <div class="analysis-section fade-in">
             <h3>🌟 용신 & 기신 분석</h3>
@@ -928,6 +936,46 @@
                     '<p><strong>' + userData.mbti + ' × 사주 융합 분석</strong></p>' +
                     '<p style="margin-top: 10px;">' + mbti.compatibility + '</p>' +
                     '<p style="margin-top: 10px;">' + mbti.uniqueness + '</p>';
+            }
+
+            // 3) 십신 분석(쉬운 요약)
+            if (sajuData && sajuData.tenGods) {
+                const tg = sajuData.tenGods;
+                const primary = tg.primary || '';
+                const secondary = tg.secondary || '';
+
+                const tenMap = {
+                    '비견': { vibe: '내 페이스/자기주도', work: '혼자 몰입하는 일, 개인 역량 기반', rel: '동등한 관계에서 편함. 간섭 싫어함.' },
+                    '겁재': { vibe: '승부/독립/돌파', work: '새 판 짜기, 경쟁/영업/창업 기질', rel: '쿨한데 뜨거움. 자존심 싸움 주의.' },
+                    '식신': { vibe: '꾸준함/생산/실행', work: '콘텐츠/제작/기술, 쌓아올리는 일', rel: '배려형. 표현이 현실적.' },
+                    '상관': { vibe: '표현/개성/직설', work: '기획/마케팅/크리에이티브, 말로 먹고사는', rel: '매력 강한데 팩폭 조절 필요.' },
+                    '정재': { vibe: '안정/관리/현실감', work: '운영/회계/PM, 돈관리 잘함', rel: '신뢰 쌓는 연애. 계획형.' },
+                    '편재': { vibe: '기회/확장/사교', work: '영업/투자/사업, 판 키우기', rel: '스케일 큰 연애. 충동지출 주의.' },
+                    '정관': { vibe: '규칙/책임/성실', work: '조직/공공/리더십, 맡은 일 끝까지', rel: '약속 중요. 안정적인 관계 선호.' },
+                    '편관': { vibe: '카리스마/결단/압박', work: '위기관리/승부처 강함, 강한 리더', rel: '끌고 가는 타입. 고집/강압 주의.' },
+                    '정인': { vibe: '학습/정리/보호', work: '연구/분석/기획, 공부로 역전', rel: '따뜻한데 혼자 회복 시간 필요.' },
+                    '편인': { vibe: '직감/특이점/몰입', work: '독특한 전문성, 한방의 아이디어', rel: '취향 확고. 이해받으면 깊게 감.' }
+                };
+
+                const p = tenMap[primary] || tenMap['정관'];
+                const s = tenMap[secondary] || tenMap['비견'];
+
+                const html = `
+                    <p style="font-weight:900;">🔥 핵심 캐릭터: <span class="mono">${primary || '정관'}</span> + <span class="mono">${secondary || '비견'}</span></p>
+                    <p style="margin-top:12px; color:#374151; line-height:1.65;">
+                        <strong>한 줄 요약:</strong> ${p.vibe} 성향이 기본이고, ${s.vibe} 기질이 보조로 깔려있어.
+                    </p>
+                    <p style="margin-top:10px; color:#374151; line-height:1.65;">
+                        <strong>일/커리어:</strong> ${p.work}
+                    </p>
+                    <p style="margin-top:10px; color:#374151; line-height:1.65;">
+                        <strong>연애/관계:</strong> ${p.rel}
+                    </p>
+                    <p style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 액션팁: ${primary} 기운은 “장점이 과하면 단점”이 돼. 오늘은 한 가지(말/돈/결정)만 ‘조절’해봐.</p>
+                `;
+
+                const el = document.getElementById('tenGodsAnalysis');
+                if (el) el.innerHTML = html;
             }
 
             // 용신/기신 분석
