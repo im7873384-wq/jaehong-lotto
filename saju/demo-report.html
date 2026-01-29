@@ -526,6 +526,29 @@
             </div>
         </div>
 
+        <!-- 운세 상세 해석 -->
+        <div class="analysis-section fade-in" id="fortuneDetailSection" style="display:none;">
+            <h3>🧾 운세 상세 해석 (요약+조언)</h3>
+            <div class="advice-grid">
+                <div class="advice-card" style="border-left-color:#ec4899;">
+                    <div style="font-weight:900; color:#111827;">💝 연애운 해석</div>
+                    <div id="loveDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                </div>
+                <div class="advice-card" style="border-left-color:#3b82f6;">
+                    <div style="font-weight:900; color:#111827;">💼 직업운 해석</div>
+                    <div id="careerDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                </div>
+                <div class="advice-card" style="border-left-color:#f59e0b;">
+                    <div style="font-weight:900; color:#111827;">💰 재물운 해석</div>
+                    <div id="wealthDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                </div>
+                <div class="advice-card" style="border-left-color:#22c55e;">
+                    <div style="font-weight:900; color:#111827;">🍃 건강운 해석</div>
+                    <div id="healthDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                </div>
+            </div>
+        </div>
+
         <!-- 사주팔자 -->
         <div class="analysis-section fade-in">
             <h3>📊 사주팔자 (四柱八字)</h3>
@@ -898,6 +921,36 @@
                 if (trendEl) trendEl.className = 'card-trend ' + trend.class;
                 safeSetText(cat + 'Desc', getFortuneDescription(cat, score));
             });
+
+            // 운세 상세 해석(전문가 코멘트 느낌: 키워드 + 조언)
+            (function() {
+                var section = document.getElementById('fortuneDetailSection');
+                if (section) section.style.display = 'block';
+
+                function detail(cat, score) {
+                    var trend = getTrendText(score);
+                    var base = getFortuneDescription(cat, score);
+                    var meta = {
+                        love: { key: '관계 리듬/소통', caution: '오해(과해석) 주의', action: '오늘 “질문 1개 + 칭찬 1개” 먼저 던지기' },
+                        career: { key: '몰입/우선순위', caution: '무리한 멀티태스킹 주의', action: '오늘 To-do에서 1개만 골라 “완료”까지' },
+                        wealth: { key: '흐름/지출 통제', caution: '충동구매/구독 누수 주의', action: '오늘 “구독 1개 점검” 또는 불필요 지출 1개 컷' },
+                        health: { key: '회복/컨디션 관리', caution: '수면 부족·과로 주의', action: '오늘 밤 30분 일찍 누워서 “핸드폰 내려두기”' }
+                    };
+                    var m = meta[cat];
+                    return [
+                        `키워드: ${m.key}`,
+                        `현재 흐름: ${trend.text} (점수 ${score})`,
+                        `전문 코멘트: ${base}`,
+                        `주의 포인트: ${m.caution}`,
+                        `오늘 실천: ${m.action}`
+                    ].join('\n');
+                }
+
+                safeSetText('loveDetail', detail('love', scores.love || 75));
+                safeSetText('careerDetail', detail('career', scores.career || 75));
+                safeSetText('wealthDetail', detail('wealth', scores.wealth || 75));
+                safeSetText('healthDetail', detail('health', scores.health || 75));
+            })();
 
             // 사주팔자 표시
             if (sajuData && sajuData.pillars) {
