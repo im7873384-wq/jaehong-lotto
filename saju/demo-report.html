@@ -552,6 +552,12 @@
                 </div>
             </div>
             <p id="sajuSummary" style="margin-top: 20px; text-align: center; color: #4b5563;"></p>
+
+            <div id="pillarExplain" style="margin-top:16px; padding:16px; border-radius:14px; background:#f8fafc; border:1px solid #e5e7eb;">
+                <div style="font-weight:900; color:#111827;">🧾 내 사주 4기둥(연·월·일·시) 개인 해석</div>
+                <div id="pillarExplainText" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                <div id="pillarExplainTip" style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 오늘 포인트: 분석중...</div>
+            </div>
         </div>
 
         <!-- 오행 분석 -->
@@ -922,6 +928,25 @@
                         (pillars.year.animal || '') + '해의 환경 속에서 태어났습니다. ' +
                         '연주는 “바깥 이미지/초반 환경”, 월주는 “사회적 역할·일/커리어”, 일주는 “내 성향의 중심(기본값)”, 시주는 “미래의 방향·잠재력/말년”을 봅니다. ' +
                         '한 줄로 요약하면: 사주는 운명을 고정하는 게 아니라, “내가 어떤 리듬에서 강해지고 어떤 상황에서 흔들리는지”를 지도처럼 보여주는 도구예요.');
+
+                    // 1) 4기둥 개인 해석(짧고 실용적으로)
+                    var y = pillars.year || {};
+                    var m = pillars.month || {};
+                    var d = pillars.day || {};
+                    var t = pillars.time || {};
+
+                    var yearExplain = `연주(年柱): 첫인상/환경/가족·사회가 나를 바라보는 프레임.\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')}) → “밖에서 보이는 나”에 영향을 줍니다.`;
+                    var monthExplain = `월주(月柱): 사회성/일·커리어/루틴의 축.\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')}) → “내가 사회에서 굴러가는 방식”을 봅니다.`;
+                    var dayExplain = `일주(日柱): 나의 기본값(성향의 중심)/연애·관계의 결.\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')}) → “내가 어떤 사람인지”의 핵심입니다.`;
+                    var timeExplain = `시주(時柱): 미래 방향/잠재력/후반운(말년)·자식/결실.\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')}) → “시간이 갈수록 커지는 성향/재능”을 봅니다.`;
+
+                    var explainText = [yearExplain, monthExplain, dayExplain, timeExplain].join('\n\n');
+                    safeSetText('pillarExplainText', explainText);
+
+                    // 오늘 포인트: 일주(일간) + 월주(커리어) 기준으로 한 줄 팁
+                    var dayStem = (d.stemName || '');
+                    var monthStem = (m.stemName || '');
+                    safeSetText('pillarExplainTip', `✅ 오늘 포인트: 일주(나)의 ${dayStem} 기운을 “핵심 1개”에 쓰고, 월주(일/사회)의 ${monthStem} 기운은 “정리/우선순위”에 써봐.`);
                 }
             }
 
