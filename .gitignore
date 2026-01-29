@@ -1,0 +1,9 @@
+# Local helper scripts / one-off utilities
+*.ps1
+*.py
+_site_base.txt
+lotto/index.from*.html
+
+# OS junk
+.DS_Store
+Thumbs.db
