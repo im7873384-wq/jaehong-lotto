@@ -1,33 +1,33 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>?�주 리포??| AI ?�주 × MBTI</title>
-    <meta name="description" content="AI ?�주 × MBTI ?�세 리포?? ?�주?�자(????????, ?�행 밸런?? ?�신/기신, ??��, MBTI ?�합까�? ??번에." />
+    <title>사주 리포트 | AI 사주 × MBTI</title>
+    <meta name="description" content="AI 사주 × MBTI 상세 리포트. 사주팔자(연/월/일/시), 오행 밸런스, 용신/기신, 십신, MBTI 융합까지 한 번에." />
     <meta name="robots" content="noindex,follow" />
     <link rel="canonical" href="https://im7873384-wq.github.io/jaehong-lotto/saju/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="?�홍 ?�주" />
-    <meta property="og:title" content="?�주 리포??| AI ?�주 × MBTI" />
-    <meta property="og:description" content="?�주?�자/?�행/?�신/??��/MBTI�??�쉽게�??�리??리포??" />
+    <meta property="og:site_name" content="재홍 사주" />
+    <meta property="og:title" content="사주 리포트 | AI 사주 × MBTI" />
+    <meta property="og:description" content="사주팔자/오행/용신/십신/MBTI를 ‘쉽게’ 정리한 리포트." />
     <meta property="og:url" content="https://im7873384-wq.github.io/jaehong-lotto/saju/" />
     <meta property="og:image" content="https://im7873384-wq.github.io/jaehong-lotto/og/og-saju.svg" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="?�주 리포??| AI ?�주 × MBTI" />
-    <meta name="twitter:description" content="?�주?�자/?�행/?�신/??��/MBTI�??�쉽게�??�리??리포??" />
+    <meta name="twitter:title" content="사주 리포트 | AI 사주 × MBTI" />
+    <meta name="twitter:description" content="사주팔자/오행/용신/십신/MBTI를 ‘쉽게’ 정리한 리포트." />
     <meta name="twitter:image" content="https://im7873384-wq.github.io/jaehong-lotto/og/og-saju.svg" />
 
     <link rel="stylesheet" href="../nav.css">
 
-    <!-- ?�주 ?�진 로드 -->
+    <!-- 사주 엔진 로드 -->
     <script src="saju-engine.js"></script>
     <script src="personal-analysis.js"></script>
 
-    <!-- 추�? ?�진 ?�전 로드 -->
+    <!-- 추가 엔진 안전 로드 -->
     <script>
     (function() {
         const additionalScripts = [
@@ -40,11 +40,11 @@
                 const script = document.createElement('script');
                 script.src = scriptSrc;
                 script.onerror = function() {
-                    console.warn(scriptSrc + ' 로드 ?�패 - 기본 기능?�로 ?�작');
+                    console.warn(scriptSrc + ' 로드 실패 - 기본 기능으로 동작');
                 };
                 document.head.appendChild(script);
             } catch (e) {
-                console.warn(scriptSrc + ' 로드 �??�류:', e);
+                console.warn(scriptSrc + ' 로드 중 오류:', e);
             }
         });
     })();
@@ -65,7 +65,7 @@
             padding: 30px 20px; 
         }
 
-        /* ?�더 */
+        /* 헤더 */
         .report-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -115,7 +115,7 @@
             font-weight: 800;
         }
 
-        /* 카드 ?��???*/
+        /* 카드 스타일 */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -179,7 +179,7 @@
         .trend-stable { color: #6b7280; }
         .trend-down { color: #dc2626; }
 
-        /* 분석 ?�션 */
+        /* 분석 섹션 */
         .analysis-section {
             background: white;
             padding: 30px;
@@ -214,7 +214,7 @@
             color: #4b5563;
         }
 
-        /* ?�주?�자 ?�시 */
+        /* 사주팔자 표시 */
         .saju-display {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -249,7 +249,7 @@
             color: #4b5563;
         }
 
-        /* ?�행 �?*/
+        /* 오행 바 */
         .element-bars {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -297,7 +297,7 @@
         .element-water .label { color: #0ea5e9; }
         .element-water .bar-fill { background: #0ea5e9; }
 
-        /* 조언 그리??*/
+        /* 조언 그리드 */
         .advice-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -379,7 +379,7 @@
             color: white;
         }
 
-        /* ?�터 */
+        /* 푸터 */
         .footer {
             text-align: center;
             padding: 30px;
@@ -387,7 +387,7 @@
             font-size: 0.85rem;
         }
 
-        /* 반응??*/
+        /* 반응형 */
         @media (max-width: 768px) {
             .container { padding: 20px 15px; }
             .report-header { padding: 30px 20px; }
@@ -405,7 +405,7 @@
             .score-display { flex-direction: column; align-items: center; }
         }
 
-        /* ?�니메이??*/
+        /* 애니메이션 */
         .fade-in {
             animation: fadeIn 0.5s ease-out;
         }
@@ -452,101 +452,101 @@
 </head>
 <body>
     <nav class="top-nav">
-        <a href="/jaehong-lotto/">??/a>
+        <a href="/jaehong-lotto/">홈</a>
         <a href="/jaehong-lotto/lotto/">로또</a>
-        <a href="/jaehong-lotto/saju/">?�주</a>
+        <a href="/jaehong-lotto/saju/">사주</a>
     </nav>
 
-    <!-- 로딩 ?�버?�이 -->
+    <!-- 로딩 오버레이 -->
     <div id="loadingOverlay" class="loading-overlay">
         <div class="loading-spinner"></div>
-        <p class="loading-text">?�� ?�주 분석 �?..</p>
+        <p class="loading-text">🔮 사주 분석 중...</p>
     </div>
 
     <div class="container" id="mainContent" style="display: none;">
-        <!-- ?�더 -->
+        <!-- 헤더 -->
         <div class="report-header fade-in">
-            <h1 id="reportTitle">?�주 분석 결과</h1>
+            <h1 id="reportTitle">사주 분석 결과</h1>
             <p class="user-info" id="userInfo"></p>
 
             <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <button id="shareCopy" style="border:0; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:800; background:#ffffff; color:#4c1d95;">?�� 링크 복사</button>
-                <a href="index.html" style="text-decoration:none; padding:10px 14px; border-radius:12px; font-weight:800; background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.35);">?�️ ?�시 분석</a>
+                <button id="shareCopy" style="border:0; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:800; background:#ffffff; color:#4c1d95;">🔗 링크 복사</button>
+                <a href="index.html" style="text-decoration:none; padding:10px 14px; border-radius:12px; font-weight:800; background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.35);">↩️ 다시 분석</a>
             </div>
-            <div style="margin-top:10px; font-size:0.9rem; opacity:0.9;">공유?�서 친구??같이 보기</div>
+            <div style="margin-top:10px; font-size:0.9rem; opacity:0.9;">공유해서 친구랑 같이 보기</div>
             
             <div class="score-display">
                 <div class="score-item">
-                    <div class="label">종합 ?�세</div>
+                    <div class="label">종합 운세</div>
                     <div class="value" id="totalScore">--</div>
                 </div>
                 <div class="score-item">
-                    <div class="label">?�애??/div>
+                    <div class="label">연애운</div>
                     <div class="value" id="headerLoveScore">--</div>
                 </div>
                 <div class="score-item">
-                    <div class="label">직업??/div>
+                    <div class="label">직업운</div>
                     <div class="value" id="headerCareerScore">--</div>
                 </div>
                 <div class="score-item">
-                    <div class="label">?�물??/div>
+                    <div class="label">재물운</div>
                     <div class="value" id="headerWealthScore">--</div>
                 </div>
             </div>
         </div>
 
-        <!-- ?�세 카드 -->
+        <!-- 운세 카드 -->
         <div class="cards-grid fade-in">
             <div class="card love">
-                <h3>?�� ?�애??/h3>
+                <h3>💝 연애운</h3>
                 <div class="card-score" id="loveScore">--</div>
-                <div class="card-trend" id="loveTrend">분석�?/div>
-                <p class="card-desc" id="loveDesc">분석�?..</p>
+                <div class="card-trend" id="loveTrend">분석중</div>
+                <p class="card-desc" id="loveDesc">분석중...</p>
             </div>
             
             <div class="card career">
-                <h3>?�� 직업??/h3>
+                <h3>💼 직업운</h3>
                 <div class="card-score" id="careerScore">--</div>
-                <div class="card-trend" id="careerTrend">분석�?/div>
-                <p class="card-desc" id="careerDesc">분석�?..</p>
+                <div class="card-trend" id="careerTrend">분석중</div>
+                <p class="card-desc" id="careerDesc">분석중...</p>
             </div>
             
             <div class="card wealth">
-                <h3>?�� ?�물??/h3>
+                <h3>💰 재물운</h3>
                 <div class="card-score" id="wealthScore">--</div>
-                <div class="card-trend" id="wealthTrend">분석�?/div>
-                <p class="card-desc" id="wealthDesc">분석�?..</p>
+                <div class="card-trend" id="wealthTrend">분석중</div>
+                <p class="card-desc" id="wealthDesc">분석중...</p>
             </div>
             
             <div class="card health">
-                <h3>?�� 건강??/h3>
+                <h3>🍃 건강운</h3>
                 <div class="card-score" id="healthScore">--</div>
-                <div class="card-trend" id="healthTrend">분석�?/div>
-                <p class="card-desc" id="healthDesc">분석�?..</p>
+                <div class="card-trend" id="healthTrend">분석중</div>
+                <p class="card-desc" id="healthDesc">분석중...</p>
             </div>
         </div>
 
-        <!-- ?�주?�자 -->
+        <!-- 사주팔자 -->
         <div class="analysis-section fade-in">
-            <h3>?�� ?�주?�자 (?�柱?�字)</h3>
+            <h3>📊 사주팔자 (四柱八字)</h3>
             <div class="saju-display" id="sajuDisplay">
                 <div class="pillar">
-                    <div class="pillar-title">?�주 (年柱)</div>
+                    <div class="pillar-title">연주 (年柱)</div>
                     <div class="pillar-chinese" id="yearPillar">--</div>
                     <div class="pillar-korean" id="yearPillarKr">--</div>
                 </div>
                 <div class="pillar">
-                    <div class="pillar-title">?�주 (?�柱)</div>
+                    <div class="pillar-title">월주 (月柱)</div>
                     <div class="pillar-chinese" id="monthPillar">--</div>
                     <div class="pillar-korean" id="monthPillarKr">--</div>
                 </div>
                 <div class="pillar">
-                    <div class="pillar-title">?�주 (?�柱)</div>
+                    <div class="pillar-title">일주 (日柱)</div>
                     <div class="pillar-chinese" id="dayPillar">--</div>
                     <div class="pillar-korean" id="dayPillarKr">--</div>
                 </div>
                 <div class="pillar">
-                    <div class="pillar-title">?�주 (?�柱)</div>
+                    <div class="pillar-title">시주 (時柱)</div>
                     <div class="pillar-chinese" id="timePillar">--</div>
                     <div class="pillar-korean" id="timePillarKr">--</div>
                 </div>
@@ -554,40 +554,40 @@
             <p id="sajuSummary" style="margin-top: 20px; text-align: center; color: #4b5563;"></p>
         </div>
 
-        <!-- ?�행 분석 -->
+        <!-- 오행 분석 -->
         <div class="analysis-section fade-in">
-            <h3>?�️ ?�행 균형 분석</h3>
+            <h3>⚖️ 오행 균형 분석</h3>
             <div class="element-bars">
                 <div class="element-bar element-wood">
-                    <div class="label">�???</div>
+                    <div class="label">목(木)</div>
                     <div class="bar-container">
                         <div class="bar-fill" id="woodBar" style="width: 0%"></div>
                     </div>
                     <div class="percentage" id="woodPercent">0%</div>
                 </div>
                 <div class="element-bar element-fire">
-                    <div class="label">????</div>
+                    <div class="label">화(火)</div>
                     <div class="bar-container">
                         <div class="bar-fill" id="fireBar" style="width: 0%"></div>
                     </div>
                     <div class="percentage" id="firePercent">0%</div>
                 </div>
                 <div class="element-bar element-earth">
-                    <div class="label">????</div>
+                    <div class="label">토(土)</div>
                     <div class="bar-container">
                         <div class="bar-fill" id="earthBar" style="width: 0%"></div>
                     </div>
                     <div class="percentage" id="earthPercent">0%</div>
                 </div>
                 <div class="element-bar element-metal">
-                    <div class="label">�???</div>
+                    <div class="label">금(金)</div>
                     <div class="bar-container">
                         <div class="bar-fill" id="metalBar" style="width: 0%"></div>
                     </div>
                     <div class="percentage" id="metalPercent">0%</div>
                 </div>
                 <div class="element-bar element-water">
-                    <div class="label">??�?</div>
+                    <div class="label">수(水)</div>
                     <div class="bar-container">
                         <div class="bar-fill" id="waterBar" style="width: 0%"></div>
                     </div>
@@ -597,82 +597,83 @@
             <p id="elementSummary" style="margin-top: 15px; text-align: center; color: #4b5563;"></p>
 
             <div id="elementDeepDive" style="margin-top:16px; padding:16px; border-radius:14px; background:#f8fafc; border:1px solid #e5e7eb;">
-                <div style="font-weight:900; color:#111827;">?�� ?�의 ?�행 밸런????번에 ?�리</div>
-                <div id="elementDeepText" style="margin-top:10px; color:#374151; line-height:1.65; white-space:pre-line;">분석�?..</div>
-                <div id="elementActionTip" style="margin-top:12px; font-weight:800; color:#4c1d95;">???�션?? 분석�?..</div>
+                <div style="font-weight:900; color:#111827;">🔥 너의 오행 밸런스 한 번에 정리</div>
+                <div id="elementDeepText" style="margin-top:10px; color:#374151; line-height:1.65; white-space:pre-line;">분석중...</div>
+                <div id="elementActionTip" style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 액션팁: 분석중...</div>
             </div>
         </div>
 
-        <!-- ?�격 분석 -->
+        <!-- 성격 분석 -->
         <div class="analysis-section fade-in">
-            <h3>?�� ?�격 분석</h3>
+            <h3>🎭 성격 분석</h3>
             <div id="personalityAnalysis">
-                <p>분석�?..</p>
+                <p>분석중...</p>
             </div>
         </div>
 
-        <!-- MBTI ?�동 -->
+        <!-- MBTI 연동 -->
         <div class="analysis-section fade-in" id="mbtiSection" style="display: none;">
-            <h3>?�� MBTI × ?�주 ?�합 분석</h3>
+            <h3>🧠 MBTI × 사주 융합 분석</h3>
             <div id="mbtiAnalysis">
-                <p>분석�?..</p>
+                <p>분석중...</p>
             </div>
         </div>
 
-        <!-- ??��(3�? -->
+        <!-- 십신(3번) -->
         <div class="analysis-section fade-in">
-            <h3>?�� ???�주??캐릭????��)</h3>
+            <h3>🧩 내 사주의 캐릭터(십신)</h3>
             <div id="tenGodsAnalysis">
-                <p>분석�?..</p>
+                <p>분석중...</p>
             </div>
         </div>
 
-        <!-- ?�신/기신 -->
+        <!-- 용신/기신 -->
         <div class="analysis-section fade-in">
-            <h3>?�� ?�신 & 기신 분석</h3>
+            <h3>🌟 용신 & 기신 분석</h3>
             <div id="yongsinAnalysis">
-                <p>분석�?..</p>
+                <p>분석중...</p>
             </div>
         </div>
 
         <!-- 맞춤 조언 -->
         <div class="analysis-section fade-in">
-            <h3>�?맞춤 조언</h3>
+            <h3>⭐ 맞춤 조언</h3>
             <div class="advice-grid">
                 <div class="advice-card advice-love">
-                    <h4>?�� ?�애 조언</h4>
-                    <p id="loveAdvice">분석�?..</p>
+                    <h4>💝 연애 조언</h4>
+                    <p id="loveAdvice">분석중...</p>
                 </div>
                 <div class="advice-card advice-career">
-                    <h4>?�� 직업 조언</h4>
-                    <p id="careerAdvice">분석�?..</p>
+                    <h4>💼 직업 조언</h4>
+                    <p id="careerAdvice">분석중...</p>
                 </div>
                 <div class="advice-card advice-wealth">
-                    <h4>?�� ?�물 조언</h4>
-                    <p id="wealthAdvice">분석�?..</p>
+                    <h4>💰 재물 조언</h4>
+                    <p id="wealthAdvice">분석중...</p>
                 </div>
                 <div class="advice-card advice-health">
-                    <h4>?�� 건강 조언</h4>
-                    <p id="healthAdvice">분석�?..</p>
+                    <h4>🍃 건강 조언</h4>
+                    <p id="healthAdvice">분석중...</p>
                 </div>
             </div>
         </div>
 
         <!-- 버튼 -->
         <div class="action-buttons">
-            <a href="index.html" class="btn btn-primary">?�� ?�시 분석?�기</a>
-            <button class="btn btn-secondary" onclick="shareResult()">?�� 결과 공유?�기</button>
+            <a href="index.html" class="btn btn-primary">🔄 다시 분석하기</a>
+            <button class="btn btn-secondary" onclick="shareResult()">📱 결과 공유하기</button>
         </div>
 
-        <!-- ?�터 -->
+        <!-- 푸터 -->
         <div class="footer">
-            <p>?�� ??분석 결과가 ?��????�셨?�요?</p>
-            <p style="margin-top: 10px;">© 2024 AI ?�주 × MBTI. 모든 분석 결과??참고?�입?�다.</p>
+            <p>🌟 이 분석 결과가 도움이 되셨나요?</p>
+            <p style="margin-top: 10px;">© 2024 AI 사주 × MBTI. 모든 분석 결과는 참고용입니다.</p>
         </div>
     </div>
 
     <script>
-        // ?�더 "링크 복사" 버튼 바인??        document.addEventListener('DOMContentLoaded', function() {
+        // 헤더 "링크 복사" 버튼 바인딩
+        document.addEventListener('DOMContentLoaded', function() {
             const btn = document.getElementById('shareCopy');
             if (btn) {
                 btn.addEventListener('click', function() {
@@ -681,14 +682,14 @@
             }
         });
 
-        // URL ?�라미터 ?�싱 (?��? ?�름 decodeURIComponent)
+        // URL 파라미터 파싱 (한글 이름 decodeURIComponent)
         function parseURLParameters() {
             const params = new URLSearchParams(window.location.search);
             const urlParams = {};
             
             for (const [key, value] of params.entries()) {
                 try {
-                    // name?� ?�중 ?�코?�되???�을 ???�음
+                    // name은 이중 인코딩되어 있을 수 있음
                     if (key === 'name') {
                         try {
                             urlParams[key] = decodeURIComponent(decodeURIComponent(value));
@@ -699,7 +700,7 @@
                         urlParams[key] = decodeURIComponent(value);
                     }
                 } catch (e) {
-                    console.warn('URL ?�라미터 ?�코???�패:', key, value);
+                    console.warn('URL 파라미터 디코딩 실패:', key, value);
                     urlParams[key] = value;
                 }
             }
@@ -707,36 +708,36 @@
             return urlParams;
         }
 
-        // ?�렌???�스???�성
+        // 트렌드 텍스트 생성
         function getTrendText(score) {
-            if (score >= 85) return { text: '??매우 좋음', class: 'trend-up' };
-            if (score >= 75) return { text: '???�승??, class: 'trend-up' };
-            if (score >= 65) return { text: '???�정', class: 'trend-stable' };
-            return { text: '??보통', class: 'trend-stable' };
+            if (score >= 85) return { text: '↗ 매우 좋음', class: 'trend-up' };
+            if (score >= 75) return { text: '↗ 상승세', class: 'trend-up' };
+            if (score >= 65) return { text: '→ 안정', class: 'trend-stable' };
+            return { text: '→ 보통', class: 'trend-stable' };
         }
 
-        // ?�세 ?�명 ?�성
+        // 운세 설명 생성
         function getFortuneDescription(category, score) {
             const descriptions = {
                 love: {
-                    high: '좋�? 만남??기회가 ?��??�고 ?�습?�다. ?�신감을 가지?�요.',
-                    mid: '기존 관계�? ?�욱 깊게 발전?�키?�데 집중?�세??',
-                    low: '?�내?�이 ?�요???�기?�니?? ?�기 ?�신?�게 집중?�세??'
+                    high: '좋은 만남의 기회가 다가오고 있습니다. 자신감을 가지세요.',
+                    mid: '기존 관계를 더욱 깊게 발전시키는데 집중하세요.',
+                    low: '인내심이 필요한 시기입니다. 자기 자신에게 집중하세요.'
                 },
                 career: {
-                    high: '?�로??기회가 찾아??것입?�다. ?�극?�으�??�전?�세??',
-                    mid: '?�재 ?�태�??��??�며 꾸�???발전?�는 ?�기?�니??',
-                    low: '?�중???�단???�요???�기?�니?? 준비에 집중?�세??'
+                    high: '새로운 기회가 찾아올 것입니다. 적극적으로 도전하세요.',
+                    mid: '현재 상태를 유지하며 꾸준히 발전하는 시기입니다.',
+                    low: '신중한 판단이 필요한 시기입니다. 준비에 집중하세요.'
                 },
                 wealth: {
-                    high: '?�입 증�???기회가 보입?�다. ?�자�??�중??검?�하?�요.',
-                    mid: '?�정?�인 ?�정 관리에 집중?�면 좋�? 결과가 ?�습?�다.',
-                    low: '지�?관리에 ?�히 ?�경?�고, ?�축에 집중?�세??'
+                    high: '수입 증가의 기회가 보입니다. 투자를 신중히 검토하세요.',
+                    mid: '안정적인 재정 관리에 집중하면 좋은 결과가 있습니다.',
+                    low: '지출 관리에 특히 신경쓰고, 저축에 집중하세요.'
                 },
                 health: {
-                    high: '?�반?�으�??�호?�니?? ?�발???�동??권장?�니??',
-                    mid: '규칙?�인 관리�? ?�요?�니?? 건강 ?��????��??�세??',
-                    low: '충분???�식�??�트?�스 관리에 ?�경?�세??'
+                    high: '전반적으로 양호합니다. 활발한 활동을 권장합니다.',
+                    mid: '규칙적인 관리가 필요합니다. 건강 습관을 유지하세요.',
+                    low: '충분한 휴식과 스트레스 관리에 신경쓰세요.'
                 }
             };
 
@@ -745,30 +746,31 @@
             return descriptions[category].low;
         }
 
-        // 메인 분석 ?�행
+        // 메인 분석 실행
         document.addEventListener('DOMContentLoaded', function() {
             const params = parseURLParameters();
             
-            // ?�수 ?�라미터 체크
+            // 필수 파라미터 체크
             if (!params.name || !params.year || !params.month || !params.day || !params.gender) {
-                alert('?�수 ?�보가 ?�락?�었?�니?? ?�시 ?�력?�주?�요.');
+                alert('필수 정보가 누락되었습니다. 다시 입력해주세요.');
                 window.location.href = 'index.html';
                 return;
             }
 
-            // ?�이???�싱
+            // 데이터 파싱
             const userData = {
                 name: params.name,
                 year: parseInt(params.year),
                 month: parseInt(params.month),
                 day: parseInt(params.day),
-                hour: params.hour === '-1' ? 12 : parseInt(params.hour), // 모름?�면 기본�?12??                gender: params.gender,
+                hour: params.hour === '-1' ? 12 : parseInt(params.hour), // 모름이면 기본값 12시
+                gender: params.gender,
                 mbti: params.mbti || null
             };
 
-            console.log('?�용???�이??', userData);
+            console.log('사용자 데이터:', userData);
 
-            // 분석 ?�행 (?�간??지?�으�?로딩 ?�과)
+            // 분석 실행 (약간의 지연으로 로딩 효과)
             setTimeout(function() {
                 runAnalysis(userData);
             }, 1000);
@@ -776,14 +778,14 @@
 
         function runAnalysis(userData) {
             try {
-                // ?�주 계산
+                // 사주 계산
                 let sajuData = null;
                 if (typeof calculateSaju === 'function') {
                     sajuData = calculateSaju(userData.year, userData.month, userData.day, userData.hour, userData.gender);
-                    console.log('?�주 ?�이??', sajuData);
+                    console.log('사주 데이터:', sajuData);
                 }
 
-                // 개인 분석 ?�성
+                // 개인 분석 생성
                 let analysisData = null;
                 if (typeof generatePersonalAnalysis === 'function' && sajuData) {
                     const birthInfo = {
@@ -795,31 +797,31 @@
                         gender: userData.gender
                     };
                     analysisData = generatePersonalAnalysis(sajuData, userData.mbti || 'ENFP', birthInfo);
-                    console.log('분석 ?�이??', analysisData);
+                    console.log('분석 데이터:', analysisData);
                 }
 
-                // 결과 ?�시
+                // 결과 표시
                 displayResults(userData, sajuData, analysisData);
 
             } catch (error) {
-                console.error('분석 ?�류:', error);
+                console.error('분석 오류:', error);
                 displayFallbackResults(userData);
             }
 
-            // 로딩 ?�기�?콘텐�??�시
+            // 로딩 숨기고 콘텐츠 표시
             document.getElementById('loadingOverlay').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
         }
 
         function displayResults(userData, sajuData, analysisData) {
-            // ?�더 ?�보
-            document.getElementById('reportTitle').textContent = userData.name + '?�의 ?�주 분석 결과';
+            // 헤더 정보
+            document.getElementById('reportTitle').textContent = userData.name + '님의 사주 분석 결과';
             document.getElementById('userInfo').textContent = 
-                (userData.gender === 'M' ? '?�성' : '?�성') + ' · ' +
-                userData.year + '??' + userData.month + '??' + userData.day + '?�생' +
+                (userData.gender === 'M' ? '남성' : '여성') + ' · ' +
+                userData.year + '년 ' + userData.month + '월 ' + userData.day + '일생' +
                 (userData.mbti ? ' · ' + userData.mbti : '');
 
-            // ?�수 계산 (분석 ?�이?��? ?�으�??�용, ?�으�?기본�?
+            // 점수 계산 (분석 데이터가 있으면 사용, 없으면 기본값)
             const scores = analysisData?.fortuneScores || {
                 overall: 80,
                 love: 78,
@@ -828,13 +830,13 @@
                 wealth: 77
             };
 
-            // ?�더 ?�수
+            // 헤더 점수
             document.getElementById('totalScore').textContent = scores.overall;
             document.getElementById('headerLoveScore').textContent = scores.love;
             document.getElementById('headerCareerScore').textContent = scores.career;
             document.getElementById('headerWealthScore').textContent = scores.wealth;
 
-            // 카드 ?�수 �??�명
+            // 카드 점수 및 설명
             const categories = ['love', 'career', 'wealth', 'health'];
             categories.forEach(cat => {
                 const score = scores[cat];
@@ -846,7 +848,7 @@
                 document.getElementById(cat + 'Desc').textContent = getFortuneDescription(cat, score);
             });
 
-            // ?�주?�자 ?�시
+            // 사주팔자 표시
             if (sajuData && sajuData.pillars) {
                 const pillars = sajuData.pillars;
                 
@@ -863,54 +865,54 @@
                 document.getElementById('timePillarKr').textContent = pillars.time.stemName + pillars.time.branchName;
 
                 document.getElementById('sajuSummary').textContent = 
-                    '?�간 ' + pillars.day.stemName + '(' + pillars.day.element + ')?�로, ' +
-                    pillars.year.animal + '?�에 ?�어?�습?�다. ' +
-                    '?�주??첫인???�경, ?�주???�회/?? ?�주?????�향(?�심), ?�주??미래/?�재?�을 봅니??';
+                    '일간 ' + pillars.day.stemName + '(' + pillars.day.element + ')으로, ' +
+                    pillars.year.animal + '해에 태어났습니다. ' +
+                    '연주는 첫인상/환경, 월주는 사회/일, 일주는 내 성향(핵심), 시주는 미래/잠재력을 봅니다.';
             }
 
-            // ?�행 분석 ?�시
+            // 오행 분석 표시
             if (sajuData && sajuData.fiveElements) {
                 const elements = sajuData.fiveElements.percentages;
                 
-                document.getElementById('woodBar').style.width = elements['�?] + '%';
-                document.getElementById('woodPercent').textContent = elements['�?] + '%';
+                document.getElementById('woodBar').style.width = elements['목'] + '%';
+                document.getElementById('woodPercent').textContent = elements['목'] + '%';
                 
-                document.getElementById('fireBar').style.width = elements['??] + '%';
-                document.getElementById('firePercent').textContent = elements['??] + '%';
+                document.getElementById('fireBar').style.width = elements['화'] + '%';
+                document.getElementById('firePercent').textContent = elements['화'] + '%';
                 
-                document.getElementById('earthBar').style.width = elements['??] + '%';
-                document.getElementById('earthPercent').textContent = elements['??] + '%';
+                document.getElementById('earthBar').style.width = elements['토'] + '%';
+                document.getElementById('earthPercent').textContent = elements['토'] + '%';
                 
-                document.getElementById('metalBar').style.width = elements['�?] + '%';
-                document.getElementById('metalPercent').textContent = elements['�?] + '%';
+                document.getElementById('metalBar').style.width = elements['금'] + '%';
+                document.getElementById('metalPercent').textContent = elements['금'] + '%';
                 
-                document.getElementById('waterBar').style.width = elements['??] + '%';
-                document.getElementById('waterPercent').textContent = elements['??] + '%';
+                document.getElementById('waterBar').style.width = elements['수'] + '%';
+                document.getElementById('waterPercent').textContent = elements['수'] + '%';
 
                 document.getElementById('elementSummary').textContent = 
-                    sajuData.fiveElements.strongest + ' 기운??강하�? ' +
-                    sajuData.fiveElements.weakest + ' 기운???�합?�다.';
+                    sajuData.fiveElements.strongest + ' 기운이 강하고, ' +
+                    sajuData.fiveElements.weakest + ' 기운이 약합니다.';
 
-                // 2) ?�행 밸런???�장(?�운 ?�명 + 루틴)
+                // 2) 오행 밸런스 확장(쉬운 설명 + 루틴)
                 const strong = sajuData.fiveElements.strongest;
                 const weak = sajuData.fiveElements.weakest;
                 const map = {
-                    '�?: { title: '�??? 기운', good: '?�이?�어/?�장/관�??�장??강해. ?�작??빠르�? ?�람·기회가 ??붙는 ?�??', tooMuch: '근데 ?�심??커�?�??�만?��?�??�하??�??�”이 ?????�어.', add: '물건/?�정?� ?�시?�”보???�마감”을 먼�? ?�아주는 �?밸런?�에 ?��?.', routine: '매주 1개만 ?�끝?�기 ?�로?�트?�로 고정?�봐.' },
-                    '??: { title: '???? 기운', good: '?�현/?�너지/?��??�이 강해. 분위�?메이�?+ 추진?�으�??�을 ?�우???�??', tooMuch: '과하�?감정기복/번아?�이 ?�기 ?�고, 말이 ?�서???�해가 ?�길 ???�어.', add: '?�너지�??�짧�?굵게???�고 ?�복 루틴???�식?�으�??�어????', routine: '??30�???+ 카페??컷오???�후 2??�??�도 체감 ?�라�?' },
-                    '??: { title: '???? 기운', good: '?�정/조율/책임감이 강해. ?�?�서 중심 ?�고 ?�까지 가?��????�??', tooMuch: '과하�??�각??무거?��?�? 결정???�려�????�어(?�일??보류??.', add: '?�택지�?줄이�??�기준 1개”로 빨리 결정?�는 ?�습??좋음.', routine: '결정?�야 ???��? 10�??�?�머 걸고 결론 ?�리�?' },
-                    '�?: { title: '�??? 기운', good: '?�단/?�리/기�????�렷?? ?�테?�·퀄리?�·효?�을 챙기???�??', tooMuch: '과하�??�카로워 보이거나 ?�벽주의�??�트?�스가 커질 ???�어.', add: '?�벽보다 ?�출?�→개선??루프�?가�??�히???�과가 빨라�?', routine: 'To-do???�초??60%)???�계�??�로 ?�어�?' },
-                    '??: { title: '??�? 기운', good: '관�??�보/깊이가 강해. ?�름???�고 공�?/분석?�로 ??��?�는 ?�??', tooMuch: '과하�??�각??많아?�서 ?�동????���????�어(?�계??조사??.', add: '?��? ?�행??먼�? ?�고 ?�이?�로 보완?�는 �?밸런?�에 ?��?.', routine: '?�늘 ????1개는 ?�조???�이 바로 ?�행??룰로 ?�봐.' }
+                    '목': { title: '목(木) 기운', good: '아이디어/성장/관계 확장에 강해. 시작이 빠르고, 사람·기회가 잘 붙는 타입.', tooMuch: '근데 욕심이 커지면 산만해지고 “하다 만 일”이 늘 수 있어.', add: '물건/일정은 “시작”보다 “마감”을 먼저 잡아주는 게 밸런스에 도움.', routine: '매주 1개만 “끝내기 프로젝트”로 고정해봐.' },
+                    '화': { title: '화(火) 기운', good: '표현/에너지/승부욕이 강해. 분위기 메이커 + 추진력으로 판을 키우는 타입.', tooMuch: '과하면 감정기복/번아웃이 오기 쉽고, 말이 앞서서 오해가 생길 수 있어.', add: '에너지를 “짧고 굵게” 쓰고 회복 루틴을 의식적으로 넣어야 함.', routine: '잠 30분 더 + 카페인 컷오프(오후 2시)만 해도 체감 달라짐.' },
+                    '토': { title: '토(土) 기운', good: '안정/조율/책임감이 강해. 팀에서 중심 잡고 끝까지 가져가는 타입.', tooMuch: '과하면 생각이 무거워지고, 결정이 느려질 수 있어(“일단 보류”).', add: '선택지를 줄이고 “기준 1개”로 빨리 결정하는 연습이 좋음.', routine: '결정해야 할 일은 10분 타이머 걸고 결론 내리기.' },
+                    '금': { title: '금(金) 기운', good: '판단/정리/기준이 뚜렷해. 디테일·퀄리티·효율을 챙기는 타입.', tooMuch: '과하면 날카로워 보이거나 완벽주의로 스트레스가 커질 수 있어.', add: '완벽보다 “출시→개선” 루프로 가면 오히려 성과가 빨라짐.', routine: 'To-do에 “초안(60%)” 단계를 따로 넣어봐.' },
+                    '수': { title: '수(水) 기운', good: '관찰/정보/깊이가 강해. 흐름을 읽고 공부/분석으로 역전하는 타입.', tooMuch: '과하면 생각이 많아져서 행동이 늦어질 수 있어(“계속 조사”).', add: '작은 실행을 먼저 하고 데이터로 보완하는 게 밸런스에 도움.', routine: '오늘 할 일 1개는 “조사 없이 바로 실행” 룰로 해봐.' }
                 };
-                const s = map[strong] || map['??];
-                const w = map[weak] || map['??];
+                const s = map[strong] || map['토'];
+                const w = map[weak] || map['수'];
 
                 const deep = [
-                    `강한 기운: ${strong} ??${s.good}`,
-                    `주의(과하�?: ${s.tooMuch}`,
-                    `?�한 기운: ${weak} ??${w.title}???�한 ?�이?? ${w.add}`
+                    `강한 기운: ${strong} → ${s.good}`,
+                    `주의(과하면): ${s.tooMuch}`,
+                    `약한 기운: ${weak} → ${w.title}이 약한 편이라, ${w.add}`
                 ].join('\n\n');
 
-                const action = `???�션?? ${w.routine}`;
+                const action = `✅ 액션팁: ${w.routine}`;
 
                 const deepEl = document.getElementById('elementDeepText');
                 const actionEl = document.getElementById('elementActionTip');
@@ -918,7 +920,7 @@
                 if (actionEl) actionEl.textContent = action;
             }
 
-            // ?�격 분석
+            // 성격 분석
             if (analysisData && analysisData.personality) {
                 const personality = analysisData.personality;
                 document.getElementById('personalityAnalysis').innerHTML = 
@@ -926,180 +928,90 @@
                     '<p style="margin-top: 15px;">' + (personality.detailedAnalysis || '').split('\n')[0] + '</p>';
             }
 
-            // MBTI ?�동 분석 (5) ?�장
-            if (userData.mbti) {
-                document.getElementById('mbtiSection').style.display = 'block';
-                const mbtiType = (userData.mbti || '').toUpperCase();
-                
-                // MBTI 그룹 ?�별
-                const isE = mbtiType.charAt(0) === 'E';
-                const isN = mbtiType.charAt(1) === 'N';
-                const isT = mbtiType.charAt(2) === 'T';
-                const isJ = mbtiType.charAt(3) === 'J';
-                
-                let group = '';
-                if (isN && isT) group = 'NT';
-                else if (isN && !isT) group = 'NF';
-                else if (!isN && isT) group = 'ST';
-                else group = 'SF';
-                
-                // 그룹�?+ E/I 조합 매핑
-                const mbtiSajuMap = {
-                    'NT': {
-                        synergy: '?�리 + ?�주??직�? ???�략???�찰?�이 강함. ?�이??기반 결정???�주 ?�름 ?�?�밍 ?�하�??�너지 극�???',
-                        conflict: '분석 과잉 주의. ?�주 조언 ?�무 ?�석?�려 ?��? 말고 "?�낌"???�뢰??',
-                        love: '머리�??�랑 ?�해?�려 ?�면 ?�곤?�짐. 감정 ?�현?� "?�순?�게, ?�주" ?�는 �??�인??',
-                        career: '기획/?�략/?�스???�계가 맞음. ?�?�선 비전 ?�시?�고 ?�테?��? ?�임??'
-                    },
-                    'NF': {
-                        synergy: '공감??+ ?�주 ?�너지 리딩 ???�람 ?�악??빠름. 직감 믿어???? 거의 맞음.',
-                        conflict: '감정 과몰??주의. ?�의 ?�너지???�들�???"??기운 리셋" ?�???�수.',
-                        love: '?�상�??�실 �?�� 지�????�음. ?�벽???�애 ?�??"충분??좋�? ?�애"�?기�? ??��??OK.',
-                        career: '?�담/교육/콘텐�??�리?�이?�브. ?��? ?�는 ?�이?�야 몰입 가??'
-                    },
-                    'ST': {
-                        synergy: '?�행??+ ?�주 ?�?�밍 ??계획 ?�우�?밀?�붙?�는 ??최강. 루틴 + ?�세 ?�름 조합 추천.',
-                        conflict: '?�통??부�?주의. ?�주가 "멈춰"???�도 ?�단 ?�려 ???��? ?�음. ?�론 ?�는 �??�략.',
-                        love: '?�현 부족이 ?�해 만듦. 말보???�동 중시?��?�? 가??말로???�인?�줘????',
-                        career: '?�영/?�무/?�무 매니�? ?�해�?목표 + 체계 ?�으�??�과 ?�실.'
-                    },
-                    'SF': {
-                        synergy: '배려 + ?�주 ?�정 ?�너지 ???��?관계에???�뢰받는 존재. 조화 챙기면서 ?�장?�는 ?�??',
-                        conflict: '거절 못해??번아?? "NO" ?�습 ?�수. ???�간부???�보?�고 ?�눠�?',
-                        love: '?�신?�이???�연???�할 ???�음. "?�도 받는 ?�애"�?균형 맞추�?',
-                        career: '?�비??케??HR/고객 ?��?. ?�람 ?�루???�에??빛남.'
-                    }
-                };
-                
-                // E/I???�른 추�? ??                const eiTip = isE 
-                    ? '?�너지 충전???�람?�게???�니�? ?�극?�으�??�트?�킹?�고 ?�주 좋�? ??미팅/모임 ?�아.'
-                    : '?�너지 충전???�자 ?�간?�서 ?�니�? ?�주 ??좋�? ?�엔 리트�?모드�??�환?�서 ?�복 ?�선.';
-                
-                const data = mbtiSajuMap[group] || mbtiSajuMap['SF'];
-                
-                document.getElementById('mbtiAnalysis').innerHTML = 
-                    '<p style="font-weight:900; font-size:1.1rem; margin-bottom:14px;">?�� ' + mbtiType + ' × ?�주 ?�합</p>' +
-                    '<div style="display:grid; gap:12px;">' +
-                        '<div style="padding:12px 14px; background:#eff6ff; border-radius:10px; border-left:3px solid #3b82f6;">' +
-                            '<div style="font-weight:800; color:#1d4ed8;">?�� ?�너지</div>' +
-                            '<p style="margin:6px 0 0; color:#1e40af;">' + data.synergy + '</p>' +
-                        '</div>' +
-                        '<div style="padding:12px 14px; background:#fef3c7; border-radius:10px; border-left:3px solid #f59e0b;">' +
-                            '<div style="font-weight:800; color:#b45309;">??충돌 ?�인??/div>' +
-                            '<p style="margin:6px 0 0; color:#92400e;">' + data.conflict + '</p>' +
-                        '</div>' +
-                        '<div style="padding:12px 14px; background:#fce7f3; border-radius:10px; border-left:3px solid #ec4899;">' +
-                            '<div style="font-weight:800; color:#be185d;">?�� ?�애</div>' +
-                            '<p style="margin:6px 0 0; color:#9d174d;">' + data.love + '</p>' +
-                        '</div>' +
-                        '<div style="padding:12px 14px; background:#e0e7ff; border-radius:10px; border-left:3px solid #6366f1;">' +
-                            '<div style="font-weight:800; color:#4338ca;">?�� ??커리??/div>' +
-                            '<p style="margin:6px 0 0; color:#3730a3;">' + data.career + '</p>' +
-                        '</div>' +
-                    '</div>' +
-                    '<p style="margin-top:14px; font-size:0.9rem; color:#6b7280;">' + (isE ? '?��' : '?��') + ' ' + eiTip + '</p>' +
-                    '<p style="margin-top:12px; font-weight:800; color:#4c1d95;">???�션?? ?�늘 ' + group + ' 강점(' + (isT ? '?�리/?�단' : '공감/조율') + ')????번만 ?�식?�으�??�봐.</p>';
-            } else if (analysisData && analysisData.mbtiSajuFusion) {
-                // MBTI ?�이 analysisData�??�을 ??기존 로직 fallback
+            // MBTI 연동 분석
+            if (userData.mbti && analysisData && analysisData.mbtiSajuFusion) {
                 document.getElementById('mbtiSection').style.display = 'block';
                 const mbti = analysisData.mbtiSajuFusion;
                 document.getElementById('mbtiAnalysis').innerHTML = 
-                    '<p><strong>MBTI × ?�주 ?�합 분석</strong></p>' +
+                    '<p><strong>' + userData.mbti + ' × 사주 융합 분석</strong></p>' +
                     '<p style="margin-top: 10px;">' + mbti.compatibility + '</p>' +
                     '<p style="margin-top: 10px;">' + mbti.uniqueness + '</p>';
             }
 
-            // 3) ??�� 분석(?�운 ?�약)
+            // 3) 십신 분석(쉬운 요약)
             if (sajuData && sajuData.tenGods) {
                 const tg = sajuData.tenGods;
                 const primary = tg.primary || '';
                 const secondary = tg.secondary || '';
 
                 const tenMap = {
-                    '비견': { vibe: '???�이???�기주도', work: '?�자 몰입?�는 ?? 개인 ??�� 기반', rel: '?�등??관계에???�함. 간섭 ?�어??' },
-                    '겁재': { vibe: '?��?/?�립/?�파', work: '????짜기, 경쟁/?�업/창업 기질', rel: '쿨한???�거?�. ?�존???��? 주의.' },
-                    '?�신': { vibe: '꾸�????�산/?�행', work: '콘텐�??�작/기술, ?�아?�리????, rel: '배려?? ?�현???�실??' },
-                    '?��?': { vibe: '?�현/개성/직설', work: '기획/마�????�리?�이?�브, 말로 먹고?�는', rel: '매력 강한???�폭 조절 ?�요.' },
-                    '?�재': { vibe: '?�정/관�??�실�?, work: '?�영/?�계/PM, ?��?�??�함', rel: '?�뢰 ?�는 ?�애. 계획??' },
-                    '?�재': { vibe: '기회/?�장/?�교', work: '?�업/?�자/?�업, ???�우�?, rel: '?��??????�애. 충동지�?주의.' },
-                    '?��?': { vibe: '규칙/책임/?�실', work: '조직/공공/리더?? 맡�? ???�까지', rel: '?�속 중요. ?�정?�인 관�??�호.' },
-                    '?��?': { vibe: '카리?�마/결단/?�박', work: '?�기관�??��?�?강함, 강한 리더', rel: '?�고 가???�?? 고집/강압 주의.' },
-                    '?�인': { vibe: '?�습/?�리/보호', work: '?�구/분석/기획, 공�?�???��', rel: '?�뜻?�데 ?�자 ?�복 ?�간 ?�요.' },
-                    '?�인': { vibe: '직감/?�이??몰입', work: '?�특???�문?? ?�방???�이?�어', rel: '취향 ?�고. ?�해받으�?깊게 �?' }
+                    '비견': { vibe: '내 페이스/자기주도', work: '혼자 몰입하는 일, 개인 역량 기반', rel: '동등한 관계에서 편함. 간섭 싫어함.' },
+                    '겁재': { vibe: '승부/독립/돌파', work: '새 판 짜기, 경쟁/영업/창업 기질', rel: '쿨한데 뜨거움. 자존심 싸움 주의.' },
+                    '식신': { vibe: '꾸준함/생산/실행', work: '콘텐츠/제작/기술, 쌓아올리는 일', rel: '배려형. 표현이 현실적.' },
+                    '상관': { vibe: '표현/개성/직설', work: '기획/마케팅/크리에이티브, 말로 먹고사는', rel: '매력 강한데 팩폭 조절 필요.' },
+                    '정재': { vibe: '안정/관리/현실감', work: '운영/회계/PM, 돈관리 잘함', rel: '신뢰 쌓는 연애. 계획형.' },
+                    '편재': { vibe: '기회/확장/사교', work: '영업/투자/사업, 판 키우기', rel: '스케일 큰 연애. 충동지출 주의.' },
+                    '정관': { vibe: '규칙/책임/성실', work: '조직/공공/리더십, 맡은 일 끝까지', rel: '약속 중요. 안정적인 관계 선호.' },
+                    '편관': { vibe: '카리스마/결단/압박', work: '위기관리/승부처 강함, 강한 리더', rel: '끌고 가는 타입. 고집/강압 주의.' },
+                    '정인': { vibe: '학습/정리/보호', work: '연구/분석/기획, 공부로 역전', rel: '따뜻한데 혼자 회복 시간 필요.' },
+                    '편인': { vibe: '직감/특이점/몰입', work: '독특한 전문성, 한방의 아이디어', rel: '취향 확고. 이해받으면 깊게 감.' }
                 };
 
-                const p = tenMap[primary] || tenMap['?��?'];
+                const p = tenMap[primary] || tenMap['정관'];
                 const s = tenMap[secondary] || tenMap['비견'];
 
                 const html = `
-                    <p style="font-weight:900;">?�� ?�심 캐릭?? <span class="mono">${primary || '?��?'}</span> + <span class="mono">${secondary || '비견'}</span></p>
+                    <p style="font-weight:900;">🔥 핵심 캐릭터: <span class="mono">${primary || '정관'}</span> + <span class="mono">${secondary || '비견'}</span></p>
                     <p style="margin-top:12px; color:#374151; line-height:1.65;">
-                        <strong>??�??�약:</strong> ${p.vibe} ?�향??기본?�고, ${s.vibe} 기질??보조�?깔려?�어.
+                        <strong>한 줄 요약:</strong> ${p.vibe} 성향이 기본이고, ${s.vibe} 기질이 보조로 깔려있어.
                     </p>
                     <p style="margin-top:10px; color:#374151; line-height:1.65;">
-                        <strong>??커리??</strong> ${p.work}
+                        <strong>일/커리어:</strong> ${p.work}
                     </p>
                     <p style="margin-top:10px; color:#374151; line-height:1.65;">
-                        <strong>?�애/관�?</strong> ${p.rel}
+                        <strong>연애/관계:</strong> ${p.rel}
                     </p>
-                    <p style="margin-top:12px; font-weight:800; color:#4c1d95;">???�션?? ${primary} 기운?� ?�장?�이 과하�??�점?�이 ?? ?�늘?� ??가지(�???결정)�??�조?�’해�?</p>
+                    <p style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 액션팁: ${primary} 기운은 “장점이 과하면 단점”이 돼. 오늘은 한 가지(말/돈/결정)만 ‘조절’해봐.</p>
                 `;
 
                 const el = document.getElementById('tenGodsAnalysis');
                 if (el) el.innerHTML = html;
             }
 
-            // ?�신/기신 분석
+            // 용신/기신 분석
             if (sajuData && sajuData.yongsinGisin) {
                 const yg = sajuData.yongsinGisin;
-                
-                // (4) ?�신 기반 ?�천??매핑
-                const yongsinTipMap = {
-                    '�?: { colors: ['초록', '민트', '�?��'], time: '?�전 5~7??묘시) 기상 루틴', rhythm: '?�침 ?�트?�칭/?�책', action: '?�늘 ?�물 ??�?만�?거나 공원 ?�깐 걸어�?' },
-                    '??: { colors: ['빨강', '?�크', '?�렌지'], time: '?�전 9~11???�시) 중요 미팅', rhythm: '?�심 ???�심 ?�무 몰입', action: '?�늘 빨간???�인???�이???�나 착용?�봐.' },
-                    '??: { colors: ['베이지', '브라??, '?�로??], time: '?�후 1~3??미시) 계획 ?�리', rhythm: '?�후 ?�깐 멍때리기(?�화 �?리셋)', action: '?�늘 ?��? ?�식(바나?? ?�수?? ?�나 먹어�?' },
-                    '�?: { colors: ['?�이??, '?�버', '그레??], time: '?�후 5~7???�시) ?�리/마감', rhythm: '?�?�에 ?�루 ?�리 ?�트 5�?, action: '?�늘 ???�는 물건 ?�나 ?�리?�거??버려�?' },
-                    '??: { colors: ['블랙', '?�이�?, '블루'], time: '�?9~11???�시) 공�?/계획', rhythm: '?�기 ???�일 ????1개만 ?�기', action: '?�늘 �???????마시�? 조용???�간 10�??�보??' }
-                };
-                const tip = yongsinTipMap[yg.yongsin] || yongsinTipMap['??];
-                
                 document.getElementById('yongsinAnalysis').innerHTML = 
-                    '<p><strong>?�� ?�신(?�神): ' + yg.yongsin + '</strong> - ?�신?�게 ?��????�는 기운?�니??</p>' +
-                    '<p style="margin-top: 10px;"><strong>?�️ 기신(忌神): ' + yg.gisin + '</strong> - 주의?�야 ??기운?�니??</p>' +
-                    '<p style="margin-top: 15px;">' + yg.yongsin + ' 기운???�극 ?�용?�고, ' + yg.gisin + ' 기운?� ?�절??조절?�여 균형??맞추?�요.</p>' +
-                    '<div style="margin-top:18px; padding:16px; border-radius:14px; background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%); border:1px solid #86efac;">' +
-                        '<div style="font-weight:900; color:#166534; margin-bottom:10px;">?�� ' + yg.yongsin + ' ?�신 ?�천??/div>' +
-                        '<p style="margin:6px 0; color:#15803d;"><strong>추천 ??</strong> ' + tip.colors.join(', ') + '</p>' +
-                        '<p style="margin:6px 0; color:#15803d;"><strong>?�간/리듬:</strong> ' + tip.time + ' · ' + tip.rhythm + '</p>' +
-                        '<p style="margin:10px 0 0; font-weight:800; color:#4c1d95;">???�늘 바로: ' + tip.action + '</p>' +
-                    '</div>';
+                    '<p><strong>🌟 용신(用神): ' + yg.yongsin + '</strong> - 당신에게 도움이 되는 기운입니다.</p>' +
+                    '<p style="margin-top: 10px;"><strong>⚠️ 기신(忌神): ' + yg.gisin + '</strong> - 주의해야 할 기운입니다.</p>' +
+                    '<p style="margin-top: 15px;">' + yg.yongsin + ' 기운을 적극 활용하고, ' + yg.gisin + ' 기운은 적절히 조절하여 균형을 맞추세요.</p>';
             }
 
             // 맞춤 조언
             document.getElementById('loveAdvice').textContent = 
                 analysisData?.compatibilityAnalysis?.romantic?.general || 
-                '?�로??차이?�을 ?�정?�고 존중?�는 관계�? 좋습?�다.';
+                '서로의 차이점을 인정하고 존중하는 관계가 좋습니다.';
             
             document.getElementById('careerAdvice').textContent = 
                 analysisData?.careerGuidance?.aptitude?.substring(0, 100) || 
-                '꾸�????�력�?발전??좋�? 결과�?가?�올 것입?�다.';
+                '꾸준한 노력과 발전이 좋은 결과를 가져올 것입니다.';
             
             document.getElementById('wealthAdvice').textContent = 
-                '계획?�인 ?�정 관리�? ?�중???�자�?권장?�니??';
+                '계획적인 재정 관리와 신중한 투자를 권장합니다.';
             
             document.getElementById('healthAdvice').textContent = 
                 analysisData?.healthAnalysis?.recommendations?.lifestyle || 
-                '규칙?�인 ?�활�??�절???�동?�로 건강???��??�세??';
+                '규칙적인 생활과 적절한 운동으로 건강을 유지하세요.';
         }
 
-        // ?�백 결과 (?�진 로드 ?�패??
+        // 폴백 결과 (엔진 로드 실패시)
         function displayFallbackResults(userData) {
-            document.getElementById('reportTitle').textContent = userData.name + '?�의 ?�주 분석 결과';
+            document.getElementById('reportTitle').textContent = userData.name + '님의 사주 분석 결과';
             document.getElementById('userInfo').textContent = 
-                (userData.gender === 'M' ? '?�성' : '?�성') + ' · ' +
-                userData.year + '??' + userData.month + '??' + userData.day + '?�생';
+                (userData.gender === 'M' ? '남성' : '여성') + ' · ' +
+                userData.year + '년 ' + userData.month + '월 ' + userData.day + '일생';
 
-            // 기본 ?�수
+            // 기본 점수
             const baseScore = (userData.year + userData.month + userData.day) % 20 + 75;
             document.getElementById('totalScore').textContent = baseScore;
             document.getElementById('headerLoveScore').textContent = baseScore - 2;
@@ -1112,7 +1024,7 @@
             document.getElementById('healthScore').textContent = baseScore;
 
             document.getElementById('personalityAnalysis').innerHTML = 
-                '<p>?�신?� ?�특??매력�??�재?�을 가�?분입?�다. ?�신만의 강점??발휘?�여 목표�??�해 ?�아가?�요.</p>';
+                '<p>당신은 독특한 매력과 잠재력을 가진 분입니다. 자신만의 강점을 발휘하여 목표를 향해 나아가세요.</p>';
         }
 
         // 결과 공유
@@ -1121,8 +1033,8 @@
             
             if (navigator.share) {
                 navigator.share({
-                    title: '?�� AI ?�주 × MBTI 분석 결과',
-                    text: '?�의 ?�주 분석 결과�??�인?�보?�요!',
+                    title: '🔮 AI 사주 × MBTI 분석 결과',
+                    text: '나의 사주 분석 결과를 확인해보세요!',
                     url: url
                 }).catch(function() {
                     copyToClipboard(url);
@@ -1135,10 +1047,10 @@
         function copyToClipboard(text) {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text).then(function() {
-                    alert('?�� 링크가 ?�립보드??복사?�었?�니??');
+                    alert('📋 링크가 클립보드에 복사되었습니다!');
                 });
             } else {
-                prompt('링크�?복사?�세??', text);
+                prompt('링크를 복사하세요:', text);
             }
         }
     </script>
