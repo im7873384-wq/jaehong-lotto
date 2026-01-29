@@ -916,9 +916,12 @@
 
                 if (pillars.day && pillars.year) {
                     safeSetText('sajuSummary',
-                        '일간 ' + (pillars.day.stemName || '') + '(' + (pillars.day.element || '') + ')으로, ' +
-                        (pillars.year.animal || '') + '해에 태어났습니다. ' +
-                        '연주는 첫인상/환경, 월주는 사회/일, 일주는 내 성향(핵심), 시주는 미래/잠재력을 봅니다.');
+                        '사주팔자(四柱八字)는 태어난 시점의 “연(年)·월(月)·일(日)·시(時)” 네 기둥(四柱)을 보고, ' +
+                        '각 기둥을 이루는 천간/지지의 8글자(八字)로 기운의 흐름을 해석하는 방식입니다. ' +
+                        '당신의 핵심은 일간(나 자신)인 ' + (pillars.day.stemName || '') + '(' + (pillars.day.element || '') + ')이고, ' +
+                        (pillars.year.animal || '') + '해의 환경 속에서 태어났습니다. ' +
+                        '연주는 “바깥 이미지/초반 환경”, 월주는 “사회적 역할·일/커리어”, 일주는 “내 성향의 중심(기본값)”, 시주는 “미래의 방향·잠재력/말년”을 봅니다. ' +
+                        '한 줄로 요약하면: 사주는 운명을 고정하는 게 아니라, “내가 어떤 리듬에서 강해지고 어떤 상황에서 흔들리는지”를 지도처럼 보여주는 도구예요.');
                 }
             }
 
@@ -972,13 +975,43 @@
                 if (actionEl) actionEl.textContent = action;
             }
 
-            // 성격 분석
+            // 성격 분석 (확장)
             if (analysisData && analysisData.personality) {
                 var personality = analysisData.personality;
-                var detailLine = (personality.detailedAnalysis || '').split('\n')[0] || '';
+                var detail = (personality.detailedAnalysis || '').trim();
+                var detailLines = detail ? detail.split('\n').filter(Boolean) : [];
+                var line1 = detailLines[0] || '';
+                var line2 = detailLines[1] || '';
+
+                // 오행 strongest/weakest 기반으로 '강점/주의/관계/실천'을 추가로 만들어줌
+                var strongest = (sajuData && sajuData.fiveElements) ? sajuData.fiveElements.strongest : null;
+                var weakest = (sajuData && sajuData.fiveElements) ? sajuData.fiveElements.weakest : null;
+
+                var map = {
+                    '목': { strength: '성장 욕구, 추진력, 새로운 시도에 강함', caution: '급하게 결론 내리거나 말이 앞설 수 있음', relation: '상대의 가능성을 키워주는 타입. 다만 잔소리처럼 들리지 않게 톤 조절', action: '오늘 “새로운 것 1개”를 10분만 맛보기(읽기/검색/시작)' },
+                    '화': { strength: '표현력, 열정, 분위기 메이커 기질', caution: '과열되면 번아웃/감정기복', relation: '감정 표현이 분명해서 관계가 빨리 가까워짐. 다만 상대에게 숨 쉴 틈 주기', action: '오늘 에너지 피크(오전~점심)에 핵심 1건 처리' },
+                    '토': { strength: '안정감, 현실 감각, 버팀목 역할', caution: '고집/루틴에 갇혀 변화가 늦어질 수 있음', relation: '신뢰를 쌓는 데 강함. 대신 감정 표현은 의식적으로 늘리면 좋음', action: '오늘 공간/파일/일정 “정리 10분”으로 중심 잡기' },
+                    '금': { strength: '판단력, 기준, 디테일/완성도', caution: '완벽주의/비판적 사고가 강해질 수 있음', relation: '관계에서도 기준이 뚜렷. 칭찬을 말로 먼저 꺼내면 균형이 좋아짐', action: '오늘 미뤄둔 1개를 “끝내기”로 마감' },
+                    '수': { strength: '관찰력, 몰입, 깊이 있는 사고', caution: '생각이 많아 실행이 늦어지거나 우울감', relation: '깊게 연결되면 오래감. 다만 혼자만의 시간이 필요하단 걸 미리 공유', action: '오늘 밤 20분 ‘혼자 몰입’(독서/공부/정리) 확보' }
+                };
+
+                var base = map[strongest] || { strength: '상황 판단과 균형 감각', caution: '과하면 한쪽으로 치우침', relation: '상대와 속도를 맞추면 장점이 살아남', action: '오늘 한 가지를 “작게” 실행' };
+                var weakHint = weakest ? ('\n\n보완 포인트: ' + weakest + ' 기운을 의식적으로 채우면 운의 흔들림이 줄어듭니다.') : '';
+
                 safeSetHTML('personalityAnalysis',
-                    '<p><strong>' + (personality.corePersonality || '') + '</strong></p>' +
-                    '<p style="margin-top: 15px;">' + detailLine + '</p>');
+                    '<p style="font-size:1.05rem; line-height:1.7;">' +
+                        '<strong>' + (personality.corePersonality || '당신의 성향') + '</strong>' +
+                    '</p>' +
+                    (line1 ? ('<p style="margin-top: 10px; color:#374151; line-height:1.7;">' + line1 + '</p>') : '') +
+                    (line2 ? ('<p style="margin-top: 8px; color:#374151; line-height:1.7;">' + line2 + '</p>') : '') +
+                    '<div style="margin-top:14px; padding:14px; border-radius:14px; background:#f8fafc; border:1px solid #e5e7eb;">' +
+                        '<div style="font-weight:900; color:#111827;">🧠 성격 디테일</div>' +
+                        '<p style="margin-top:10px; color:#374151; line-height:1.7;"><strong>강점:</strong> ' + base.strength + '</p>' +
+                        '<p style="margin-top:8px; color:#374151; line-height:1.7;"><strong>주의:</strong> ' + base.caution + '</p>' +
+                        '<p style="margin-top:8px; color:#374151; line-height:1.7;"><strong>관계/소통:</strong> ' + base.relation + '</p>' +
+                        '<p style="margin-top:10px; font-weight:800; color:#4c1d95;">✅ 오늘 실천: ' + base.action + '</p>' +
+                        (weakHint ? ('<p style="margin-top:10px; color:#6b7280; white-space:pre-line;">' + weakHint + '</p>') : '') +
+                    '</div>');
             }
 
             // MBTI 연동 분석 (확장버전)
