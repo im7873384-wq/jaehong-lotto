@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://im7873384-wq.github.io/jaehong-lotto/sitemap.xml

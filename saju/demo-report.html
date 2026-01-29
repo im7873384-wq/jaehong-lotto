@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사주 분석 결과 - AI 사주 × MBTI</title>
+
+    <title>사주 리포트 | AI 사주 × MBTI</title>
+    <meta name="description" content="AI 사주 × MBTI 상세 리포트. 사주팔자(연/월/일/시), 오행 밸런스, 용신/기신, 십신, MBTI 융합까지 한 번에." />
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="https://im7873384-wq.github.io/jaehong-lotto/saju/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="재홍 사주" />
+    <meta property="og:title" content="사주 리포트 | AI 사주 × MBTI" />
+    <meta property="og:description" content="사주팔자/오행/용신/십신/MBTI를 ‘쉽게’ 정리한 리포트." />
+    <meta property="og:url" content="https://im7873384-wq.github.io/jaehong-lotto/saju/" />
+    <meta property="og:image" content="https://im7873384-wq.github.io/jaehong-lotto/og/og-saju.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="사주 리포트 | AI 사주 × MBTI" />
+    <meta name="twitter:description" content="사주팔자/오행/용신/십신/MBTI를 ‘쉽게’ 정리한 리포트." />
+    <meta name="twitter:image" content="https://im7873384-wq.github.io/jaehong-lotto/og/og-saju.svg" />
+
     <link rel="stylesheet" href="../nav.css">
 
     <!-- 사주 엔진 로드 -->
@@ -451,6 +468,12 @@
         <div class="report-header fade-in">
             <h1 id="reportTitle">사주 분석 결과</h1>
             <p class="user-info" id="userInfo"></p>
+
+            <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                <button id="shareCopy" style="border:0; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:800; background:#ffffff; color:#4c1d95;">🔗 링크 복사</button>
+                <a href="index.html" style="text-decoration:none; padding:10px 14px; border-radius:12px; font-weight:800; background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.35);">↩️ 다시 분석</a>
+            </div>
+            <div style="margin-top:10px; font-size:0.9rem; opacity:0.9;">공유해서 친구랑 같이 보기</div>
             
             <div class="score-display">
                 <div class="score-item">
@@ -635,6 +658,16 @@
     </div>
 
     <script>
+        // 헤더 "링크 복사" 버튼 바인딩
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('shareCopy');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    copyToClipboard(window.location.href);
+                });
+            }
+        });
+
         // URL 파라미터 파싱 (한글 이름 decodeURIComponent)
         function parseURLParameters() {
             const params = new URLSearchParams(window.location.search);
