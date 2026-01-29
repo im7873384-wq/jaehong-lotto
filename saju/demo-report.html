@@ -552,6 +552,12 @@
                 </div>
             </div>
             <p id="sajuSummary" style="margin-top: 20px; text-align: center; color: #4b5563;"></p>
+
+            <div id="pillarExplain" style="margin-top:16px; padding:16px; border-radius:14px; background:#f8fafc; border:1px solid #e5e7eb;">
+                <div style="font-weight:900; color:#111827;">🧾 내 사주 4기둥(연·월·일·시) 개인 해석</div>
+                <div id="pillarExplainText" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
+                <div id="pillarExplainTip" style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 오늘 포인트: 분석중...</div>
+            </div>
         </div>
 
         <!-- 오행 분석 -->
@@ -922,6 +928,25 @@
                         (pillars.year.animal || '') + '해의 환경 속에서 태어났습니다. ' +
                         '연주는 “바깥 이미지/초반 환경”, 월주는 “사회적 역할·일/커리어”, 일주는 “내 성향의 중심(기본값)”, 시주는 “미래의 방향·잠재력/말년”을 봅니다. ' +
                         '한 줄로 요약하면: 사주는 운명을 고정하는 게 아니라, “내가 어떤 리듬에서 강해지고 어떤 상황에서 흔들리는지”를 지도처럼 보여주는 도구예요.');
+
+                    // 1) 4기둥 개인 해석(짧고 실용적으로)
+                    var y = pillars.year || {};
+                    var m = pillars.month || {};
+                    var d = pillars.day || {};
+                    var t = pillars.time || {};
+
+                    var yearExplain = `연주(年柱): ‘바깥 프레임’(초반 환경/가문/첫인상).\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')})\n- 포인트: 연주는 ‘외부가 나를 읽는 방식’이라, 같은 성향이어도 대외 이미지가 다르게 잡힐 수 있어.`;
+                    var monthExplain = `월주(月柱): ‘사회 축’(월령=계절 기운 / 커리어·루틴).\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')})\n- 포인트: 월령(계절 기운)이 강하게 작동해서, 일/사회에서 반복되는 패턴이 여기서 선명해져.`;
+                    var dayExplain = `일주(日柱): ‘나의 기본값’(일간=나 자신 / 관계의 결).\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')})\n- 포인트: 일간(천간)은 “내 엔진”이라 힘들 때도 결국 여기로 돌아와. 연애/관계 스타일도 이 영향이 큼.`;
+                    var timeExplain = `시주(時柱): ‘미래/결실’(잠재력·후반운 / 성과).\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')})\n- 포인트: 시주는 시간이 갈수록 체감이 커져서, 후반에 강점(재능/성과)이 더 뚜렷해지기도 해.`;
+
+                    var explainText = [yearExplain, monthExplain, dayExplain, timeExplain].join('\n\n');
+                    safeSetText('pillarExplainText', explainText);
+
+                    // 오늘 포인트: 일주(일간) + 월주(커리어) 기준으로 한 줄 팁
+                    var dayStem = (d.stemName || '');
+                    var monthStem = (m.stemName || '');
+                    safeSetText('pillarExplainTip', `✅ 오늘 포인트: 일주(나)의 ${dayStem} 기운을 “핵심 1개”에 쓰고, 월주(일/사회)의 ${monthStem} 기운은 “정리/우선순위”에 써봐.`);
                 }
             }
 
