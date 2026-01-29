@@ -635,6 +635,25 @@
             </div>
         </div>
 
+        <!-- 용신/기신 실천팁 -->
+        <div class="analysis-section fade-in" id="yongsinTipsSection" style="display: none;">
+            <h3>🎯 용신 실천 가이드</h3>
+            <div class="advice-grid" id="yongsinTipsGrid">
+                <div class="advice-card" id="yongsinColorCard" style="background:#f8fafc; border-left-color:#667eea;">
+                    <h4 style="color:#667eea;">🎨 추천 컬러</h4>
+                    <p id="yongsinColorText">분석중...</p>
+                </div>
+                <div class="advice-card" id="yongsinTimeCard" style="background:#f8fafc; border-left-color:#22c55e;">
+                    <h4 style="color:#22c55e;">⏰ 추천 시간대</h4>
+                    <p id="yongsinTimeText">분석중...</p>
+                </div>
+                <div class="advice-card" id="yongsinActionCard" style="background:#f8fafc; border-left-color:#f59e0b;">
+                    <h4 style="color:#f59e0b;">✅ 오늘 액션 1개</h4>
+                    <p id="yongsinActionText">분석중...</p>
+                </div>
+            </div>
+        </div>
+
         <!-- 맞춤 조언 -->
         <div class="analysis-section fade-in">
             <h3>⭐ 맞춤 조언</h3>
@@ -774,6 +793,17 @@
             setTimeout(function() {
                 runAnalysis(userData);
             }, 1000);
+
+            // 무한로딩 방지: 5초 후에도 로딩 중이면 강제 표시
+            setTimeout(function() {
+                var overlay = document.getElementById('loadingOverlay');
+                var content = document.getElementById('mainContent');
+                if (overlay && overlay.style.display !== 'none') {
+                    console.warn('분석 타임아웃 - 폴백 결과 표시');
+                    overlay.style.display = 'none';
+                    if (content) content.style.display = 'block';
+                }
+            }, 5000);
         });
 
         function runAnalysis(userData) {
@@ -813,16 +843,30 @@
             document.getElementById('mainContent').style.display = 'block';
         }
 
+        // 안전한 DOM 업데이트 헬퍼
+        function safeSetText(id, text) {
+            var el = document.getElementById(id);
+            if (el && text != null) el.textContent = text;
+        }
+        function safeSetHTML(id, html) {
+            var el = document.getElementById(id);
+            if (el && html != null) el.innerHTML = html;
+        }
+        function safeSetStyle(id, prop, val) {
+            var el = document.getElementById(id);
+            if (el && val != null) el.style[prop] = val;
+        }
+
         function displayResults(userData, sajuData, analysisData) {
             // 헤더 정보
-            document.getElementById('reportTitle').textContent = userData.name + '님의 사주 분석 결과';
-            document.getElementById('userInfo').textContent = 
+            safeSetText('reportTitle', (userData.name || '') + '님의 사주 분석 결과');
+            safeSetText('userInfo',
                 (userData.gender === 'M' ? '남성' : '여성') + ' · ' +
                 userData.year + '년 ' + userData.month + '월 ' + userData.day + '일생' +
-                (userData.mbti ? ' · ' + userData.mbti : '');
+                (userData.mbti ? ' · ' + userData.mbti : ''));
 
             // 점수 계산 (분석 데이터가 있으면 사용, 없으면 기본값)
-            const scores = analysisData?.fortuneScores || {
+            var scores = (analysisData && analysisData.fortuneScores) ? analysisData.fortuneScores : {
                 overall: 80,
                 love: 78,
                 career: 82,
@@ -831,67 +875,75 @@
             };
 
             // 헤더 점수
-            document.getElementById('totalScore').textContent = scores.overall;
-            document.getElementById('headerLoveScore').textContent = scores.love;
-            document.getElementById('headerCareerScore').textContent = scores.career;
-            document.getElementById('headerWealthScore').textContent = scores.wealth;
+            safeSetText('totalScore', scores.overall);
+            safeSetText('headerLoveScore', scores.love);
+            safeSetText('headerCareerScore', scores.career);
+            safeSetText('headerWealthScore', scores.wealth);
 
             // 카드 점수 및 설명
-            const categories = ['love', 'career', 'wealth', 'health'];
-            categories.forEach(cat => {
-                const score = scores[cat];
-                const trend = getTrendText(score);
+            var categories = ['love', 'career', 'wealth', 'health'];
+            categories.forEach(function(cat) {
+                var score = scores[cat] || 75;
+                var trend = getTrendText(score);
                 
-                document.getElementById(cat + 'Score').textContent = score;
-                document.getElementById(cat + 'Trend').textContent = trend.text;
-                document.getElementById(cat + 'Trend').className = 'card-trend ' + trend.class;
-                document.getElementById(cat + 'Desc').textContent = getFortuneDescription(cat, score);
+                safeSetText(cat + 'Score', score);
+                safeSetText(cat + 'Trend', trend.text);
+                var trendEl = document.getElementById(cat + 'Trend');
+                if (trendEl) trendEl.className = 'card-trend ' + trend.class;
+                safeSetText(cat + 'Desc', getFortuneDescription(cat, score));
             });
 
             // 사주팔자 표시
             if (sajuData && sajuData.pillars) {
-                const pillars = sajuData.pillars;
+                var pillars = sajuData.pillars;
                 
-                document.getElementById('yearPillar').textContent = pillars.year.chinese;
-                document.getElementById('yearPillarKr').textContent = pillars.year.stemName + pillars.year.branchName;
-                
-                document.getElementById('monthPillar').textContent = pillars.month.chinese;
-                document.getElementById('monthPillarKr').textContent = pillars.month.stemName + pillars.month.branchName;
-                
-                document.getElementById('dayPillar').textContent = pillars.day.chinese;
-                document.getElementById('dayPillarKr').textContent = pillars.day.stemName + pillars.day.branchName;
-                
-                document.getElementById('timePillar').textContent = pillars.time.chinese;
-                document.getElementById('timePillarKr').textContent = pillars.time.stemName + pillars.time.branchName;
+                if (pillars.year) {
+                    safeSetText('yearPillar', pillars.year.chinese || '--');
+                    safeSetText('yearPillarKr', (pillars.year.stemName || '') + (pillars.year.branchName || ''));
+                }
+                if (pillars.month) {
+                    safeSetText('monthPillar', pillars.month.chinese || '--');
+                    safeSetText('monthPillarKr', (pillars.month.stemName || '') + (pillars.month.branchName || ''));
+                }
+                if (pillars.day) {
+                    safeSetText('dayPillar', pillars.day.chinese || '--');
+                    safeSetText('dayPillarKr', (pillars.day.stemName || '') + (pillars.day.branchName || ''));
+                }
+                if (pillars.time) {
+                    safeSetText('timePillar', pillars.time.chinese || '--');
+                    safeSetText('timePillarKr', (pillars.time.stemName || '') + (pillars.time.branchName || ''));
+                }
 
-                document.getElementById('sajuSummary').textContent = 
-                    '일간 ' + pillars.day.stemName + '(' + pillars.day.element + ')으로, ' +
-                    pillars.year.animal + '해에 태어났습니다. ' +
-                    '연주는 첫인상/환경, 월주는 사회/일, 일주는 내 성향(핵심), 시주는 미래/잠재력을 봅니다.';
+                if (pillars.day && pillars.year) {
+                    safeSetText('sajuSummary',
+                        '일간 ' + (pillars.day.stemName || '') + '(' + (pillars.day.element || '') + ')으로, ' +
+                        (pillars.year.animal || '') + '해에 태어났습니다. ' +
+                        '연주는 첫인상/환경, 월주는 사회/일, 일주는 내 성향(핵심), 시주는 미래/잠재력을 봅니다.');
+                }
             }
 
             // 오행 분석 표시
-            if (sajuData && sajuData.fiveElements) {
-                const elements = sajuData.fiveElements.percentages;
+            if (sajuData && sajuData.fiveElements && sajuData.fiveElements.percentages) {
+                var elements = sajuData.fiveElements.percentages;
                 
-                document.getElementById('woodBar').style.width = elements['목'] + '%';
-                document.getElementById('woodPercent').textContent = elements['목'] + '%';
+                safeSetStyle('woodBar', 'width', (elements['목'] || 0) + '%');
+                safeSetText('woodPercent', (elements['목'] || 0) + '%');
                 
-                document.getElementById('fireBar').style.width = elements['화'] + '%';
-                document.getElementById('firePercent').textContent = elements['화'] + '%';
+                safeSetStyle('fireBar', 'width', (elements['화'] || 0) + '%');
+                safeSetText('firePercent', (elements['화'] || 0) + '%');
                 
-                document.getElementById('earthBar').style.width = elements['토'] + '%';
-                document.getElementById('earthPercent').textContent = elements['토'] + '%';
+                safeSetStyle('earthBar', 'width', (elements['토'] || 0) + '%');
+                safeSetText('earthPercent', (elements['토'] || 0) + '%');
                 
-                document.getElementById('metalBar').style.width = elements['금'] + '%';
-                document.getElementById('metalPercent').textContent = elements['금'] + '%';
+                safeSetStyle('metalBar', 'width', (elements['금'] || 0) + '%');
+                safeSetText('metalPercent', (elements['금'] || 0) + '%');
                 
-                document.getElementById('waterBar').style.width = elements['수'] + '%';
-                document.getElementById('waterPercent').textContent = elements['수'] + '%';
+                safeSetStyle('waterBar', 'width', (elements['수'] || 0) + '%');
+                safeSetText('waterPercent', (elements['수'] || 0) + '%');
 
-                document.getElementById('elementSummary').textContent = 
-                    sajuData.fiveElements.strongest + ' 기운이 강하고, ' +
-                    sajuData.fiveElements.weakest + ' 기운이 약합니다.';
+                safeSetText('elementSummary',
+                    (sajuData.fiveElements.strongest || '토') + ' 기운이 강하고, ' +
+                    (sajuData.fiveElements.weakest || '수') + ' 기운이 약합니다.');
 
                 // 2) 오행 밸런스 확장(쉬운 설명 + 루틴)
                 const strong = sajuData.fiveElements.strongest;
@@ -922,27 +974,81 @@
 
             // 성격 분석
             if (analysisData && analysisData.personality) {
-                const personality = analysisData.personality;
-                document.getElementById('personalityAnalysis').innerHTML = 
-                    '<p><strong>' + personality.corePersonality + '</strong></p>' +
-                    '<p style="margin-top: 15px;">' + (personality.detailedAnalysis || '').split('\n')[0] + '</p>';
+                var personality = analysisData.personality;
+                var detailLine = (personality.detailedAnalysis || '').split('\n')[0] || '';
+                safeSetHTML('personalityAnalysis',
+                    '<p><strong>' + (personality.corePersonality || '') + '</strong></p>' +
+                    '<p style="margin-top: 15px;">' + detailLine + '</p>');
             }
 
-            // MBTI 연동 분석
+            // MBTI 연동 분석 (확장버전)
             if (userData.mbti && analysisData && analysisData.mbtiSajuFusion) {
-                document.getElementById('mbtiSection').style.display = 'block';
+                const mbtiSection = document.getElementById('mbtiSection');
+                const mbtiAnalysis = document.getElementById('mbtiAnalysis');
+                if (mbtiSection) mbtiSection.style.display = 'block';
+
                 const mbti = analysisData.mbtiSajuFusion;
-                document.getElementById('mbtiAnalysis').innerHTML = 
-                    '<p><strong>' + userData.mbti + ' × 사주 융합 분석</strong></p>' +
-                    '<p style="margin-top: 10px;">' + mbti.compatibility + '</p>' +
-                    '<p style="margin-top: 10px;">' + mbti.uniqueness + '</p>';
+                const mbtiType = userData.mbti || 'ENFP';
+
+                // MBTI별 확장 데이터
+                const mbtiExtended = {
+                    'INTJ': { summary: '전략가 + 통찰형', strength: '장기 플랜/분석/독립적 실행', weakness: '감정 표현/유연성 부족', love: '깊이 있는 지적 교류 선호. 밀당보다 진솔한 대화가 끌림.', career: '연구/전략/기획 쪽 강점. 혼자 몰입할 수 있는 환경이 최적.', action: '오늘 감정 1개를 말로 표현해보기 (연습!)' },
+                    'INTP': { summary: '논리술사 + 분석형', strength: '논리/문제해결/창의적 아이디어', weakness: '실행력/감정 공감', love: '지적 호기심 자극하는 상대에게 끌림. 먼저 다가가기 어려움.', career: '개발/분석/연구 적합. 자유로운 환경에서 역량 폭발.', action: '오늘 아이디어 1개를 "작게라도 실행"해보기' },
+                    'ENTJ': { summary: '통솔자 + 리더형', strength: '결단/추진/조직 장악력', weakness: '독선/과도한 통제', love: '대등한 파트너십 선호. 존경할 수 있는 사람에게 끌림.', career: '경영/리더십/사업 적합. 큰 그림 그리고 밀어붙이는 힘.', action: '오늘 누군가 의견 1개 "끝까지 들어보기"' },
+                    'ENTP': { summary: '변론가 + 아이디어형', strength: '토론/창의/새로운 시도', weakness: '지속력/감정 배려', love: '재미있고 자극적인 관계 선호. 루틴 연애는 질림.', career: '기획/마케팅/스타트업 적합. 판 바꾸는 역할에 강점.', action: '오늘 하던 일 1개 "마무리"까지 해보기' },
+                    'INFJ': { summary: '옹호자 + 이상형', strength: '통찰/공감/비전 제시', weakness: '현실 타협/자기 희생', love: '영혼의 교감 추구. 표면적 관계는 공허함.', career: '상담/교육/창작 적합. 의미 있는 일에 몰입.', action: '오늘 "내 기준"으로 NO 한 번 해보기' },
+                    'INFP': { summary: '중재자 + 이상주의형', strength: '창의/공감/진정성', weakness: '결정장애/현실 회피', love: '이상적 사랑 추구. 상대방 내면에 끌림.', career: '창작/상담/예술 적합. 가치 일치가 동기부여.', action: '오늘 결정 1개 "5분 안에" 내려보기' },
+                    'ENFJ': { summary: '선도자 + 카리스마형', strength: '리더십/공감/영향력', weakness: '과한 배려/자기 무시', love: '상대 성장 도우며 사랑. 헌신적이지만 지칠 수 있음.', career: '교육/HR/리더십 적합. 사람 성장시키는 일에 보람.', action: '오늘 "나를 위한 시간" 30분 확보하기' },
+                    'ENFP': { summary: '활동가 + 열정형', strength: '아이디어/사교/에너지', weakness: '산만함/깊이 부족', love: '설렘과 연결감 추구. 권태기 오면 힘들어함.', career: '마케팅/기획/콘텐츠 적합. 새로운 것 시작하는 힘.', action: '오늘 진행 중인 일 1개 "끝"까지 밀어보기' },
+                    'ISTJ': { summary: '현실주의자 + 책임형', strength: '성실/체계/신뢰', weakness: '변화 거부/융통성', love: '안정적이고 신뢰 기반 관계. 말보다 행동으로 표현.', career: '관리/회계/공무원 적합. 맡은 일 확실히 처리.', action: '오늘 "평소와 다른 방식" 1개 시도해보기' },
+                    'ISFJ': { summary: '수호자 + 헌신형', strength: '배려/꼼꼼함/인내', weakness: '자기 표현/거절', love: '조용히 챙기는 사랑. 헌신하지만 표현은 서툼.', career: '의료/복지/서비스 적합. 사람 돕는 일에 보람.', action: '오늘 내 의견 1개 "먼저" 말해보기' },
+                    'ESTJ': { summary: '경영자 + 관리형', strength: '조직력/실행력/책임감', weakness: '고집/감정 무시', love: '실용적 파트너십. 약속과 계획 중시.', career: '경영/관리/운영 적합. 시스템 잡고 실행하는 힘.', action: '오늘 상대 감정 "먼저 물어보기" 1회' },
+                    'ESFJ': { summary: '집정관 + 사교형', strength: '친화력/배려/조화', weakness: '갈등 회피/눈치', love: '따뜻하고 헌신적. 인정받고 싶은 욕구 있음.', career: '서비스/교육/HR 적합. 사람과 함께하는 일.', action: '오늘 "NO" 한 번 연습해보기' },
+                    'ISTP': { summary: '장인 + 분석형', strength: '문제해결/실용/독립', weakness: '감정 표현/장기 계획', love: '자유로운 관계 선호. 구속은 질색.', career: '기술/엔지니어/수리 적합. 손으로 해결하는 일.', action: '오늘 감정 1개 말로 표현해보기' },
+                    'ISFP': { summary: '모험가 + 예술형', strength: '감각/미적 감각/유연함', weakness: '계획/자기주장', love: '느낌과 분위기 중시. 진심이 느껴지면 깊게 감.', career: '예술/디자인/힐링 적합. 자유로운 환경에서 빛남.', action: '오늘 원하는 것 1개 "직접 요청"해보기' },
+                    'ESTP': { summary: '사업가 + 행동형', strength: '순발력/현실감각/에너지', weakness: '장기 계획/인내', love: '자극적이고 재미있는 관계. 지루함은 못 참음.', career: '영업/스포츠/창업 적합. 현장에서 빛나는 타입.', action: '오늘 "한 템포 쉬고" 생각해보기' },
+                    'ESFP': { summary: '연예인 + 자유형', strength: '사교/에너지/현재 집중', weakness: '깊이/계획성', love: '함께 있으면 즐거운 관계. 분위기 메이커.', career: '엔터/서비스/이벤트 적합. 사람들 앞에서 빛남.', action: '오늘 중요한 일 1개 "미리" 준비해보기' }
+                };
+
+                const ext = mbtiExtended[mbtiType] || mbtiExtended['ENFP'];
+
+                if (mbtiAnalysis) {
+                    mbtiAnalysis.innerHTML = `
+                        <div style="margin-bottom:16px; padding:16px; background:#f8fafc; border-radius:12px; border-left:4px solid #667eea;">
+                            <p style="font-weight:900; font-size:1.1rem; color:#4c1d95; margin-bottom:8px;">${mbtiType} : ${ext.summary}</p>
+                            <p style="color:#374151; line-height:1.6;">${mbti.compatibility || ''}</p>
+                            <p style="margin-top:8px; color:#374151; line-height:1.6;">${mbti.uniqueness || ''}</p>
+                        </div>
+                        <div class="advice-grid" style="margin-top:16px;">
+                            <div class="advice-card" style="background:#f0fdf4; border-left-color:#22c55e;">
+                                <h4 style="color:#16a34a;">💪 강점</h4>
+                                <p>${ext.strength}</p>
+                            </div>
+                            <div class="advice-card" style="background:#fef2f2; border-left-color:#ef4444;">
+                                <h4 style="color:#dc2626;">⚠️ 약점</h4>
+                                <p>${ext.weakness}</p>
+                            </div>
+                            <div class="advice-card" style="background:#fef2f2; border-left-color:#ec4899;">
+                                <h4 style="color:#db2777;">💝 연애 스타일</h4>
+                                <p>${ext.love}</p>
+                            </div>
+                            <div class="advice-card" style="background:#eff6ff; border-left-color:#3b82f6;">
+                                <h4 style="color:#2563eb;">💼 커리어 적합</h4>
+                                <p>${ext.career}</p>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px; padding:14px 18px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:12px; color:white;">
+                            <p style="font-weight:800;">✅ 오늘 실천: ${ext.action}</p>
+                        </div>
+                    `;
+                }
             }
 
             // 3) 십신 분석(쉬운 요약)
             if (sajuData && sajuData.tenGods) {
-                const tg = sajuData.tenGods;
-                const primary = tg.primary || '';
-                const secondary = tg.secondary || '';
+                var tg = sajuData.tenGods;
+                var primary = tg.primary || '정관';
+                var secondary = tg.secondary || '비견';
 
                 const tenMap = {
                     '비견': { vibe: '내 페이스/자기주도', work: '혼자 몰입하는 일, 개인 역량 기반', rel: '동등한 관계에서 편함. 간섭 싫어함.' },
@@ -981,50 +1087,75 @@
             // 용신/기신 분석
             if (sajuData && sajuData.yongsinGisin) {
                 const yg = sajuData.yongsinGisin;
-                document.getElementById('yongsinAnalysis').innerHTML = 
-                    '<p><strong>🌟 용신(用神): ' + yg.yongsin + '</strong> - 당신에게 도움이 되는 기운입니다.</p>' +
-                    '<p style="margin-top: 10px;"><strong>⚠️ 기신(忌神): ' + yg.gisin + '</strong> - 주의해야 할 기운입니다.</p>' +
-                    '<p style="margin-top: 15px;">' + yg.yongsin + ' 기운을 적극 활용하고, ' + yg.gisin + ' 기운은 적절히 조절하여 균형을 맞추세요.</p>';
+                const yongsinEl = document.getElementById('yongsinAnalysis');
+                if (yongsinEl) {
+                    yongsinEl.innerHTML =
+                        '<p><strong>🌟 용신(用神): ' + yg.yongsin + '</strong> - 당신에게 도움이 되는 기운입니다.</p>' +
+                        '<p style="margin-top: 10px;"><strong>⚠️ 기신(忌神): ' + yg.gisin + '</strong> - 주의해야 할 기운입니다.</p>' +
+                        '<p style="margin-top: 15px;">' + yg.yongsin + ' 기운을 적극 활용하고, ' + yg.gisin + ' 기운은 적절히 조절하여 균형을 맞추세요.</p>';
+                }
+
+                // 용신 실천팁 카드 표시
+                const yongsinTipsData = {
+                    '목': { color: '초록색, 청록색 계열', time: '오전 5시~9시 (목 기운 시간)', action: '오늘 하루 식물 옆에서 5분 명상하거나, 산책 10분 해보기' },
+                    '화': { color: '빨강, 주황, 분홍 계열', time: '오전 9시~오후 1시 (화 기운 시간)', action: '점심 전에 가장 중요한 결정/미팅 잡기. 에너지 피크 활용!' },
+                    '토': { color: '노랑, 베이지, 브라운 계열', time: '환절기 시간대 or 식사 시간', action: '오늘 중심 잡는 루틴(스트레칭/정리정돈) 10분 하기' },
+                    '금': { color: '흰색, 회색, 골드/실버 계열', time: '오후 3시~7시 (금 기운 시간)', action: '오늘 정리할 것 1개 선택해서 깔끔하게 마무리하기' },
+                    '수': { color: '검정, 남색, 파랑 계열', time: '밤 9시~새벽 1시 (수 기운 시간)', action: '저녁에 혼자 공부/독서/영상 시청으로 지식 충전하기' }
+                };
+                const tips = yongsinTipsData[yg.yongsin] || yongsinTipsData['토'];
+
+                const tipsSection = document.getElementById('yongsinTipsSection');
+                const colorText = document.getElementById('yongsinColorText');
+                const timeText = document.getElementById('yongsinTimeText');
+                const actionText = document.getElementById('yongsinActionText');
+
+                if (tipsSection) tipsSection.style.display = 'block';
+                if (colorText) colorText.textContent = tips.color;
+                if (timeText) timeText.textContent = tips.time;
+                if (actionText) actionText.textContent = tips.action;
             }
 
             // 맞춤 조언
-            document.getElementById('loveAdvice').textContent = 
-                analysisData?.compatibilityAnalysis?.romantic?.general || 
-                '서로의 차이점을 인정하고 존중하는 관계가 좋습니다.';
+            var loveAdv = (analysisData && analysisData.compatibilityAnalysis && analysisData.compatibilityAnalysis.romantic && analysisData.compatibilityAnalysis.romantic.general)
+                ? analysisData.compatibilityAnalysis.romantic.general
+                : '서로의 차이점을 인정하고 존중하는 관계가 좋습니다.';
+            safeSetText('loveAdvice', loveAdv);
             
-            document.getElementById('careerAdvice').textContent = 
-                analysisData?.careerGuidance?.aptitude?.substring(0, 100) || 
-                '꾸준한 노력과 발전이 좋은 결과를 가져올 것입니다.';
+            var careerAdv = (analysisData && analysisData.careerGuidance && analysisData.careerGuidance.aptitude)
+                ? analysisData.careerGuidance.aptitude.substring(0, 100)
+                : '꾸준한 노력과 발전이 좋은 결과를 가져올 것입니다.';
+            safeSetText('careerAdvice', careerAdv);
             
-            document.getElementById('wealthAdvice').textContent = 
-                '계획적인 재정 관리와 신중한 투자를 권장합니다.';
+            safeSetText('wealthAdvice', '계획적인 재정 관리와 신중한 투자를 권장합니다.');
             
-            document.getElementById('healthAdvice').textContent = 
-                analysisData?.healthAnalysis?.recommendations?.lifestyle || 
-                '규칙적인 생활과 적절한 운동으로 건강을 유지하세요.';
+            var healthAdv = (analysisData && analysisData.healthAnalysis && analysisData.healthAnalysis.recommendations && analysisData.healthAnalysis.recommendations.lifestyle)
+                ? analysisData.healthAnalysis.recommendations.lifestyle
+                : '규칙적인 생활과 적절한 운동으로 건강을 유지하세요.';
+            safeSetText('healthAdvice', healthAdv);
         }
 
         // 폴백 결과 (엔진 로드 실패시)
         function displayFallbackResults(userData) {
-            document.getElementById('reportTitle').textContent = userData.name + '님의 사주 분석 결과';
-            document.getElementById('userInfo').textContent = 
+            safeSetText('reportTitle', (userData.name || '') + '님의 사주 분석 결과');
+            safeSetText('userInfo',
                 (userData.gender === 'M' ? '남성' : '여성') + ' · ' +
-                userData.year + '년 ' + userData.month + '월 ' + userData.day + '일생';
+                userData.year + '년 ' + userData.month + '월 ' + userData.day + '일생');
 
             // 기본 점수
-            const baseScore = (userData.year + userData.month + userData.day) % 20 + 75;
-            document.getElementById('totalScore').textContent = baseScore;
-            document.getElementById('headerLoveScore').textContent = baseScore - 2;
-            document.getElementById('headerCareerScore').textContent = baseScore + 1;
-            document.getElementById('headerWealthScore').textContent = baseScore - 1;
+            const baseScore = ((userData.year || 0) + (userData.month || 0) + (userData.day || 0)) % 20 + 75;
+            safeSetText('totalScore', baseScore);
+            safeSetText('headerLoveScore', baseScore - 2);
+            safeSetText('headerCareerScore', baseScore + 1);
+            safeSetText('headerWealthScore', baseScore - 1);
 
-            document.getElementById('loveScore').textContent = baseScore - 2;
-            document.getElementById('careerScore').textContent = baseScore + 1;
-            document.getElementById('wealthScore').textContent = baseScore - 1;
-            document.getElementById('healthScore').textContent = baseScore;
+            safeSetText('loveScore', baseScore - 2);
+            safeSetText('careerScore', baseScore + 1);
+            safeSetText('wealthScore', baseScore - 1);
+            safeSetText('healthScore', baseScore);
 
-            document.getElementById('personalityAnalysis').innerHTML = 
-                '<p>당신은 독특한 매력과 잠재력을 가진 분입니다. 자신만의 강점을 발휘하여 목표를 향해 나아가세요.</p>';
+            safeSetHTML('personalityAnalysis',
+                '<p>당신은 독특한 매력과 잠재력을 가진 분입니다. 자신만의 강점을 발휘하여 목표를 향해 나아가세요.</p>');
         }
 
         // 결과 공유
