@@ -595,6 +595,12 @@
                 </div>
             </div>
             <p id="elementSummary" style="margin-top: 15px; text-align: center; color: #4b5563;"></p>
+
+            <div id="elementDeepDive" style="margin-top:16px; padding:16px; border-radius:14px; background:#f8fafc; border:1px solid #e5e7eb;">
+                <div style="font-weight:900; color:#111827;">🔥 너의 오행 밸런스 한 번에 정리</div>
+                <div id="elementDeepText" style="margin-top:10px; color:#374151; line-height:1.65; white-space:pre-line;">분석중...</div>
+                <div id="elementActionTip" style="margin-top:12px; font-weight:800; color:#4c1d95;">✅ 액션팁: 분석중...</div>
+            </div>
         </div>
 
         <!-- 성격 분석 -->
@@ -878,6 +884,32 @@
                 document.getElementById('elementSummary').textContent = 
                     sajuData.fiveElements.strongest + ' 기운이 강하고, ' +
                     sajuData.fiveElements.weakest + ' 기운이 약합니다.';
+
+                // 2) 오행 밸런스 확장(쉬운 설명 + 루틴)
+                const strong = sajuData.fiveElements.strongest;
+                const weak = sajuData.fiveElements.weakest;
+                const map = {
+                    '목': { title: '목(木) 기운', good: '아이디어/성장/관계 확장에 강해. 시작이 빠르고, 사람·기회가 잘 붙는 타입.', tooMuch: '근데 욕심이 커지면 산만해지고 “하다 만 일”이 늘 수 있어.', add: '물건/일정은 “시작”보다 “마감”을 먼저 잡아주는 게 밸런스에 도움.', routine: '매주 1개만 “끝내기 프로젝트”로 고정해봐.' },
+                    '화': { title: '화(火) 기운', good: '표현/에너지/승부욕이 강해. 분위기 메이커 + 추진력으로 판을 키우는 타입.', tooMuch: '과하면 감정기복/번아웃이 오기 쉽고, 말이 앞서서 오해가 생길 수 있어.', add: '에너지를 “짧고 굵게” 쓰고 회복 루틴을 의식적으로 넣어야 함.', routine: '잠 30분 더 + 카페인 컷오프(오후 2시)만 해도 체감 달라짐.' },
+                    '토': { title: '토(土) 기운', good: '안정/조율/책임감이 강해. 팀에서 중심 잡고 끝까지 가져가는 타입.', tooMuch: '과하면 생각이 무거워지고, 결정이 느려질 수 있어(“일단 보류”).', add: '선택지를 줄이고 “기준 1개”로 빨리 결정하는 연습이 좋음.', routine: '결정해야 할 일은 10분 타이머 걸고 결론 내리기.' },
+                    '금': { title: '금(金) 기운', good: '판단/정리/기준이 뚜렷해. 디테일·퀄리티·효율을 챙기는 타입.', tooMuch: '과하면 날카로워 보이거나 완벽주의로 스트레스가 커질 수 있어.', add: '완벽보다 “출시→개선” 루프로 가면 오히려 성과가 빨라짐.', routine: 'To-do에 “초안(60%)” 단계를 따로 넣어봐.' },
+                    '수': { title: '수(水) 기운', good: '관찰/정보/깊이가 강해. 흐름을 읽고 공부/분석으로 역전하는 타입.', tooMuch: '과하면 생각이 많아져서 행동이 늦어질 수 있어(“계속 조사”).', add: '작은 실행을 먼저 하고 데이터로 보완하는 게 밸런스에 도움.', routine: '오늘 할 일 1개는 “조사 없이 바로 실행” 룰로 해봐.' }
+                };
+                const s = map[strong] || map['토'];
+                const w = map[weak] || map['수'];
+
+                const deep = [
+                    `강한 기운: ${strong} → ${s.good}`,
+                    `주의(과하면): ${s.tooMuch}`,
+                    `약한 기운: ${weak} → ${w.title}이 약한 편이라, ${w.add}`
+                ].join('\n\n');
+
+                const action = `✅ 액션팁: ${w.routine}`;
+
+                const deepEl = document.getElementById('elementDeepText');
+                const actionEl = document.getElementById('elementActionTip');
+                if (deepEl) deepEl.textContent = deep;
+                if (actionEl) actionEl.textContent = action;
             }
 
             // 성격 분석
