@@ -526,29 +526,6 @@
             </div>
         </div>
 
-        <!-- 운세 상세 해석 -->
-        <div class="analysis-section fade-in" id="fortuneDetailSection" style="display:none;">
-            <h3>🧾 운세 상세 해석 (요약+조언)</h3>
-            <div class="advice-grid">
-                <div class="advice-card" style="border-left-color:#ec4899;">
-                    <div style="font-weight:900; color:#111827;">💝 연애운 해석</div>
-                    <div id="loveDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
-                </div>
-                <div class="advice-card" style="border-left-color:#3b82f6;">
-                    <div style="font-weight:900; color:#111827;">💼 직업운 해석</div>
-                    <div id="careerDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
-                </div>
-                <div class="advice-card" style="border-left-color:#f59e0b;">
-                    <div style="font-weight:900; color:#111827;">💰 재물운 해석</div>
-                    <div id="wealthDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
-                </div>
-                <div class="advice-card" style="border-left-color:#22c55e;">
-                    <div style="font-weight:900; color:#111827;">🍃 건강운 해석</div>
-                    <div id="healthDetail" style="margin-top:10px; color:#374151; line-height:1.7; white-space:pre-line;">분석중...</div>
-                </div>
-            </div>
-        </div>
-
         <!-- 사주팔자 -->
         <div class="analysis-section fade-in">
             <h3>📊 사주팔자 (四柱八字)</h3>
@@ -637,6 +614,38 @@
             <h3>🎭 성격 분석</h3>
             <div id="personalityAnalysis">
                 <p>분석중...</p>
+            </div>
+        </div>
+
+        <!-- 운세 상세 해석: 연애운 -->
+        <div class="analysis-section fade-in" id="loveDetailSection" style="display:none;">
+            <h3>💝 연애운 해석 (전문 코멘트)</h3>
+            <div class="advice-card" style="border-left-color:#ec4899;">
+                <div id="loveDetail" style="margin-top:6px; color:#374151; line-height:1.8; white-space:pre-line;">분석중...</div>
+            </div>
+        </div>
+
+        <!-- 운세 상세 해석: 직업운 -->
+        <div class="analysis-section fade-in" id="careerDetailSection" style="display:none;">
+            <h3>💼 직업운 해석 (전문 코멘트)</h3>
+            <div class="advice-card" style="border-left-color:#3b82f6;">
+                <div id="careerDetail" style="margin-top:6px; color:#374151; line-height:1.8; white-space:pre-line;">분석중...</div>
+            </div>
+        </div>
+
+        <!-- 운세 상세 해석: 재물운 -->
+        <div class="analysis-section fade-in" id="wealthDetailSection" style="display:none;">
+            <h3>💰 재물운 해석 (전문 코멘트)</h3>
+            <div class="advice-card" style="border-left-color:#f59e0b;">
+                <div id="wealthDetail" style="margin-top:6px; color:#374151; line-height:1.8; white-space:pre-line;">분석중...</div>
+            </div>
+        </div>
+
+        <!-- 운세 상세 해석: 건강운 -->
+        <div class="analysis-section fade-in" id="healthDetailSection" style="display:none;">
+            <h3>🍃 건강운 해석 (전문 코멘트)</h3>
+            <div class="advice-card" style="border-left-color:#22c55e;">
+                <div id="healthDetail" style="margin-top:6px; color:#374151; line-height:1.8; white-space:pre-line;">분석중...</div>
             </div>
         </div>
 
@@ -924,8 +933,14 @@
 
             // 운세 상세 해석(전문가 코멘트 느낌: 키워드 + 조언)
             (function() {
-                var section = document.getElementById('fortuneDetailSection');
-                if (section) section.style.display = 'block';
+                var loveSec = document.getElementById('loveDetailSection');
+                var careerSec = document.getElementById('careerDetailSection');
+                var wealthSec = document.getElementById('wealthDetailSection');
+                var healthSec = document.getElementById('healthDetailSection');
+                if (loveSec) loveSec.style.display = 'block';
+                if (careerSec) careerSec.style.display = 'block';
+                if (wealthSec) wealthSec.style.display = 'block';
+                if (healthSec) healthSec.style.display = 'block';
 
                 function detail(cat, score) {
                     var trend = getTrendText(score);
