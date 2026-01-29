@@ -935,10 +935,10 @@
                     var d = pillars.day || {};
                     var t = pillars.time || {};
 
-                    var yearExplain = `연주(年柱): 첫인상/환경/가족·사회가 나를 바라보는 프레임.\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')}) → “밖에서 보이는 나”에 영향을 줍니다.`;
-                    var monthExplain = `월주(月柱): 사회성/일·커리어/루틴의 축.\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')}) → “내가 사회에서 굴러가는 방식”을 봅니다.`;
-                    var dayExplain = `일주(日柱): 나의 기본값(성향의 중심)/연애·관계의 결.\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')}) → “내가 어떤 사람인지”의 핵심입니다.`;
-                    var timeExplain = `시주(時柱): 미래 방향/잠재력/후반운(말년)·자식/결실.\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')}) → “시간이 갈수록 커지는 성향/재능”을 봅니다.`;
+                    var yearExplain = `연주(年柱): ‘바깥 프레임’(초반 환경/가문/첫인상).\n- ${y.chinese || ''} (${(y.stemName||'') + (y.branchName||'')})\n- 포인트: 연주는 나를 둘러싼 “기본 배경”이라, 같은 성격이라도 대외 이미지가 달라질 수 있어.`;
+                    var monthExplain = `월주(月柱): ‘사회 축’(월령=계절 기운 / 커리어·루틴).\n- ${m.chinese || ''} (${(m.stemName||'') + (m.branchName||'')})\n- 포인트: 사주에서 월주는 계절(월령)의 영향이 커서, 일/사회에서 자주 쓰는 패턴이 여기서 강하게 드러남.`;
+                    var dayExplain = `일주(日柱): ‘나의 기본값’(일간=나 자신 / 관계의 결).\n- ${d.chinese || ''} (${(d.stemName||'') + (d.branchName||'')})\n- 포인트: 일간(천간)이 “내가 원래 쓰는 엔진”이라, 힘들 때도 결국 여기로 돌아오는 경향이 있어.`;
+                    var timeExplain = `시주(時柱): ‘미래/결실’(잠재력·후반운 / 자식·성과).\n- ${t.chinese || ''} (${(t.stemName||'') + (t.branchName||'')})\n- 포인트: 시주는 시간이 갈수록 체감이 커지는 영역이라, 20~30대보다 30~40대 이후에 강점이 뚜렷해지기도 해.`;
 
                     var explainText = [yearExplain, monthExplain, dayExplain, timeExplain].join('\n\n');
                     safeSetText('pillarExplainText', explainText);
