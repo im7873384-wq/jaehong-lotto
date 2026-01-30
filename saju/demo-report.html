@@ -1100,7 +1100,7 @@
                         '<p style="margin-top:10px; color:#374151; line-height:1.7;"><strong>강점:</strong> ' + base.strength + '</p>' +
                         '<p style="margin-top:8px; color:#374151; line-height:1.7;"><strong>주의:</strong> ' + base.caution + '</p>' +
                         '<p style="margin-top:8px; color:#374151; line-height:1.7;"><strong>관계/소통:</strong> ' + base.relation + '</p>' +
-                        '<p style="margin-top:10px; font-weight:800; color:#4c1d95;">✅ 오늘 실천: ' + base.action + '</p>' +
+                        '<p style="margin-top:10px; font-weight:800; color:#4c1d95;">' + base.action + '</p>' +
                         (weakHint ? ('<p style="margin-top:10px; color:#6b7280; white-space:pre-line;">' + weakHint + '</p>') : '') +
                     '</div>');
             }
@@ -1162,7 +1162,7 @@
                             </div>
                         </div>
                         <div style="margin-top:16px; padding:14px 18px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:12px; color:white;">
-                            <p style="font-weight:800;">✅ 오늘 실천: ${ext.action}</p>
+                            <p style="font-weight:800;">${ext.action}</p>
                         </div>
                     `;
                 }
