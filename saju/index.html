@@ -251,6 +251,27 @@
                     <input type="text" id="name" name="name" required placeholder="홍길동" maxlength="20">
                 </div>
 
+                <div class="form-group">
+                    <label>달력 <span class="required">*</span></label>
+                    <div style="display:flex; gap:12px; align-items:center; margin-top:6px; flex-wrap:wrap;">
+                        <label style="display:flex; align-items:center; gap:6px; font-weight:600; margin:0;">
+                            <input type="radio" name="calendarType" value="solar" checked>
+                            <span>양력</span>
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; font-weight:600; margin:0;">
+                            <input type="radio" name="calendarType" value="lunar">
+                            <span>음력</span>
+                        </label>
+                        <label id="leapMonthWrap" style="display:none; align-items:center; gap:6px; font-weight:600; margin:0;">
+                            <input type="checkbox" id="isLeapMonth">
+                            <span>윤달</span>
+                        </label>
+                    </div>
+                    <div style="margin-top:8px; font-size:0.9rem; color:#6b7280;">
+                        ※ 음력 선택 시 입력값을 양력으로 변환한 뒤 사주를 계산합니다.
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label>생년 <span class="required">*</span></label>
@@ -395,6 +416,18 @@
             }
         })();
 
+        // 달력 타입 UI
+        (function initCalendarType() {
+            const leapWrap = document.getElementById('leapMonthWrap');
+            const radios = document.querySelectorAll('input[name="calendarType"]');
+            function update() {
+                const type = document.querySelector('input[name="calendarType"]:checked')?.value || 'solar';
+                if (leapWrap) leapWrap.style.display = (type === 'lunar') ? 'flex' : 'none';
+            }
+            radios.forEach(r => r.addEventListener('change', update));
+            update();
+        })();
+
         // 폼 제출 처리
         document.getElementById('sajuForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -406,6 +439,8 @@
             const hour = document.getElementById('hour').value;
             const gender = document.getElementById('gender').value;
             const mbti = document.getElementById('mbti').value;
+            const calendarType = document.querySelector('input[name="calendarType"]:checked')?.value || 'solar';
+            const isLeapMonth = document.getElementById('isLeapMonth')?.checked ? '1' : '0';
 
             // 유효성 검사
             if (!name || !year || !month || !day || !hour || !gender) {
@@ -421,6 +456,8 @@
             params.set('day', day);
             params.set('hour', hour);
             params.set('gender', gender);
+            params.set('calendar', calendarType);
+            if (calendarType === 'lunar') params.set('leap', isLeapMonth);
             if (mbti) {
                 params.set('mbti', mbti);
             }
